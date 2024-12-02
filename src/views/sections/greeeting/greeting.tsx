@@ -1,7 +1,7 @@
-import { ActionButton } from '@components/ui'
-import { ArrowIcon } from '@components/ui/images'
-import GreetingIcon from '@components/ui/images/icons/greeting'
 import { motion } from 'framer-motion'
+import { ActionButton } from '../../../components/ui'
+import { ArrowIcon } from '../../../components/ui/images'
+import GreetingIcon from '../../../components/ui/images/icons/greeting'
 import { AnimatedText } from '../../../components/ui/texts'
 import useMousePosition from '../../../hooks/useMousePosition'
 import { calculateRotation } from '../../../utils/calculateRotation'
@@ -16,10 +16,10 @@ const Greeting = () => {
 	return (
 		<section
 			id='greeting'
-			className=' w-full section flex flex-col gap-10 sm:flex-row justify-around items-center font-bold '
+			className=' w-full section flex flex-col gap-10 sm:flex-row justify-around items-center font-bold'
 		>
-			<div className=' flex flex-col text-2xl sm:text-4xl gap-2'>
-				<div className='min-w-80 min-h-36 '>
+			<div className=' flex flex-col text-2xl sm:text-4xl gap-2 '>
+				<div className='sm:min-w-80 min-h-36 '>
 					<p className='text-xl font-bold'>Hello!</p>
 					<AnimatedText
 						wrapper='h2'

@@ -1,14 +1,5 @@
 {
-	"compilerOptions": {
-		"noEmit": true,
-		"jsx": "react-jsx",
-		"baseUrl": "./",
-		"paths": {
-			"@components/*": ["src/components/*"],
-			"@types/*": ["src/types/*"]
-		}
-	},
-	"include": ["src"],
+	"files": [],
 	"references": [
 		{ "path": "./tsconfig.app.json" },
 		{ "path": "./tsconfig.node.json" }

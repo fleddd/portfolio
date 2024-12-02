@@ -28,7 +28,7 @@ const animationVariants = {
 
 const AnimatedText = ({ options, wrapper: Wrapper = 'p' }: IAnimatedText) => {
 	const textRef = useRef(null)
-	const isInView = useInView(textRef, { amount: 1 })
+	const isInView = useInView(textRef, { amount: 0.5 })
 
 	return (
 		<Wrapper>

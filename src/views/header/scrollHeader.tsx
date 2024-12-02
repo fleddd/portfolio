@@ -4,6 +4,7 @@ import { NavButton } from '../../components/ui'
 
 const ScrollHeader = () => {
 	const [isScrolled, setIsScrolled] = useState<boolean>(false)
+
 	useEffect(() => {
 		const handleScroll = () => {
 			if (window.scrollY > 65) {
@@ -23,7 +24,7 @@ const ScrollHeader = () => {
 				<motion.nav
 					transition={{ type: 'spring', bounce: false, duration: 0.5 }}
 					initial={{ y: -20 }}
-					animate={{ y: 20 }}
+					animate={{ y: 10 }}
 					exit={{ y: -50 }}
 					className='hidden sm:flex fixed top-0 left-0 w-max inset-x-0 mx-auto z-20 
                  items-center justify-center  bg-white gap-5 py-2 px-4 rounded-xl border-2  shadow-md'

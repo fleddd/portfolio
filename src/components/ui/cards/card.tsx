@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge'
 import { IChildrenWrapper } from '../../../types/Wrappers/TWrappers'
 const Card = ({ children, styles }: IChildrenWrapper) => {
 	const refDiv = useRef(null)
-	const isInDiv = useInView(refDiv, { amount: 0.5 })
+	const isInDiv = useInView(refDiv, { amount: 0.01 })
 	return (
 		<motion.div
 			layout
@@ -22,9 +22,9 @@ const Card = ({ children, styles }: IChildrenWrapper) => {
 			}}
 			ref={refDiv}
 			initial={'hidden'}
-			animate={isInDiv ? 'visible' : 'hidden'}
+			animate={isInDiv ? 'visible' : ''}
 			className={twMerge(
-				' min-h-40 sm:max-w-96 min-w-80 max-w-64 rounded-xl border-2 border-accent overflow-hidden p-4 shadow-accentXl',
+				'min-h-40 sm:max-w-96 sm:min-w-80 max-w-72 rounded-xl overflow-hidden p-4 shadow-xl',
 				styles
 			)}
 		>

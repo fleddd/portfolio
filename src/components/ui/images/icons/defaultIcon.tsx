@@ -1,4 +1,4 @@
-import { TIcon } from '../../../../../types/icons'
+import { TIcon } from '../../../../types/icons'
 
 interface DefaultIcon extends TIcon {
 	image: string

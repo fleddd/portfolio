@@ -8,7 +8,7 @@ const Header = () => {
 	const toggle = () => setIsOpen(prev => !prev)
 
 	return (
-		<header className='w-full fixed z-20 sm:relative flex justify-between items-center  gap-10 py-5 px-10  bg-[#fefefe] shadow-md'>
+		<header className='w-full flex justify-between items-center  gap-10 py-5 px-10  bg-[#fefefe] shadow-md'>
 			<h2 className='text-xl'>Oleh Fedkiv</h2>
 			<Navigation />
 			<BurgerToggler toggle={toggle} isOpen={isOpen} />
