@@ -1,9 +1,11 @@
 const Projects = () => {
 	return (
-		<div id='projects' className=' min-h-dvh text-center'>
+		<div
+			id='projects'
+			className='flex flex-col items-center gap-10 my-20 text-center'
+		>
 			<div className='text-center text-2xl sm:text-4xl'>Projects</div>
-
-			<div></div>
+			<div>Open to cooperate {'<._.>'}</div>
 		</div>
 	)
 }
