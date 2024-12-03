@@ -1,15 +1,15 @@
-import ContactCard from '../../../components/ui/cards/contactCard'
-import { contacts } from '../../../data/contacts'
+import { ContactCard } from "../../../components/ui/cards/index";
+import { contacts } from "../../../data/contacts";
 
 const Contact = () => {
 	return (
 		<div
-			id='contact'
-			className='my-20 flex flex-col items-center w-full gap-10'
+			id="contact"
+			className="my-20 flex flex-col items-center w-full gap-10"
 		>
-			<h3 className='text-center text-2xl sm:text-4xl'>Contact me</h3>
-			<div className='grid max-sm:grid-cols-2  grid-cols-2 gap-5'>
-				{contacts.map(contact => (
+			<h3 className="text-center text-2xl sm:text-4xl">Contact me</h3>
+			<div className="grid max-sm:grid-cols-2  grid-cols-2 gap-5">
+				{contacts.map((contact) => (
 					<ContactCard
 						name={contact.name}
 						image={contact.image}
@@ -18,7 +18,7 @@ const Contact = () => {
 				))}
 			</div>
 		</div>
-	)
-}
+	);
+};
 
-export default Contact
+export default Contact;

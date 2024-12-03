@@ -1,15 +1,15 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 type Option = {
-	text: string
-	styles: string
-}
+	text: string;
+	styles: string;
+};
 
 interface IAnimatedText {
-	options: Option[]
-	wrapper?: keyof JSX.IntrinsicElements
+	options: Option[];
+	wrapper?: keyof JSX.IntrinsicElements;
 }
 
 const animationVariants = {
@@ -24,41 +24,41 @@ const animationVariants = {
 			duration: 0.1,
 		},
 	},
-}
+};
 
-const AnimatedText = ({ options, wrapper: Wrapper = 'p' }: IAnimatedText) => {
-	const textRef = useRef(null)
-	const isInView = useInView(textRef, { amount: 0.5 })
+const AnimatedText = ({ options, wrapper: Wrapper = "p" }: IAnimatedText) => {
+	const textRef = useRef(null);
+	const isInView = useInView(textRef, { amount: 0.5 });
 
 	return (
 		<Wrapper>
 			<motion.span
 				ref={textRef}
-				initial={'hidden'}
-				animate={isInView ? 'visible' : ''}
+				initial={"hidden"}
+				animate={isInView ? "visible" : ""}
 				transition={{ staggerChildren: 0.05 }}
 				aria-hidden
 			>
-				{options.map(line => (
-					<span className={twMerge('block', line.styles)}>
-						{line.text.split(' ').map(word => (
-							<span className='inline-block'>
-								{word.split('').map(char => (
+				{options.map((line) => (
+					<span className={twMerge("block", line.styles)}>
+						{line.text.split(" ").map((word) => (
+							<span className="inline-block">
+								{word.split("").map((char) => (
 									<motion.span
-										className='inline-block'
+										className="inline-block"
 										variants={animationVariants}
 									>
 										{char}
 									</motion.span>
 								))}
-								<span className='inline-block'>&nbsp;</span>
+								<span className="inline-block">&nbsp;</span>
 							</span>
 						))}
 					</span>
 				))}
 			</motion.span>
 		</Wrapper>
-	)
-}
+	);
+};
 
-export default AnimatedText
+export default AnimatedText;

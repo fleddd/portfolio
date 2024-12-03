@@ -1,10 +1,10 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { twMerge } from 'tailwind-merge'
-import { IChildrenWrapper } from '../../../types/Wrappers/TWrappers'
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { twMerge } from "tailwind-merge";
+import { IChildrenWrapper } from "../../../types/Wrappers";
 const Card = ({ children, styles }: IChildrenWrapper) => {
-	const refDiv = useRef(null)
-	const isInDiv = useInView(refDiv, { amount: 0.01 })
+	const refDiv = useRef(null);
+	const isInDiv = useInView(refDiv, { amount: 0.01 });
 	return (
 		<motion.div
 			layout
@@ -16,21 +16,21 @@ const Card = ({ children, styles }: IChildrenWrapper) => {
 					scale: 1,
 					transition: {
 						duration: 0.6,
-						type: 'spring',
+						type: "spring",
 					},
 				},
 			}}
 			ref={refDiv}
-			initial={'hidden'}
-			animate={isInDiv ? 'visible' : ''}
+			initial={"hidden"}
+			animate={isInDiv ? "visible" : ""}
 			className={twMerge(
-				'min-h-40 sm:max-w-96 sm:min-w-80 max-w-72 rounded-xl overflow-hidden p-4 shadow-xl',
-				styles
+				"min-h-40 sm:max-w-96 sm:min-w-80 max-w-72 rounded-xl overflow-hidden p-4 shadow-xl",
+				styles,
 			)}
 		>
 			{children}
 		</motion.div>
-	)
-}
+	);
+};
 
-export default Card
+export default Card;

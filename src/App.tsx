@@ -1,9 +1,11 @@
-import { AppRouter } from "./router/router";
+import Layout from "./views/layout/layout";
 
 function App() {
 	return (
 		<>
-			<AppRouter />
+			{/* <AppRouter /> */}
+			{/* Decided not deleting routing for future updates */}
+			<Layout />
 		</>
 	);
 }

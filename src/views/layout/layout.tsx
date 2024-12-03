@@ -1,13 +1,13 @@
-import { isMobile } from 'react-device-detect'
-import Header from '../header/header'
-import ScrollHeader from '../header/scrollHeader'
-import { About, Contact, Greeting, Projects, Skills } from '../sections'
+import { isMobile } from "react-device-detect";
+import Header from "../header/header";
+import ScrollHeader from "../header/scrollHeader";
+import { About, Contact, Greeting, Projects, Skills } from "../sections";
 const Layout = () => {
 	return (
 		<>
 			<Header />
 			{!isMobile && <ScrollHeader />}
-			<main className='flex flex-col gap-20'>
+			<main className="flex flex-col gap-20">
 				<Greeting />
 				<About />
 				<Skills />
@@ -15,7 +15,7 @@ const Layout = () => {
 				<Contact />
 			</main>
 		</>
-	)
-}
+	);
+};
 
-export default Layout
+export default Layout;

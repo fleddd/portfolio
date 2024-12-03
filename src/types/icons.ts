@@ -1,4 +1,4 @@
 export type TIcon = {
-	size: number
-	styles?: string
-}
+	size: number;
+	styles?: string;
+};
