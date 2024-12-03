@@ -1,14 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
-import Error from "../pages/error/error";
-import Layout from "../views/layout/layout";
+import { createBrowserRouter } from 'react-router-dom'
+import Layout from '../views/layout/layout'
 
 export const routes = createBrowserRouter([
 	{
 		element: <Layout />,
-		path: "/",
+		path: '/portfolio',
 	},
-	{
-		element: <Error />,
-		path: "*",
-	},
-]);
+])
