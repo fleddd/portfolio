@@ -1,5 +1,6 @@
 {
 	"name": "portfolio",
+	"homepage": "https://fleddd.github.io/portfolio/",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -8,12 +9,16 @@
 		"build": "tsc -b && vite build",
 		"lint": "eslint .",
 		"format": "npx @biomejs/biome format --write ./src",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d dist"
 	},
 	"dependencies": {
+		"gh-pages": "^6.2.0",
 		"git": "^0.1.5",
 		"motion": "^11.11.17",
 		"react": "^18.3.1",
+		"react-device-detect": "^2.2.3",
 		"react-dom": "^18.3.1",
 		"react-router-dom": "^7.0.1",
 		"tailwind-merge": "^2.5.5",

@@ -1,4 +1,4 @@
-import Button from './button'
+import { motion } from 'framer-motion'
 
 type TNavButton = {
 	section: string
@@ -6,14 +6,16 @@ type TNavButton = {
 	onClick?: () => void
 }
 
-const NavButton = ({ section, text, onClick }: TNavButton) => {
+const NavButton = ({ onClick, section, text }: TNavButton) => {
 	return (
-		<Button
-			styles='text-white sm:text-black hover:text-accent hover:transition-all hover:transition-ease'
+		<motion.button
+			whileHover={{
+				color: '#036fff',
+			}}
+			type='button'
+			className={`font-normal text-white sm:text-black`}
 			onClick={() => {
 				if (onClick) onClick()
-				// just to be sure that ui loaded so it can be scrolled
-
 				setTimeout(() => {
 					document
 						.getElementById(section)
@@ -22,7 +24,7 @@ const NavButton = ({ section, text, onClick }: TNavButton) => {
 			}}
 		>
 			{text}
-		</Button>
+		</motion.button>
 	)
 }
 
