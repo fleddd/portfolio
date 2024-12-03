@@ -1,9 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../views/layout/layout'
 
-export const routes = createBrowserRouter([
+export const routes = createBrowserRouter(
+	[
+		{
+			element: <Layout />,
+			path: '/',
+		},
+	],
 	{
-		element: <Layout />,
-		path: '/portfolio',
-	},
-])
+		basename: '/portfolio',
+	}
+)
