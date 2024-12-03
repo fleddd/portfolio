@@ -3,7 +3,7 @@ type TMenuToggle = {
 	isOpen: boolean
 }
 
-const BurgerToggler = ({ toggle, isOpen }: TMenuToggle) => (
+const BurgerToggler = ({ toggle, isOpen = false }: TMenuToggle) => (
 	<button className='sm:hidden static z-10' onClick={toggle}>
 		<svg
 			width='24'

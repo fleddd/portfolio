@@ -6,16 +6,15 @@ type TBurgerMenu = {
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const BurgerMenu: React.FC<TBurgerMenu> = ({ isOpen, setIsOpen }) => {
+const BurgerMenu: React.FC<TBurgerMenu> = ({ isOpen = false, setIsOpen }) => {
 	const [scrollPosition, setScrollPosition] = useState(0)
 
 	const toggleMenu = () => setIsOpen(prev => !prev)
 
-	const handleResize = () => {
-		if (window.innerWidth > 640) setIsOpen(false)
-	}
-
 	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth > 640) setIsOpen(false)
+		}
 		window.addEventListener('resize', handleResize)
 
 		return () => {
@@ -44,11 +43,6 @@ const BurgerMenu: React.FC<TBurgerMenu> = ({ isOpen, setIsOpen }) => {
 		}
 	}, [isOpen, scrollPosition])
 
-	useEffect(() => {
-		if (window.innerWidth >= 640) {
-			toggleMenu()
-		}
-	}, [window.innerWidth])
 	return (
 		<motion.div
 			initial={false}
