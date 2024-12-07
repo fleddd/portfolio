@@ -6,13 +6,13 @@ import sql from '../assets/sql.svg'
 export const skills = [
 	{
 		name: 'C#',
-		skill: 2,
+		skill: 3,
 		status: 1,
 		src: csharp,
 	},
 	{
 		name: 'ASP.NET',
-		skill: 0,
+		skill: 1,
 		status: 1,
 		src: asp,
 	},
