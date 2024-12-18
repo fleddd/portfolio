@@ -1,18 +1,21 @@
 export const projects = [
 	{
-		name: "UserProfile",
+		name: "Notes",
 		description:
-			"CRUD / Create employee, Edit data, Delete employees, Dashboard.",
+			"Full stack CRUD Notes app connected to MS SQL database.",
 		stack: [
 			"HTML",
 			"CSS",
-			"JS",
+			"Typescript",
 			"React",
 			"TailwindCSS",
-			"Firestore",
-			"MaterialUI",
+			"C#",
+			"ASP.NET",
+			"Entity Framework",
+			"MS SQL",
+
 		],
 		image: "",
-		link: "",
+		link: "https://fleddd.github.io/notes",
 	},
 ];

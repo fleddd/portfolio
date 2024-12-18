@@ -12,7 +12,7 @@ export const skills = [
 	},
 	{
 		name: 'ASP.NET',
-		skill: 1,
+		skill: 2,
 		status: 1,
 		src: asp,
 	},
