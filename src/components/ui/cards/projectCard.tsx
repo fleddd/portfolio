@@ -42,7 +42,7 @@ const projectCard = ({ name, description, stack, link }: IProjectCard) => {
 					</div>
 				</div>
 			</div>
-			<div className={'py-2'}>
+			<div className={'py-2 space-x-2'}>
 				<motion.a
 					whileHover={{
 						background: '#036fff',
