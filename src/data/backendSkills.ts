@@ -1,31 +1,39 @@
-import asp from '../assets/asp.svg'
-import csharp from '../assets/csharp.svg'
+import express from '../assets/express.svg'
 import firestore from '../assets/firestore.svg'
-import sql from '../assets/sql.svg'
+import mongodb from '../assets/mongodb.svg'
+import nestjs from '../assets/nestjs.svg'
+import nodejs from '../assets/nodejs.svg'
+import { SkillStatus } from './enum'
 
 export const skills = [
 	{
-		name: 'C#',
+		name: 'Node.JS',
 		skill: 3,
-		status: 1,
-		src: csharp,
+		status: SkillStatus.Learning,
+		src: nodejs,
 	},
 	{
-		name: 'ASP.NET',
+		name: 'Express',
 		skill: 2,
-		status: 1,
-		src: asp,
+		status: SkillStatus.Learning,
+		src: express,
 	},
 	{
-		name: 'SQL',
+		name: 'NestJS',
 		skill: 0,
-		status: 2,
-		src: sql,
+		status: SkillStatus.Planning,
+		src: nestjs,
+	},
+	{
+		name: 'MongoDB',
+		skill: 3,
+		status: SkillStatus.Learning,
+		src: mongodb,
 	},
 	{
 		name: 'Firestore',
 		skill: 3,
-		status: 1,
+		status: SkillStatus.Learning,
 		src: firestore,
 	},
 ]

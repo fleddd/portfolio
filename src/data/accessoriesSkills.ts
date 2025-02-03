@@ -1,24 +1,25 @@
-import git from "../assets/git.svg";
-import nginx from "../assets/nginx.svg";
-import typescript from "../assets/typescript.svg";
+import git from '../assets/git.svg'
+import nginx from '../assets/nginx.svg'
+import typescript from '../assets/typescript.svg'
+import { SkillStatus } from './enum'
 
 export const skills = [
 	{
-		name: "Git",
+		name: 'Git',
 		skill: 5,
-		status: 0,
+		status: SkillStatus.Mastered,
 		src: git,
 	},
 	{
-		name: "Nginx",
+		name: 'Nginx',
 		skill: 3,
-		status: 1,
+		status: SkillStatus.Learning,
 		src: nginx,
 	},
 	{
-		name: "Typescript",
+		name: 'TypeScript',
 		skill: 5,
-		status: 0,
+		status: SkillStatus.Mastered,
 		src: typescript,
 	},
-];
+]
