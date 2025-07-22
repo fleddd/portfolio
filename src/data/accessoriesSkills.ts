@@ -1,6 +1,4 @@
-import git from '../assets/git.svg'
-import nginx from '../assets/nginx.svg'
-import typescript from '../assets/typescript.svg'
+import {git, nginx, typescript, rest ,graphql} from '../assets'
 import { SkillStatus } from './enum'
 
 export const skills = [
@@ -9,6 +7,18 @@ export const skills = [
 		skill: 5,
 		status: SkillStatus.Mastered,
 		src: git,
+	},
+	{
+		name: "REST API",
+		skill: 5,
+		status: SkillStatus.Mastered,
+		src: rest,
+	},
+	{
+		name: "GraphQL",
+		skill: 2,
+		status: SkillStatus.Learning,
+		src: graphql,
 	},
 	{
 		name: 'Nginx',

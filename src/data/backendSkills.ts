@@ -1,20 +1,17 @@
-import express from '../assets/express.svg'
-import firestore from '../assets/firestore.svg'
-import mongodb from '../assets/mongodb.svg'
-import nestjs from '../assets/nestjs.svg'
-import nodejs from '../assets/nodejs.svg'
+import {express, firestore, mongodb, nestjs, nodejs} from '../assets'
+
 import { SkillStatus } from './enum'
 
 export const skills = [
 	{
 		name: 'Node.JS',
-		skill: 3,
+		skill: 4,
 		status: SkillStatus.Learning,
 		src: nodejs,
 	},
 	{
 		name: 'Express',
-		skill: 2,
+		skill: 4,
 		status: SkillStatus.Learning,
 		src: express,
 	},

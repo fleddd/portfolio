@@ -1,5 +1,4 @@
-import github from "../assets/github.svg";
-import tg from "../assets/tg.svg";
+import {github, tg} from "../assets";
 
 export const contacts = [
 	{
