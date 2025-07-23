@@ -43,6 +43,8 @@ const projectCard = ({ name, description, stack, link }: IProjectCard) => {
 				</div>
 			</div>
 			<div className={'py-2 space-x-2'}>
+				{link.public && (
+
 				<motion.a
 					whileHover={{
 						background: '#036fff',
@@ -57,6 +59,7 @@ const projectCard = ({ name, description, stack, link }: IProjectCard) => {
 				>
 					Link
 				</motion.a>
+				)} 
 				<motion.a
 					whileHover={{
 						background: '#036fff',
