@@ -1,4 +1,4 @@
-import {github, tg} from "../assets";
+import { github, linkedin, tg } from "../assets";
 
 export const contacts = [
 	{
@@ -10,5 +10,10 @@ export const contacts = [
 		name: "Telegram",
 		image: tg,
 		link: "https://t.me/olehfedkiv",
+	},
+	{
+		name: "Linkedin",
+		image: linkedin,
+		link: "https://www.linkedin.com/in/oleh-fedkiv-35b806257/ч'",
 	},
 ];

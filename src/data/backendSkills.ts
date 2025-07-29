@@ -1,4 +1,4 @@
-import {express, firestore, mongodb, nestjs, nodejs} from '../assets'
+import { express, firestore, mongodb, nestjs, nodejs, postgreSQL } from '../assets'
 
 import { SkillStatus } from './enum'
 
@@ -17,8 +17,8 @@ export const skills = [
 	},
 	{
 		name: 'NestJS',
-		skill: 0,
-		status: SkillStatus.Planning,
+		skill: 3,
+		status: SkillStatus.Learning,
 		src: nestjs,
 	},
 	{
@@ -32,5 +32,11 @@ export const skills = [
 		skill: 3,
 		status: SkillStatus.Learning,
 		src: firestore,
+	},
+	{
+		name: 'PostgreSQL',
+		skill: 3,
+		status: SkillStatus.Learning,
+		src: postgreSQL,
 	},
 ]

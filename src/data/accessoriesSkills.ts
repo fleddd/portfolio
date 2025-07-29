@@ -1,4 +1,4 @@
-import {git, nginx, typescript, rest ,graphql} from '../assets'
+import { git, nginx, typescript, rest, graphql, docker } from '../assets'
 import { SkillStatus } from './enum'
 
 export const skills = [
@@ -25,6 +25,12 @@ export const skills = [
 		skill: 3,
 		status: SkillStatus.Learning,
 		src: nginx,
+	},
+	{
+		name: 'Docker',
+		skill: 3,
+		status: SkillStatus.Learning,
+		src: docker,
 	},
 	{
 		name: 'TypeScript',

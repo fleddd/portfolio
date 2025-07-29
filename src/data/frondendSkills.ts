@@ -1,4 +1,4 @@
-import {css, html, javascript, react, sass, tailwind} from '../assets'
+import { css, html, javascript, nextJs, react, sass, tailwind } from '../assets'
 
 import { SkillStatus } from './enum'
 
@@ -26,6 +26,12 @@ export const skills = [
 		src: react,
 		skill: 5,
 		status: SkillStatus.Mastered,
+	},
+	{
+		name: 'Next',
+		src: nextJs,
+		skill: 3,
+		status: SkillStatus.Learning,
 	},
 
 	{
