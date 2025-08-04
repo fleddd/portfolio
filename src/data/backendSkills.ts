@@ -16,8 +16,8 @@ export const skills = [
 		src: express,
 	},
 	{
-		name: 'NestJS',
-		skill: 3,
+		name: 'Nest',
+		skill: 4,
 		status: SkillStatus.Learning,
 		src: nestjs,
 	},

@@ -1,10 +1,27 @@
 export const projects = [
 	{
+		name: 'FlavorAI',
+		description: 'Full stack app for creating own meals recipes and generating based on ingredients using AI. Not finished yet (didn\'t integrated AI).',
+		stack: [
+			'Typescript',
+			'Next',
+			'TailwindCSS',
+			'Nest',
+			'PostgreSQL',
+			'Prisma',
+			'JWT',
+			'Docker',
+		],
+		image: '',
+		link: {
+			public: '',
+			github: 'https://github.com/fleddd/flavorai',
+		},
+	},
+	{
 		name: 'Real time Chat Messenger',
 		description: 'Full stack RealTime Chat Messenger app with user authentication. Not finished yet.',
 		stack: [
-			'HTML',
-			'CSS',
 			'Typescript',
 			'React',
 			'TailwindCSS',
@@ -25,8 +42,6 @@ export const projects = [
 		name: 'Notes',
 		description: 'Full stack CRUD Notes app connected to MS SQL database.',
 		stack: [
-			'HTML',
-			'CSS',
 			'Typescript',
 			'React',
 			'TailwindCSS',
@@ -41,13 +56,11 @@ export const projects = [
 			github: 'https://github.com/fleddd/notes',
 		},
 	},
-	
+
 	{
 		name: 'Employee Management System',
 		description: 'Full stack CRUD Employee Management System app connected to Firebase',
 		stack: [
-			'HTML',
-			'CSS',
 			'Javascript',
 			'React',
 			'TailwindCSS',
