@@ -14,6 +14,6 @@ export const contacts = [
 	{
 		name: "Linkedin",
 		image: linkedin,
-		link: "https://www.linkedin.com/in/oleh-fedkiv-35b806257/ч'",
+		link: "https://www.linkedin.com/in/olehfedkiv'",
 	},
 ];
