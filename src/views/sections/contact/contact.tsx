@@ -8,7 +8,7 @@ const Contact = () => {
 			className='my-20 flex flex-col items-center w-full gap-10'
 		>
 			<h3 className='text-center text-2xl sm:text-4xl'>Contact me</h3>
-			<article className='grid max-sm:grid-cols-3  grid-cols-3 gap-5 justify-center'>
+			<article className='grid max-sm:grid-cols-1  grid-cols-3 gap-5 justify-center'>
 				{contacts.map(contact => (
 					<ContactCard
 						name={contact.name}

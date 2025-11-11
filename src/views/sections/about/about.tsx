@@ -8,8 +8,8 @@ const About = () => {
 		>
 			<h3 className='text-center text-2xl sm:text-4xl'>About me</h3>
 			<div className='flex justify-center items-center sm:gap-14 flex-col sm:flex-row'>
-				<AboutIcon size={400} />
-				<Card>
+				{/* <AboutIcon size={400} /> */}
+				<Card styles='sm:max-w-[700px] py-16 px-10 sm:text-lg ' variant='liquidGlass'>
 					<article>
 						<span className='text-accent'>{'<p>'}</span>
 						Hi!<span className='text-accent'>{'</p>'}</span>

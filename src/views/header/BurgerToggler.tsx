@@ -6,7 +6,7 @@ type TMenuToggle = {
 const BurgerToggler = ({ toggle, isOpen = false }: TMenuToggle) => (
 	<button
 		name='navigation toggler'
-		className='sm:hidden static z-10'
+		className={`sm:hidden static z-10 ${isOpen ? '' : 'dark:invert'}`}
 		onClick={toggle}
 	>
 		<svg

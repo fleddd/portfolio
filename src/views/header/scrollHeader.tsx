@@ -7,34 +7,42 @@ const ScrollHeader = () => {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			if (window.scrollY > 65) {
-				setIsScrolled(true);
-			} else setIsScrolled(false);
+			setIsScrolled(window.scrollY > 65);
 		};
-
 		window.addEventListener("scroll", handleScroll);
-
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
+		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
+
 	return (
 		<AnimatePresence>
 			{isScrolled && (
 				<motion.nav
 					transition={{ type: "spring", bounce: false, duration: 0.5 }}
-					initial={{ y: -20 }}
-					animate={{ y: 10 }}
-					exit={{ y: -50 }}
-					className="hidden sm:flex fixed top-0 left-0 w-max inset-x-0 mx-auto z-20 
-                 items-center justify-center  bg-white-secondary dark:bg-black-secondary gap-5 py-2 px-4 rounded-xl border-2 dark:border-black shadow-md"
+					initial={{ y: -20, opacity: 0 }}
+					animate={{ y: 10, opacity: 1 }}
+					exit={{ y: -50, opacity: 0 }}
+					className="
+						hidden sm:flex fixed top-0 left-0 inset-x-0 mx-auto z-20
+						items-center justify-center py-2 px-6 rounded-xl
+						bg-white/30 dark:bg-black/30
+						backdrop-blur-[20px]
+						border border-white/20 dark:border-black/20
+						shadow-md
+						max-w-[400px] 
+					"
 				>
-					<NavButton text="Home" section={"greeting"} />
-					<NavButton text="About" section={"about"} />
-					<NavButton text="Skills" section={"skills"} />
-					<NavButton text="Projects" section={"projects"} />
-					<NavButton text="Contact" section={"contact"} />
+					{/* Блік позаду кнопок */}
+
+					{/* Кнопки */}
+					<div className="relative z-10 flex gap-5">
+						<NavButton text="Home" section={"greeting"} />
+						<NavButton text="About" section={"about"} />
+						<NavButton text="Skills" section={"skills"} />
+						<NavButton text="Projects" section={"projects"} />
+						<NavButton text="Contact" section={"contact"} />
+					</div>
 				</motion.nav>
+
 			)}
 		</AnimatePresence>
 	);
