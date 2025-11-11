@@ -27,6 +27,7 @@ const Front = () => {
 						name={skill.name}
 						image={skill.src}
 						skill={skill.skill}
+						invertInDark={skill.invertInDark}
 					/>
 				))}
 			</div>

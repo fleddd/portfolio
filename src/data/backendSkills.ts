@@ -8,35 +8,41 @@ export const skills = [
 		skill: 4,
 		status: SkillStatus.Learning,
 		src: nodejs,
+		invertInDark: false
 	},
 	{
 		name: 'Express',
 		skill: 4,
 		status: SkillStatus.Learning,
 		src: express,
+		invertInDark: true
 	},
 	{
 		name: 'Nest',
 		skill: 4,
 		status: SkillStatus.Learning,
 		src: nestjs,
+		invertInDark: false
 	},
 	{
 		name: 'MongoDB',
 		skill: 3,
 		status: SkillStatus.Learning,
 		src: mongodb,
+		invertInDark: false
 	},
 	{
 		name: 'Firestore',
 		skill: 3,
 		status: SkillStatus.Learning,
 		src: firestore,
+		invertInDark: false
 	},
 	{
 		name: 'PostgreSQL',
 		skill: 3,
 		status: SkillStatus.Learning,
 		src: postgreSQL,
+		invertInDark: false
 	},
 ]

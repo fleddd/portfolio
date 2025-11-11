@@ -24,7 +24,7 @@ const Card = ({ children, styles }: IChildrenWrapper) => {
 			initial={"hidden"}
 			animate={isInDiv ? "visible" : ""}
 			className={twMerge(
-				"min-h-40 sm:max-w-96 sm:min-w-80 max-w-72 rounded-xl overflow-hidden p-4 shadow-xl",
+				"min-h-40 sm:max-w-96 sm:min-w-80 max-w-72 rounded-xl overflow-hidden p-4 bg-white-secondary dark:bg-black-secondary shadow-shadow-accent shadow-md dark:shadow-lg",
 				styles,
 			)}
 		>

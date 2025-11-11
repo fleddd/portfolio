@@ -1,28 +1,67 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-	font-family: "Roboto Mono", serif;
-	line-height: 1.5;
-	font-weight: 400;
+@custom-variant dark (&:is(.dark *));
 
-	color-scheme: light dark;
-	color: #010101;
-	background-color: #ffffff;
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	scroll-behavior: smooth;
+@theme {
+	--color-black: #101010;
+	--color-white: #fefefe;
+	--color-accent: #0370ff;
+	--color-black-secondary: rgb(var(--black-secondary));
+	--color-black-light: rgb(var(--black-light));
+	--color-white-secondary: rgb(var(--white-secondary));
+	--color-text-color: rgb(var(--text-color));
+	--color-bg-primary: rgb(var(--bg-primary));
+
+	--drop-shadow-md: 0 0 5px #036fff;
+	--drop-shadow-xl: 0 5px 20px #036fff;
+
+	--shadow-accent-md: 0 0 5px #036fff;
+	--shadow-accent-xl: 0 0 5px #037fff;
 }
 
-.section {
-	min-height: calc(100vh - 68px);
+
+@layer base {
+
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
 }
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+@layer base {
+
+	:root {
+		font-family: "Roboto Mono", serif;
+		line-height: 1.5;
+		font-weight: 400;
+		color-scheme: light dark;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		scroll-behavior: smooth;
+
+		--text-color: 0 0 0;
+		--black-secondary: 21 21 21;
+		--black-light: 30 30 30;
+		--white-secondary: 245 245 245;
+		--bg-primary: 254 254 254;
+	}
+
+	.dark {
+		--text-color: 255 255 255;
+		--bg-primary: 26 26 26;
+	}
+
+	body {
+		background-color: rgb(var(--bg-primary) / 1);
+		color: rgb(var(--text-color) / 1);
+		transition: color 200ms ease, background-color 200ms ease;
+	}
+
+	/* приклад: мінімальний reset/section */
+	.section {
+		min-height: calc(100vh - 68px);
+	}
 }

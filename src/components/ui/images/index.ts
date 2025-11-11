@@ -3,3 +3,5 @@ export { default as AboutIcon } from "./icons/about";
 export { default as ArrowIcon } from "./icons/arrow";
 export { default as GreetingIcon } from "./icons/greeting";
 export { default as StatusIcon } from "./icons/statusIcon";
+export { default as ThemeToggerIcon } from "./icons/ThemeToggerIcon";
+

@@ -14,6 +14,7 @@ const Contact = () => {
 						name={contact.name}
 						image={contact.image}
 						link={contact.link}
+						invertInDark={contact.invertInDark}
 					/>
 				))}
 			</article>

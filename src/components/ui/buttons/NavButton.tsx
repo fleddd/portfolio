@@ -9,12 +9,10 @@ type TNavButton = {
 const NavButton = ({ onClick, section, text }: TNavButton) => {
 	return (
 		<motion.button
-			whileHover={{
-				color: '#036fff',
-			}}
-			name={`navigation button: ${text}`}
-			type='button'
-			className={`font-normal text-white sm:text-black`}
+			initial={{ color: 'var(--text-color)' }}
+			animate={{ color: 'var(--text-color)' }}
+			whileHover={{ color: '#036fff' }}
+			className="font-normal sm:text-base cursor-pointer"
 			onClick={() => {
 				if (onClick) onClick()
 				setTimeout(() => {

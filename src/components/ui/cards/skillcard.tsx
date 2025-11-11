@@ -10,6 +10,7 @@ interface ISkillCard extends IChildrenWrapper {
 	image: string;
 	skill: number;
 	status: number;
+	invertInDark: boolean
 }
 
 const SkillCard = ({
@@ -19,11 +20,12 @@ const SkillCard = ({
 	image,
 	skill,
 	status,
+	invertInDark
 }: ISkillCard) => {
 	return (
 		<div
 			className={twMerge(
-				"flex flex-col min-w-48 max-w-48 min-h-48 shadow-md gap-2 p-3 pt-5 rounded-xl text-md",
+				"flex flex-col min-w-48 max-w-48 min-h-48 bg-white-secondary dark:bg-black-light gap-2 p-3 pt-5 rounded-xl text-md",
 				styles,
 			)}
 		>
@@ -31,7 +33,7 @@ const SkillCard = ({
 				whileHover={{ scale: 1.1, transition: { type: "spring" } }}
 				className="flex items-center justify-center"
 			>
-				<DefaultIcon size={50} image={image} />
+				<DefaultIcon size={50} image={image} invertInDark={invertInDark} />
 			</motion.div>
 			<div className="flex flex-col justify-center items-start ">
 				<div>Name: {name}</div>

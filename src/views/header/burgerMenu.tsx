@@ -56,7 +56,7 @@ const BurgerMenu: React.FC<TBurgerMenu> = ({ isOpen = false, setIsOpen }) => {
 					x: "-100%",
 				},
 			}}
-			className="min-w-dvw z-[9] fixed left-0 top-0 flex h-dvh w-dvw justify-center bg-zinc-950 pt-24 text-white"
+			className="min-w-dvw z-9 fixed left-0 top-0 flex h-dvh w-dvw justify-center bg-zinc-950 pt-24 text-white"
 		>
 			<div className="flex w-64 grow flex-col gap-5 px-12 text-start text-xl">
 				<NavButton onClick={toggleMenu} text="Home" section={"greeting"} />

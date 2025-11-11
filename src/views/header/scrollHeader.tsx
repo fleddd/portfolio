@@ -27,7 +27,7 @@ const ScrollHeader = () => {
 					animate={{ y: 10 }}
 					exit={{ y: -50 }}
 					className="hidden sm:flex fixed top-0 left-0 w-max inset-x-0 mx-auto z-20 
-                 items-center justify-center  bg-white gap-5 py-2 px-4 rounded-xl border-2  shadow-md"
+                 items-center justify-center  bg-white-secondary dark:bg-black-secondary gap-5 py-2 px-4 rounded-xl border-2 dark:border-black shadow-md"
 				>
 					<NavButton text="Home" section={"greeting"} />
 					<NavButton text="About" section={"about"} />
