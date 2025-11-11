@@ -3,13 +3,13 @@ const About = () => {
 	return (
 		<section
 			id='about'
-			className=' min-h-dvh flex items-center sm:gap-10 justify-center flex-col'
+			className=' min-h-dvh flex items-center gap-3 sm:gap-10 justify-center flex-col'
 		>
 			<h3 className='text-center text-2xl sm:text-4xl'>About me</h3>
 			<div className='flex justify-center items-center sm:gap-14 flex-col sm:flex-row'>
 				{/* <AboutIcon size={400} /> */}
-				<Card styles='sm:max-w-[700px] py-16 px-10 sm:text-lg ' variant='liquidGlass'>
-					<article>
+				<Card styles='sm:max-w-[700px] py-8 sm:py-16 px-5 sm:px-10 sm:text-lg text-sm' variant='liquidGlass'>
+					<article >
 						<span className='text-accent'>{'<p>'}</span>
 						Hi!<span className='text-accent'>{'</p>'}</span>
 						<br /> <br /> <span className='text-accent'>{'<p>'}</span> I’m Oleh,
