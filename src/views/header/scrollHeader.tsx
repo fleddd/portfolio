@@ -22,19 +22,18 @@ const ScrollHeader = () => {
 					animate={{ y: 10, opacity: 1 }}
 					exit={{ y: -50, opacity: 0 }}
 					className="
-						hidden sm:flex fixed top-0 left-0 inset-x-0 mx-auto z-20
-						items-center justify-center py-2 px-6 rounded-xl
-						bg-white/30 dark:bg-black/30
-						backdrop-blur-[20px]
-						border border-white/20 dark:border-black/20
-						shadow-md
-						max-w-[400px] 
-					"
+                        flex fixed top-0 left-0 inset-x-0 mx-auto z-20 
+                        items-center justify-center py-2 px-3 sm:px-6 rounded-xl 
+                        bg-white/30 dark:bg-black/30
+                        backdrop-blur-[20px]
+                        border border-white/20 dark:border-black/20
+                        shadow-md
+                        max-w-fit
+                    "
 				>
-					{/* Блік позаду кнопок */}
 
-					{/* Кнопки */}
-					<div className="relative z-10 flex gap-5">
+
+					<div className="relative z-10 flex justify-center gap-5  max-sm:text-xs">
 						<NavButton text="Home" section={"greeting"} />
 						<NavButton text="About" section={"about"} />
 						<NavButton text="Skills" section={"skills"} />
@@ -42,7 +41,6 @@ const ScrollHeader = () => {
 						<NavButton text="Contact" section={"contact"} />
 					</div>
 				</motion.nav>
-
 			)}
 		</AnimatePresence>
 	);

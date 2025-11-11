@@ -1,5 +1,4 @@
 import { Card } from '../../../components/ui/cards'
-import { AboutIcon } from '../../../components/ui/images'
 const About = () => {
 	return (
 		<section
