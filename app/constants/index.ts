@@ -43,7 +43,8 @@ export const FEATURES = [
 export const TECH_STACK = ['React / Next', 'TypeScript', 'Nest.js', 'PostgreSQL', 'Docker'] as const;
 
 export const STATS = [
-  { value: '3+', label: 'Years Experience' },
+  { value: '3+', label: 'Years in Tech' },
+  { value: '8+', label: 'Months of commercial experience' },
   { value: '5+', label: 'Projects Completed' },
   { value: '5+', label: 'Happy Clients' },
   { value: '100%', label: 'Commitment' },
@@ -162,7 +163,7 @@ export const PROJECTS = [
     title: 'Telegram Bot with Web API',
     category: 'Telegram Bots',
     description: 'Telegram bot with web API for real-time data management.',
-    tech: ['Angular', 'Spring Boot', 'MySQL', 'Kafka', 'K8s'],
+    tech: ['React', 'Tailwind', 'REST API', "Telegram API"],
     gradient: 'from-green-500 to-emerald-500',
     icon: Code,
     sourceCode: "",

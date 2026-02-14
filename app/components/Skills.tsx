@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Button, Section, SectionHeader } from '@/components/ui';
+import { AnimatedCounter, Button, Section, SectionHeader } from '@/components/ui';
 import { SKILL_CATEGORIES } from '@/constants';
 import Link from 'next/link';
 
@@ -63,7 +63,7 @@ export function Skills() {
                       >
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-gray-300 font-medium">{skill.name}</span>
-                          <span className="text-gray-500">{skill.level}%</span>
+                          <AnimatedCounter text={`${skill.level}%`} durationSeconds={2} />
                         </div>
                         <div className="h-2 bg-white/5 rounded-full overflow-hidden">
                           <motion.div

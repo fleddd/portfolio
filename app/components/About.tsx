@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Section } from '@/components/ui';
+import { Section, AnimatedCounter } from '@/components/ui';
 import { FEATURES, TECH_STACK, STATS } from '@/constants';
 
 export function About() {
@@ -93,7 +93,7 @@ export function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 pt-12 border-t border-white/10"
+          className="grid grid-cols-2 md:grid-cols-5 gap-8 mt-24 pt-12 border-t border-white/10"
         >
           {STATS.map((stat, index) => (
             <motion.div
@@ -105,7 +105,7 @@ export function About() {
               className="text-center space-y-2"
             >
               <div className="text-4xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text">
-                {stat.value}
+                <AnimatedCounter text={stat.value} />
               </div>
               <div className="text-sm text-gray-400">{stat.label}</div>
             </motion.div>
