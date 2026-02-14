@@ -118,32 +118,34 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-14"
+            className="relative flex flex-col sm:flex-row items-center justify-center gap-4 pt-14"
           >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+              className='absolute top-3'
+            >
+              <motion.button
+                animate={{ y: [-20, -10, -20] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                onClick={() => scrollTo('about')}
+                className="flex flex-col items-center gap-2 text-gray-500 hover:text-cyan-400 transition-colors cursor-pointer"
+              >
+                <span className="text-sm">Scroll to explore</span>
+                <ArrowDown className="w-5 h-5" />
+              </motion.button>
+            </motion.div>
             <Button onClick={() => scrollTo('projects')}>View My Work</Button>
+
             <Button variant="secondary" onClick={() => scrollTo('contact')}>
               Get In Touch
             </Button>
           </motion.div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
-        >
-          <motion.button
-            animate={{ y: [-20, -10, -20] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            onClick={() => scrollTo('about')}
-            className="flex flex-col items-center gap-2 text-gray-500 hover:text-cyan-400 transition-colors cursor-pointer"
-          >
-            <span className="text-sm">Scroll to explore</span>
-            <ArrowDown className="w-5 h-5" />
-          </motion.button>
-        </motion.div>
+
       </div>
-    </section>
+    </section >
   );
 }
