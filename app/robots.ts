@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://olehfedkiv.dev";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fedkiv.tech";
 
 export default function robots(): MetadataRoute.Robots {
   return {
