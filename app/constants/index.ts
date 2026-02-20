@@ -117,7 +117,7 @@ export const PROJECTS = [
     gradient: 'from-cyan-500 to-blue-500',
     icon: Layers,
     sourceCode: "",
-    livePreview: "",
+    livePreview: "https://seatravel.hr",
   },
   {
     title: 'AI-Powered Copywriting Tool',
