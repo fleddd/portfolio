@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Toaster } from "./components/Toaster";
 import { JsonLd } from "./components/JsonLd";
+import { Analytics } from "@vercel/analytics/next";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fedkiv.tech";
 
@@ -89,6 +90,7 @@ export default function RootLayout({
         <JsonLd />
         {children}
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
