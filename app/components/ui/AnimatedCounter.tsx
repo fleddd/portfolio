@@ -22,7 +22,7 @@ export function AnimatedCounter({ text, durationSeconds = 4 }: { text: string, d
         });
 
         return () => controls.stop();
-    }, [text, isInView]);
+    }, [text, isInView, durationSeconds]);
 
     return <span ref={ref}>0{text.replace(/\d/g, '')}</span>;
 }

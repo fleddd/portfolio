@@ -3,8 +3,22 @@
 import { motion } from 'motion/react';
 import { Section, AnimatedCounter } from '@/components/ui';
 import { FEATURES, TECH_STACK, STATS } from '@/constants';
+import { Locale, getCopy } from '@/constants/i18n';
 
-export function About() {
+type AboutProps = {
+  locale: Locale;
+};
+
+export function About({ locale }: AboutProps) {
+  const t = getCopy(locale).about;
+  const localizedStats = [
+    { ...STATS[0], label: t.stats.years },
+    { ...STATS[1], label: t.stats.months },
+    { ...STATS[2], label: t.stats.projects },
+    { ...STATS[3], label: t.stats.clients },
+    { ...STATS[4], label: t.stats.commitment },
+  ];
+
   return (
     <Section id="about">
       <div
@@ -25,20 +39,19 @@ export function About() {
             className="space-y-8"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-              Building Digital
+              {t.titleMain}
               <br />
               <span className="text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text">
-                Strength
+                {t.titleAccent}
               </span>
             </h2>
 
             <p className="text-lg text-gray-400 leading-relaxed">
-              I&apos;m a Full-Stack Developer specializing in robust, scalable web applications.
-              Transforming complex requirements into elegant, high-performance solutions.
+              {t.p1}
             </p>
 
             <p className="text-lg text-gray-400 leading-relaxed">
-              Technical precision combined with creative problem-solving and best practices.
+              {t.p2}
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
@@ -95,7 +108,7 @@ export function About() {
           transition={{ delay: 0.5 }}
           className="grid grid-cols-2 md:grid-cols-5 gap-8 mt-24 pt-12 border-t border-white/10"
         >
-          {STATS.map((stat, index) => (
+          {localizedStats.map((stat, index) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}

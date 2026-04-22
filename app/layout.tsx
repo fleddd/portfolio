@@ -11,9 +11,8 @@ export const metadata: Metadata = {
     default: "Oleh Fedkiv | Full-Stack Developer",
     template: "%s | Oleh Fedkiv",
   },
-  // Додано український контекст та повний стек у description
   description:
-    "Full-Stack Developer crafting exceptional digital experiences with precision and technical excellence. Фулстек веб-розробник (React, Next.js, NestJS, Node.js).",
+    "Full-Stack Developer crafting high-performance websites, MVPs, and business modules with technical SEO and strong Core Web Vitals.",
   keywords: [
     "Full-Stack Developer",
     "Oleh Fedkiv",
@@ -43,13 +42,23 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Oleh Fedkiv Portfolio",
     title: "Oleh Fedkiv | Full-Stack Developer",
-    description: "Full-Stack Developer crafting exceptional digital experiences. Фулстек веб-розробник.",
+    description:
+      "Full-Stack Developer crafting high-performance websites, MVPs, and business modules with technical SEO.",
+    images: [
+      {
+        url: `${SITE_URL}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: "Oleh Fedkiv - Full-Stack Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Oleh Fedkiv | Full-Stack Developer",
-    description: "Full-Stack Developer crafting exceptional digital experiences. Фулстек веб-розробник.",
-    images: [],
+    description:
+      "Full-Stack Developer crafting high-performance websites, MVPs, and business modules with technical SEO.",
+    images: [`${SITE_URL}/opengraph-image`],
   },
   robots: {
     index: true,
@@ -64,6 +73,11 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+    languages: {
+      "en-US": SITE_URL,
+      "uk-UA": `${SITE_URL}/uk`,
+      "x-default": SITE_URL,
+    },
   },
   category: "technology",
   manifest: "/manifest.json",

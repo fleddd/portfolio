@@ -3,9 +3,15 @@
 import { motion } from 'motion/react';
 import { AnimatedCounter, Button, Section, SectionHeader } from '@/components/ui';
 import { SKILL_CATEGORIES } from '@/constants';
-import Link from 'next/link';
+import { Locale, getCopy } from '@/constants/i18n';
 
-export function Skills() {
+type SkillsProps = {
+  locale: Locale;
+};
+
+export function Skills({ locale }: SkillsProps) {
+  const t = getCopy(locale).skills;
+
   return (
     <Section id="skills" bg="gradient-down">
       <div className="absolute inset-0 overflow-hidden">
@@ -25,10 +31,11 @@ export function Skills() {
         <SectionHeader
           title={
             <>
-              Skills & <span className="text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text">Expertise</span>
+              {t.titleLeft}{' '}
+              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text">{t.titleRight}</span>
             </>
           }
-          description="A comprehensive toolkit for building modern, scalable applications"
+          description={t.description}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -89,10 +96,8 @@ export function Skills() {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <p className="text-gray-400 mb-6">Always learning and staying updated with the latest technologies</p>
-          <Button>
-            <Link href="/cv.pdf" download target="_blank">Download Resume</Link>
-          </Button>
+          <p className="text-gray-400 mb-6">{t.note}</p>
+          <Button href="/cv.pdf">{t.resume}</Button>
         </motion.div>
       </div>
     </Section>

@@ -6,12 +6,22 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { Section, SectionHeader } from '@/components/ui';
 import { CONTACT_INFO, CONTACT_SOCIAL_LINKS, INPUT_CLASS } from '@/constants';
+import { Locale, getCopy } from '@/constants/i18n';
 
 const INITIAL_FORM = { name: '', email: '', subject: '', message: '' };
 
-export function Contact() {
+type ContactProps = {
+  locale: Locale;
+};
+
+export function Contact({ locale }: ContactProps) {
   const [formData, setFormData] = useState(INITIAL_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const t = getCopy(locale).contact;
+  const infoLabels = {
+    email: locale === 'uk' ? 'Пошта' : 'Email',
+    location: locale === 'uk' ? 'Локація' : 'Location',
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +32,7 @@ export function Contact() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, website: '' }),
       });
       const data = await res.json();
 
@@ -30,10 +40,10 @@ export function Contact() {
         throw new Error(data.error || 'Failed to send');
       }
 
-      toast.success('Message sent! I\'ll get back to you soon.');
+      toast.success(t.success);
       setFormData(INITIAL_FORM);
     } catch {
-      toast.error('Could not send message. Please try again or email me directly.');
+      toast.error(t.error);
     } finally {
       setIsSubmitting(false);
     }
@@ -62,13 +72,13 @@ export function Contact() {
         <SectionHeader
           title={
             <>
-              Let&apos;s Build{' '}
+              {t.titleLeft}{' '}
               <span className="text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text">
-                Together
+                {t.titleRight}
               </span>
             </>
           }
-          description="Have a project in mind? Let's discuss how we can bring your vision to life"
+          description={t.description}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -94,7 +104,7 @@ export function Contact() {
                     <info.icon className="w-6 h-6 text-cyan-400" strokeWidth={2} />
                   </div>
                   <div className="flex-1">
-                    <div className="text-sm text-gray-500 mb-1">{info.label}</div>
+                    <div className="text-sm text-gray-500 mb-1">{info.label === 'Email' ? infoLabels.email : infoLabels.location}</div>
                     <div className="text-white font-medium">{info.value}</div>
                   </div>
                 </motion.a>
@@ -108,7 +118,7 @@ export function Contact() {
               transition={{ delay: 0.3 }}
               className="space-y-4"
             >
-              <h3 className="text-white font-semibold">Follow Me</h3>
+              <h3 className="text-white font-semibold">{t.followMe}</h3>
               <div className="flex gap-4">
                 {CONTACT_SOCIAL_LINKS.map((social) => (
                   <motion.a
@@ -117,6 +127,7 @@ export function Contact() {
                     whileHover={{ scale: 1.1, y: -5 }}
                     whileTap={{ scale: 0.95 }}
                     className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all group cursor-pointer"
+                    aria-label={social.label}
                   >
                     <social.icon className="w-6 h-6 text-gray-400 group-hover:text-cyan-400 transition-colors" />
                   </motion.a>
@@ -136,9 +147,9 @@ export function Contact() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
                 </span>
-                <span className="text-white font-semibold">Available for Work</span>
+                <span className="text-white font-semibold">{t.available}</span>
               </div>
-              <p className="text-sm text-gray-400">Open to new opportunities and exciting projects</p>
+              <p className="text-sm text-gray-400">{t.availableDescription}</p>
             </motion.div>
           </motion.div>
 
@@ -149,10 +160,22 @@ export function Contact() {
             className="lg:col-span-2"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  defaultValue=""
+                />
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Name
+                    {t.fields.name}
                   </label>
                   <input
                     type="text"
@@ -161,13 +184,13 @@ export function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    placeholder="Your name"
+                    placeholder={t.placeholders.name}
                     className={INPUT_CLASS}
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Email
+                    {t.fields.email}
                   </label>
                   <input
                     type="email"
@@ -176,7 +199,7 @@ export function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    placeholder="your.email@example.com"
+                    placeholder={t.placeholders.email}
                     className={INPUT_CLASS}
                   />
                 </div>
@@ -184,7 +207,7 @@ export function Contact() {
 
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                  Subject
+                  {t.fields.subject}
                 </label>
                 <input
                   type="text"
@@ -193,14 +216,14 @@ export function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  placeholder="What's this about?"
+                  placeholder={t.placeholders.subject}
                   className={INPUT_CLASS}
                 />
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Message
+                  {t.fields.message}
                 </label>
                 <textarea
                   id="message"
@@ -209,7 +232,7 @@ export function Contact() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  placeholder="Tell me about your project..."
+                  placeholder={t.placeholders.message}
                   className={`${INPUT_CLASS} resize-none`}
                 />
               </div>
@@ -224,11 +247,11 @@ export function Contact() {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Sending...</span>
+                    <span>{t.sending}</span>
                   </>
                 ) : (
                   <>
-                    <span>Send Message</span>
+                    <span>{t.send}</span>
                     <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </>
                 )}

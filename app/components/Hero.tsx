@@ -5,9 +5,15 @@ import { ArrowDown } from 'lucide-react';
 import { useScrollTo } from '@/hooks/useScrollTo';
 import { Button } from '@/components/ui';
 import { CONTACT_SOCIAL_LINKS } from '../constants';
+import { Locale, getCopy } from '@/constants/i18n';
 
-export function Hero() {
+type HeroProps = {
+  locale: Locale;
+};
+
+export function Hero({ locale }: HeroProps) {
   const scrollTo = useScrollTo();
+  const t = getCopy(locale).hero;
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -67,7 +73,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10"
           >
             <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-sm text-gray-300">Available for work</span>
+            <span className="text-sm text-gray-300">{t.available}</span>
           </motion.div>
 
           <motion.div
@@ -82,7 +88,7 @@ export function Hero() {
               </span>
             </h1>
             <div className="text-2xl md:text-3xl lg:text-4xl font-medium text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text">
-              Full-Stack Developer
+              {t.role}
             </div>
           </motion.div>
 
@@ -92,7 +98,7 @@ export function Hero() {
             transition={{ delay: 0.5 }}
             className="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 leading-relaxed"
           >
-            Building robust, scalable applications with precision and technical excellence.
+            {t.description}
           </motion.p>
 
           <motion.div
@@ -108,6 +114,7 @@ export function Hero() {
                 whileHover={{ scale: 1.1, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all group cursor-pointer"
+                aria-label={social.label}
               >
                 <social.icon className="w-6 h-6 text-gray-400 group-hover:text-cyan-400 transition-colors" />
               </motion.a>
@@ -131,15 +138,16 @@ export function Hero() {
                 transition={{ duration: 2, repeat: Infinity }}
                 onClick={() => scrollTo('about')}
                 className="flex flex-col items-center gap-2 text-gray-500 hover:text-cyan-400 transition-colors cursor-pointer"
+                type="button"
               >
-                <span className="text-sm">Scroll to explore</span>
+                <span className="text-sm">{t.scroll}</span>
                 <ArrowDown className="w-5 h-5" />
               </motion.button>
             </motion.div>
-            <Button onClick={() => scrollTo('projects')}>View My Work</Button>
+            <Button onClick={() => scrollTo('projects')}>{t.primaryCta}</Button>
 
             <Button variant="secondary" onClick={() => scrollTo('contact')}>
-              Get In Touch
+              {t.secondaryCta}
             </Button>
           </motion.div>
         </motion.div>

@@ -2,10 +2,22 @@
 
 import { motion } from 'motion/react';
 import { Heart } from 'lucide-react';
-import { FOOTER_LINKS } from '@/constants';
+import { Locale, getCopy } from '@/constants/i18n';
 
-export function Footer() {
+type FooterProps = {
+  locale: Locale;
+};
+
+export function Footer({ locale }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const t = getCopy(locale).footer;
+
+  const links = [
+    { label: locale === 'uk' ? 'Про мене' : 'About', href: locale === 'uk' ? '/uk#about' : '#about' },
+    { label: locale === 'uk' ? 'Навички' : 'Skills', href: locale === 'uk' ? '/uk#skills' : '#skills' },
+    { label: locale === 'uk' ? 'Проєкти' : 'Projects', href: locale === 'uk' ? '/uk#projects' : '#projects' },
+    { label: locale === 'uk' ? 'Контакти' : 'Contact', href: locale === 'uk' ? '/uk#contact' : '#contact' },
+  ];
 
   return (
     <footer className="relative bg-[#0a0a0f] border-t border-white/5">
@@ -19,7 +31,7 @@ export function Footer() {
           >
             <h3 className="text-2xl font-bold text-white">Oleh Fedkiv</h3>
             <p className="text-gray-400 leading-relaxed">
-              Full-Stack Developer crafting exceptional digital experiences.
+              {t.subtitle}
             </p>
           </motion.div>
 
@@ -30,9 +42,9 @@ export function Footer() {
             transition={{ delay: 0.1 }}
             className="space-y-4"
           >
-            <h4 className="font-semibold text-white">Quick Links</h4>
+            <h4 className="font-semibold text-white">{t.quickLinks}</h4>
             <ul className="space-y-2">
-              {FOOTER_LINKS.map((link) => (
+              {links.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
@@ -55,14 +67,14 @@ export function Footer() {
         >
           <p className="text-gray-500 text-sm flex items-center gap-2">
             © {currentYear} Oleh Fedkiv. Built with <Heart className="w-4 h-4 text-red-500" /> and
-            precision
+            {t.copyrightSuffix}
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-gray-500 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
-              Privacy Policy
+            <a href={t.privacyHref} className="text-gray-500 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
+              {t.privacy}
             </a>
-            <a href="#" className="text-gray-500 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
-              Terms of Service
+            <a href={t.termsHref} className="text-gray-500 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
+              {t.terms}
             </a>
           </div>
         </motion.div>

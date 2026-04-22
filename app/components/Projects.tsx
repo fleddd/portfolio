@@ -4,8 +4,15 @@ import { motion } from 'motion/react';
 import { ExternalLink, Github, Code } from 'lucide-react';
 import { Section, SectionHeader, Button } from '@/components/ui';
 import { PROJECTS, CODE_SNIPPET, CONTACT_SOCIAL_LINKS } from '@/constants';
+import { Locale, getCopy } from '@/constants/i18n';
 
-export function Projects() {
+type ProjectsProps = {
+  locale: Locale;
+};
+
+export function Projects({ locale }: ProjectsProps) {
+  const t = getCopy(locale).projects;
+
   return (
     <Section id="projects">
       <div
@@ -21,13 +28,13 @@ export function Projects() {
         <SectionHeader
           title={
             <>
-              Featured{' '}
+              {t.titleLeft}{' '}
               <span className="text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text">
-                Projects
+                {t.titleRight}
               </span>
             </>
           }
-          description="Production-grade applications showcasing technical excellence"
+          description={t.description}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -79,7 +86,7 @@ export function Projects() {
                       className="z-10 flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer"
                     >
                       <ExternalLink className="w-4 h-4" />
-                      <span>Live Demo</span>
+                      <span>{t.liveDemo}</span>
                     </motion.a>
                   )}
                   {project.sourceCode && (
@@ -89,7 +96,7 @@ export function Projects() {
                       className="z-10 flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer"
                     >
                       <Github className="w-4 h-4" />
-                      <span>Source Code</span>
+                      <span>{t.sourceCode}</span>
                     </motion.a>
                   )}
 
@@ -128,10 +135,10 @@ export function Projects() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <p className="text-gray-400 mb-6">Want to see more projects and contributions?</p>
+          <p className="text-gray-400 mb-6">{t.more}</p>
           <Button variant="secondary" href={CONTACT_SOCIAL_LINKS[0].href}>
             <Github className="w-5 h-5" />
-            View GitHub Profile
+            {t.github}
           </Button>
         </motion.div>
       </div>

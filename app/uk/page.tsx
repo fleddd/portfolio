@@ -4,13 +4,13 @@ import { getCopy } from "@/constants/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fedkiv.tech";
 
-const seo = getCopy("en").seo;
+const seo = getCopy("uk").seo;
 
 export const metadata: Metadata = {
   title: seo.title,
   description: seo.description,
   alternates: {
-    canonical: SITE_URL,
+    canonical: `${SITE_URL}/uk`,
     languages: {
       "en-US": SITE_URL,
       "uk-UA": `${SITE_URL}/uk`,
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    locale: "en_US",
-    url: SITE_URL,
+    locale: "uk_UA",
+    url: `${SITE_URL}/uk`,
     title: seo.title,
     description: seo.description,
   },
 };
 
-export default function Home() {
-  return <HomePage locale="en" />;
+export default function HomeUk() {
+  return <HomePage locale="uk" />;
 }
