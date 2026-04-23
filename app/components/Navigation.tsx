@@ -18,31 +18,41 @@ export function Navigation({ locale, mode }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = getCopy(locale).nav;
+  const isUa = locale === 'ua';
+  const homeHref = isUa ? '/ua' : '/';
+  const isHomePage = pathname === homeHref;
+  const homeSectionHref = (id: string) => `${homeHref}#${id}`;
+  const isTechnicalPage = pathname === '/technical' || pathname === '/ua/technical';
+  const contactHref = isHomePage ? '#contact' : homeSectionHref('contact');
   const navItems = mode === 'business'
     ? [
-      { label: t.about, id: 'about' },
-      { label: t.solution, id: 'projects' },
-      { label: t.contact, id: 'contact' },
+      { label: t.about, id: 'about', href: isHomePage ? undefined : homeSectionHref('about') },
+      { label: t.solution, id: 'projects', href: isHomePage ? undefined : homeSectionHref('projects') },
+      { label: t.contact, id: 'contact', href: isHomePage ? undefined : homeSectionHref('contact') },
     ]
     : [
-      { label: t.solution, id: 'projects' },
-      { label: locale === 'ua' ? 'Навички' : 'Skills', id: 'skills' },
-      { label: t.contact, id: 'contact' },
+      { label: t.solution, id: 'projects', href: isTechnicalPage ? undefined : `${isUa ? '/ua' : ''}/technical#projects` },
+      { label: locale === 'ua' ? 'Навички' : 'Skills', id: 'skills', href: isTechnicalPage ? undefined : `${isUa ? '/ua' : ''}/technical#skills` },
+      { label: t.contact, id: 'contact', href: isTechnicalPage ? undefined : `${isUa ? '/ua' : ''}/technical#contact` },
     ];
 
-  const servicesHref = locale === 'ua' ? '/ua/services' : '/services';
-  const technicalHref = locale === 'ua' ? '/ua/technical' : '/technical';
+  const servicesHref = isUa ? '/ua/services' : '/services';
+  const technicalHref = isUa ? '/ua/technical' : '/technical';
   const languageSwitchHref = locale === 'ua'
     ? pathname === '/ua/technical'
       ? '/technical'
       : pathname.startsWith('/ua/services')
         ? pathname.replace('/ua/services', '/services')
-        : '/'
+        : pathname === '/ua'
+          ? '/'
+          : homeHref
     : pathname === '/technical'
       ? '/ua/technical'
       : pathname.startsWith('/services')
         ? pathname.replace('/services', '/ua/services')
-        : '/ua';
+        : pathname === '/'
+          ? '/ua'
+          : homeHref;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -51,7 +61,16 @@ export function Navigation({ locale, mode }: NavigationProps) {
   }, []);
 
   const handleNav = (id: string) => {
-    scrollTo(id);
+    if (isHomePage || isTechnicalPage) {
+      scrollTo(id);
+      setIsMobileMenuOpen(false);
+      return;
+    }
+
+    window.location.href = mode === 'technical'
+      ? `${homeHref}/technical#${id}`
+      : `${homeHref}#${id}`;
+
     setIsMobileMenuOpen(false);
   };
 
@@ -70,12 +89,12 @@ export function Navigation({ locale, mode }: NavigationProps) {
             whileHover={{ scale: 1.05 }}
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => {
-              if (mode === 'technical') {
-                window.location.href = locale === 'ua' ? '/ua' : '/';
-                return;
-              }
+                if (isHomePage) {
+                  handleNav('hero');
+                  return;
+                }
 
-              handleNav('hero');
+                window.location.href = homeHref;
             }}
             aria-label={locale === 'ua' ? 'Перейти на головну сторінку' : 'Go to homepage'}
             type="button"
@@ -94,19 +113,27 @@ export function Navigation({ locale, mode }: NavigationProps) {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                onClick={() => handleNav(item.id)}
+                onClick={() => {
+                  if (item.href) {
+                    window.location.href = item.href;
+                    setIsMobileMenuOpen(false);
+                    return;
+                  }
+
+                  handleNav(item.id);
+                }}
                 className="relative text-sm font-medium text-gray-400 hover:text-white transition-colors group cursor-pointer"
                 type="button"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-linear-to-r from-cyan-400 to-blue-500 group-hover:w-full transition-all duration-300" />
               </motion.button>
             ))}
             <motion.a
-              href="#contact"
+              href={contactHref}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg hover:shadow-cyan-500/25 transition-all cursor-pointer"
+              className="px-6 py-2.5 bg-linear-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg hover:shadow-cyan-500/25 transition-all cursor-pointer"
             >
               {t.hireMe}
             </motion.a>
@@ -159,7 +186,15 @@ export function Navigation({ locale, mode }: NavigationProps) {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => handleNav(item.id)}
+                onClick={() => {
+                  if (item.href) {
+                    window.location.href = item.href;
+                    setIsMobileMenuOpen(false);
+                    return;
+                  }
+
+                  handleNav(item.id);
+                }}
                 className="block w-full text-left text-gray-400 hover:text-white transition-colors py-2 cursor-pointer"
                 type="button"
               >
@@ -167,8 +202,8 @@ export function Navigation({ locale, mode }: NavigationProps) {
               </button>
             ))}
             <a
-              href="#contact"
-              className="block w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-lg text-center cursor-pointer"
+              href={contactHref}
+              className="block w-full px-6 py-3 bg-linear-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-lg text-center cursor-pointer"
             >
               {t.hireMe}
             </a>
