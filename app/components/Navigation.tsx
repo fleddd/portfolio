@@ -30,14 +30,19 @@ export function Navigation({ locale, mode }: NavigationProps) {
       { label: t.contact, id: 'contact' },
     ];
 
+  const servicesHref = locale === 'ua' ? '/ua/services' : '/services';
   const technicalHref = locale === 'ua' ? '/ua/technical' : '/technical';
   const languageSwitchHref = locale === 'ua'
     ? pathname === '/ua/technical'
       ? '/technical'
-      : '/'
+      : pathname.startsWith('/ua/services')
+        ? pathname.replace('/ua/services', '/services')
+        : '/'
     : pathname === '/technical'
       ? '/ua/technical'
-      : '/ua';
+      : pathname.startsWith('/services')
+        ? pathname.replace('/services', '/ua/services')
+        : '/ua';
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -106,6 +111,14 @@ export function Navigation({ locale, mode }: NavigationProps) {
               {t.hireMe}
             </motion.a>
             <motion.a
+              href={servicesHref}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-4 py-2.5 bg-white/5 backdrop-blur-sm border border-white/10 text-white font-medium rounded-lg hover:bg-white/10 hover:border-cyan-400/50 transition-all"
+            >
+              {t.services}
+            </motion.a>
+            <motion.a
               href={technicalHref}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -158,6 +171,12 @@ export function Navigation({ locale, mode }: NavigationProps) {
               className="block w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-lg text-center cursor-pointer"
             >
               {t.hireMe}
+            </a>
+            <a
+              href={servicesHref}
+              className="block w-full px-6 py-3 bg-white/5 border border-white/10 text-white font-medium rounded-lg text-center"
+            >
+              {t.services}
             </a>
             <a
               href={technicalHref}
