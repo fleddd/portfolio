@@ -19,8 +19,8 @@ export function Contact({ locale }: ContactProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const t = getCopy(locale).contact;
   const infoLabels = {
-    email: locale === 'uk' ? 'Пошта' : 'Email',
-    location: locale === 'uk' ? 'Локація' : 'Location',
+    email: locale === 'ua' ? 'Пошта' : 'Email',
+    location: locale === 'ua' ? 'Локація' : 'Location',
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

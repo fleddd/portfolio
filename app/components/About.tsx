@@ -2,8 +2,8 @@
 
 import { motion } from 'motion/react';
 import { Section, AnimatedCounter } from '@/components/ui';
-import { FEATURES, TECH_STACK, STATS } from '@/constants';
 import { Locale, getCopy } from '@/constants/i18n';
+import { Target, Zap, ShieldCheck } from 'lucide-react';
 
 type AboutProps = {
   locale: Locale;
@@ -11,12 +11,14 @@ type AboutProps = {
 
 export function About({ locale }: AboutProps) {
   const t = getCopy(locale).about;
+  const icons = [Target, Zap, ShieldCheck];
+
   const localizedStats = [
-    { ...STATS[0], label: t.stats.years },
-    { ...STATS[1], label: t.stats.months },
-    { ...STATS[2], label: t.stats.projects },
-    { ...STATS[3], label: t.stats.clients },
-    { ...STATS[4], label: t.stats.commitment },
+    { value: t.values.years, label: t.stats.years },
+    { value: t.values.months, label: t.stats.months },
+    { value: t.values.projects, label: t.stats.projects },
+    { value: t.values.clients, label: t.stats.clients },
+    { value: t.values.commitment, label: t.stats.commitment },
   ];
 
   return (
@@ -55,7 +57,7 @@ export function About({ locale }: AboutProps) {
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
-              {TECH_STACK.map((tech, index) => (
+              {t.chips.map((tech, index) => (
                 <motion.span
                   key={tech}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -77,7 +79,10 @@ export function About({ locale }: AboutProps) {
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
-            {FEATURES.map((feature, index) => (
+            {t.features.map((feature, index) => {
+              const Icon = icons[index] || Target;
+
+              return (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 30 }}
@@ -89,7 +94,7 @@ export function About({ locale }: AboutProps) {
               >
                 <div className="relative flex items-start gap-4">
                   <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-400/20">
-                    <feature.icon className="w-6 h-6 text-cyan-400" strokeWidth={2} />
+                    <Icon className="w-6 h-6 text-cyan-400" strokeWidth={2} />
                   </div>
                   <div className="flex-1 space-y-2">
                     <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
@@ -97,7 +102,7 @@ export function About({ locale }: AboutProps) {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            )})}
           </motion.div>
         </div>
 

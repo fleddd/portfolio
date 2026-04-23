@@ -1,6 +1,6 @@
-export type Locale = "en" | "uk";
+export type Locale = "en" | "ua";
 
-export const SUPPORTED_LOCALES: Locale[] = ["en", "uk"];
+export const SUPPORTED_LOCALES: Locale[] = ["en", "ua"];
 
 export const DEFAULT_LOCALE: Locale = "en";
 
@@ -8,52 +8,104 @@ export const copy = {
   en: {
     nav: {
       about: "About",
-      skills: "Skills",
+      solution: "Solutions",
       projects: "Projects",
       contact: "Contact",
+      technical: "Technical",
       hireMe: "Hire Me",
       switchLanguage: "UA",
-      switchLanguageHref: "/uk",
     },
     hero: {
       available: "Available for work",
-      role: "Full-Stack Developer",
+      role: "Web Solutions Developer",
       description:
-        "Building robust, scalable applications with precision and technical excellence.",
+        "I build fast websites and digital systems that turn traffic into qualified leads.",
       scroll: "Scroll to explore",
-      primaryCta: "View My Work",
-      secondaryCta: "Get In Touch",
+      primaryCta: "See Relevant Cases",
+      secondaryCta: "Discuss Your Task",
     },
     about: {
-      titleMain: "Building Digital",
-      titleAccent: "Strength",
+      titleMain: "Business-Driven",
+      titleAccent: "Development",
       p1:
-        "I'm a Full-Stack Developer specializing in robust, scalable web applications. Transforming complex requirements into elegant, high-performance solutions.",
+        "I help small and medium businesses launch websites and web tools that directly support sales, bookings, and lead collection.",
       p2:
-        "Technical precision combined with creative problem-solving and best practices.",
+        "You get a clear delivery process, predictable timelines, and a product focused on measurable outcomes.",
+      chips: [
+        "Lead-focused landing pages",
+        "MVP launch in weeks, not months",
+        "CRM and API integrations",
+        "Technical SEO foundation",
+      ],
+      features: [
+        {
+          title: "Business First",
+          description: "Every section is built to drive an action: call, form submit, booking, or inquiry.",
+        },
+        {
+          title: "Fast Delivery",
+          description: "From structure to launch without unnecessary complexity and with clear milestones.",
+        },
+        {
+          title: "Long-Term Reliability",
+          description: "Clean architecture and maintainable code so your site stays stable as your business grows.",
+        },
+      ],
       stats: {
-        years: "Years in Tech",
-        months: "Months of commercial experience",
-        projects: "Projects Completed",
-        clients: "Happy Clients",
-        commitment: "Commitment",
+        years: "Years of hands-on development",
+        months: "Months of direct commercial delivery",
+        projects: "Completed client and product projects",
+        clients: "Satisfied clients",
+        commitment: "Response and ownership",
+      },
+      values: {
+        years: "3+",
+        months: "12+",
+        projects: "15+",
+        clients: "5+",
+        commitment: "24h",
       },
     },
     skills: {
-      titleLeft: "Skills &",
+      titleLeft: "Technical",
       titleRight: "Expertise",
-      description: "A comprehensive toolkit for building modern, scalable applications",
-      note: "Always learning and staying updated with the latest technologies",
+      description: "Stack, architecture, and engineering capabilities behind delivery",
+      note: "If you need implementation details, architecture decisions, or stack fit, this page is for you",
       resume: "Download Resume",
     },
     projects: {
       titleLeft: "Featured",
-      titleRight: "Projects",
-      description: "Production-grade applications showcasing technical excellence",
+      titleRight: "Business Cases",
+      description: "Selected projects relevant to booking flows, lead generation, and business automation",
       liveDemo: "Live Demo",
       sourceCode: "Source Code",
-      more: "Want to see more projects and contributions?",
+      more: "Need a similar solution for your business?",
       github: "View GitHub Profile",
+      items: [
+        {
+          title: "Sea Travel Booking Platform",
+          category: "Booking System",
+          description:
+            "Multi-vendor booking platform with real-time availability, secure checkout, and scalable admin logic.",
+        },
+        {
+          title: "AI-Powered Copywriting Tool",
+          category: "SaaS MVP",
+          description:
+            "Content optimization product with custom style settings for teams that need faster marketing production.",
+        },
+        {
+          title: "Telegram Bot with Web API",
+          category: "Lead Automation",
+          description:
+            "Automation flow with API integration and notifications to reduce missed requests and speed up response time.",
+        },
+      ],
+    },
+    technicalPage: {
+      title: "Technical Profile",
+      description:
+        "Implementation stack, engineering approach, and practical capabilities for teams that evaluate technical fit.",
     },
     contact: {
       titleLeft: "Let's Build",
@@ -80,7 +132,7 @@ export const copy = {
       error: "Could not send message. Please try again or email me directly.",
     },
     footer: {
-      subtitle: "Full-Stack Developer crafting exceptional digital experiences.",
+      subtitle: "Web developer focused on measurable business outcomes.",
       quickLinks: "Quick Links",
       copyrightSuffix: "precision",
       privacy: "Privacy Policy",
@@ -89,60 +141,117 @@ export const copy = {
       termsHref: "/terms-of-service",
     },
     seo: {
-      title: "Oleh Fedkiv | Full-Stack Developer",
+      title: "Oleh Fedkiv | Web Development for Business",
       description:
-        "Full-Stack Developer for high-performance websites, custom business modules, SEO-ready Next.js landing pages, and API integrations.",
+        "Web development for SMB and startups: fast websites, lead-focused landing pages, MVP delivery, and API/CRM integrations.",
+    },
+    seoTechnical: {
+      title: "Oleh Fedkiv | Technical Profile",
+      description:
+        "Technical page with stack details, architecture capabilities, integrations, and engineering focus areas.",
     },
   },
-  uk: {
+  ua: {
     nav: {
       about: "Про мене",
-      skills: "Навички",
-      projects: "Проєкти",
+      solution: "Рішення",
+      projects: "Кейси",
       contact: "Контакти",
+      technical: "Технічні навички",
       hireMe: "Замовити",
       switchLanguage: "EN",
-      switchLanguageHref: "/",
     },
     hero: {
       available: "Відкритий до співпраці",
-      role: "Full-Stack Розробник",
+      role: "Розробник веб-рішень для бізнесу",
       description:
-        "Створюю швидкі, масштабовані веб-рішення, що приносять бізнесу заявки та продажі.",
+        "Створюю швидкі сайти та веб-системи, які генерують заявки, автоматизують процеси й не гальмують ріст бізнесу.",
       scroll: "Гортай, щоб дізнатися більше",
-      primaryCta: "Переглянути роботи",
+      primaryCta: "Переглянути релевантні кейси",
       secondaryCta: "Обговорити проєкт",
     },
     about: {
-      titleMain: "Будую цифрову",
-      titleAccent: "перевагу",
+      titleMain: "Розробка з фокусом",
+      titleAccent: "на результат",
       p1:
-        "Я Full-Stack розробник, який спеціалізується на сучасних веб-додатках, MVP та лендінгах із фокусом на продуктивність і конверсію.",
+        "Працюю з бізнесами та стартапами, яким потрібен не просто сайт, а інструмент для лідів, продажів і стабільної обробки заявок.",
       p2:
-        "Поєдную інженерну точність, бізнес-мислення та технічне SEO, щоб сайт працював як інструмент залучення клієнтів.",
+        "Ви отримуєте зрозумілий процес, контроль термінів і продукт, який вирішує конкретну бізнес-задачу.",
+      chips: [
+        "Лендінги під заявки",
+        "MVP запуск за тижні",
+        "Інтеграції CRM та API",
+        "Технічна SEO-основа",
+      ],
+      features: [
+        {
+          title: "Бізнес-логіка на першому місці",
+          description: "Кожен блок сторінки працює на дію: заявка, дзвінок, бронювання або контакт.",
+        },
+        {
+          title: "Швидкий запуск без хаосу",
+          description: "Етапи прозорі, дедлайни фіксуються, пріоритети узгоджуються до старту робіт.",
+        },
+        {
+          title: "Надійність у довгу",
+          description: "Чиста архітектура і підтримуваний код, щоб продукт спокійно масштабувався далі.",
+        },
+      ],
       stats: {
-        years: "Років у технологіях",
-        months: "Місяців комерційного досвіду",
+        years: "Років практичного досвіду розробки",
+        months: "Місяців прямої комерційної роботи",
         projects: "Завершених проєктів",
         clients: "Задоволених клієнтів",
-        commitment: "Віддача",
+        commitment: "Швидкість зворотного зв'язку",
+      },
+      values: {
+        years: "3+",
+        months: "12+",
+        projects: "15+",
+        clients: "5+",
+        commitment: "24h",
       },
     },
     skills: {
-      titleLeft: "Навички та",
+      titleLeft: "Технічна",
       titleRight: "експертиза",
-      description: "Інструменти для створення сучасних, надійних і масштабованих продуктів",
-      note: "Постійно оновлюю підхід і технології під реальні задачі бізнесу",
+      description: "Стек, архітектурні підходи та інженерні можливості для складних задач",
+      note: "Ця сторінка для тих, кому важливо оцінити технічну глибину та відповідність стеку",
       resume: "Завантажити резюме",
     },
     projects: {
-      titleLeft: "Вибрані",
-      titleRight: "проєкти",
-      description: "Продакшн-рішення, що демонструють технічну глибину та якість",
+      titleLeft: "Реалізовані",
+      titleRight: "бізнес-кейси",
+      description: "Лише ті роботи, що релевантні для лідів, бронювань та бізнес-автоматизації",
       liveDemo: "Демо",
       sourceCode: "Вихідний код",
-      more: "Хочете побачити більше робіт та активностей?",
-      github: "Перейти в GitHub",
+      more: "Потрібне схоже рішення під ваш бізнес?",
+      github: "Переглянути GitHub профіль",
+      items: [
+        {
+          title: "Sea Travel Booking Platform",
+          category: "Система бронювання",
+          description:
+            "Мультивендорна платформа бронювання з онлайн-доступністю, безпечними оплатами та масштабованою адмін-логікою.",
+        },
+        {
+          title: "AI-Powered Copywriting Tool",
+          category: "SaaS MVP",
+          description:
+            "Продукт для оптимізації контенту з налаштуванням власного стилю та пришвидшенням маркетингового продакшну.",
+        },
+        {
+          title: "Telegram Bot with Web API",
+          category: "Автоматизація заявок",
+          description:
+            "Автоматизований потік із API-інтеграціями та сповіщеннями, щоб не втрачати звернення й швидше відповідати клієнтам.",
+        },
+      ],
+    },
+    technicalPage: {
+      title: "Технічні навички",
+      description:
+        "Сторінка зі стеком, підходом до архітектури, інтеграціями та практичними інженерними можливостями.",
     },
     contact: {
       titleLeft: "Давайте створимо",
@@ -169,18 +278,23 @@ export const copy = {
       error: "Не вдалося надіслати. Спробуйте ще раз або напишіть напряму на email.",
     },
     footer: {
-      subtitle: "Full-Stack розробник, який створює результативні цифрові рішення.",
+      subtitle: "Розробляю цифрові рішення, що працюють на бізнес-результат.",
       quickLinks: "Швидкі посилання",
       copyrightSuffix: "увагою до деталей",
       privacy: "Політика конфіденційності",
       terms: "Умови користування",
-      privacyHref: "/uk/privacy-policy",
-      termsHref: "/uk/terms-of-service",
+      privacyHref: "/ua/privacy-policy",
+      termsHref: "/ua/terms-of-service",
     },
     seo: {
-      title: "Олег Федків | Full-Stack Розробник",
+      title: "Олег Федьків | Розробка сайтів і веб-рішень для бізнесу",
       description:
-        "Розробка швидких сайтів і лендінгів на Next.js, MVP до 1 місяця, технічне SEO, інтеграції API/CRM та кастомні бізнес-модулі.",
+        "Розробка швидких сайтів, лендінгів і MVP для бізнесу: заявки, автоматизація процесів, технічне SEO та інтеграції API/CRM.",
+    },
+    seoTechnical: {
+      title: "Олег Федьків | Технічний профіль",
+      description:
+        "Технічні навички: стек, архітектурні підходи, інтеграції, продуктивність та технічне SEO.",
     },
   },
 } as const;

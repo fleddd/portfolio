@@ -8,9 +8,10 @@ import { Locale, getCopy } from '@/constants/i18n';
 
 type ProjectsProps = {
   locale: Locale;
+  mode?: 'business' | 'technical';
 };
 
-export function Projects({ locale }: ProjectsProps) {
+export function Projects({ locale, mode = 'business' }: ProjectsProps) {
   const t = getCopy(locale).projects;
 
   return (
@@ -38,7 +39,10 @@ export function Projects({ locale }: ProjectsProps) {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PROJECTS.map((project, index) => (
+          {PROJECTS.map((project, index) => {
+            const localizedItem = t.items[index];
+
+            return (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 50 }}
@@ -60,12 +64,12 @@ export function Projects({ locale }: ProjectsProps) {
                 </motion.div>
 
                 <span className="text-xs font-medium text-cyan-400 mb-2 uppercase tracking-wider">
-                  {project.category}
+                  {localizedItem?.category || project.category}
                 </span>
                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">
-                  {project.title}
+                  {localizedItem?.title || project.title}
                 </h3>
-                <p className="text-gray-400 leading-relaxed mb-6 flex-grow">{project.description}</p>
+                <p className="text-gray-400 leading-relaxed mb-6 flex-grow">{localizedItem?.description || project.description}</p>
 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tech.map((tech) => (
@@ -107,27 +111,29 @@ export function Projects({ locale }: ProjectsProps) {
                 </div>
               </div>
             </motion.div>
-          ))}
+          )})}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-20 p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-xl border border-white/10 overflow-hidden"
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500" />
-              <div className="w-3 h-3 rounded-full bg-green-500" />
+        {mode === 'technical' && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-20 p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-xl border border-white/10 overflow-hidden"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                <div className="w-3 h-3 rounded-full bg-green-500" />
+              </div>
+              <span className="text-sm text-gray-500 font-mono">server.ts</span>
             </div>
-            <span className="text-sm text-gray-500 font-mono">server.ts</span>
-          </div>
-          <pre className="text-sm text-gray-400 font-mono overflow-x-auto">
-            <code>{CODE_SNIPPET}</code>
-          </pre>
-        </motion.div>
+            <pre className="text-sm text-gray-400 font-mono overflow-x-auto">
+              <code>{CODE_SNIPPET}</code>
+            </pre>
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}

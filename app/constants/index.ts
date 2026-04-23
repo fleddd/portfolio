@@ -56,53 +56,60 @@ export const SKILL_CATEGORIES = [
     title: 'Frontend',
     icon: Code2,
     color: 'from-cyan-500 to-blue-500',
-    skills: [
-      { name: 'React / Next.js', level: 99 },
-      { name: 'TypeScript', level: 97 },
-      { name: 'Tailwind CSS', level: 99 },
+    recruiterFocus: 'UI architecture, SSR/SSG, and conversion-focused landing pages',
+    technologies: [
+      { name: 'React', icon: '/assets/react.svg' },
+      { name: 'Next.js', icon: '/assets/next-js.svg' },
+      { name: 'TypeScript', icon: '/assets/typescript.svg' },
+      { name: 'Tailwind CSS', icon: '/assets/tailwind.svg' },
     ],
   },
   {
     title: 'Backend',
     icon: Server,
     color: 'from-blue-500 to-purple-500',
-    skills: [
-      { name: 'Node.js / Nest.js', level: 95 },
-      { name: 'REST APIs', level: 97 },
-      { name: 'GraphQL APIs', level: 80 },
+    recruiterFocus: 'APIs, integrations, validation, and scalable business logic',
+    technologies: [
+      { name: 'Node.js', icon: '/assets/nodejs.svg' },
+      { name: 'NestJS', icon: '/assets/nestjs.svg' },
+      { name: 'REST API', icon: '/assets/rest.svg' },
+      { name: 'GraphQL', icon: '/assets/graphql.svg' },
+      { name: 'Express', icon: '/assets/express.svg' },
     ],
   },
   {
     title: 'Database',
     icon: Database,
     color: 'from-purple-500 to-pink-500',
-    skills: [
-      { name: 'PostgreSQL', level: 95 },
-      { name: 'MongoDB', level: 87 },
-      { name: 'Prisma ORM', level: 92 },
+    recruiterFocus: 'Data modeling, query performance, and reliable persistence',
+    technologies: [
+      { name: 'PostgreSQL', icon: '/assets/postgresql.svg' },
+      { name: 'MongoDB', icon: '/assets/mongodb.svg' },
+      { name: 'Prisma ORM', icon: '/assets/icon.svg' },
     ],
   },
   {
     title: 'DevOps',
     icon: Cloud,
     color: 'from-pink-500 to-red-500',
-    skills: [
-      { name: 'Azure', level: 86 },
-      { name: 'Docker', level: 88 },
-      { name: 'CI/CD', level: 86 },
-      { name: 'Nginx', level: 88 },
-
+    recruiterFocus: 'Deployment pipelines, containerization, and production stability',
+    technologies: [
+      { name: 'Docker', icon: '/assets/docker.svg' },
+      { name: 'Nginx', icon: '/assets/nginx.svg' },
+      { name: 'CI/CD', icon: '/assets/git.svg' },
+      { name: 'Cloud', icon: '/assets/blue-circle.svg' },
     ],
   },
   {
     title: 'Tools',
     icon: GitBranch,
     color: 'from-green-500 to-emerald-500',
-    skills: [
-      { name: 'Git / GitHub', level: 97 },
-      { name: 'Postman', level: 90 },
-      { name: 'Jira', level: 94 },
-
+    recruiterFocus: 'Version control, API testing, and collaborative workflows',
+    technologies: [
+      { name: 'Git', icon: '/assets/git.svg' },
+      { name: 'GitHub', icon: '/assets/github.svg' },
+      { name: 'Postman', icon: '/assets/yellow-circle.svg' },
+      { name: 'Jira', icon: '/assets/green-circle.svg' },
     ],
   },
 ] as const;
@@ -110,6 +117,7 @@ export const SKILL_CATEGORIES = [
 // Projects
 export const PROJECTS = [
   {
+    id: 'sea-travel',
     title: 'Sea Travel Booking Platform',
     category: 'Web Application',
     description: 'A multi-vendor travel booking platform with real-time availability and secure payments.',
@@ -120,8 +128,9 @@ export const PROJECTS = [
     livePreview: "https://seatravel.hr",
   },
   {
+    id: 'ai-copywriting',
     title: 'AI-Powered Copywriting Tool',
-    category: 'Frontend',
+    category: 'SaaS MVP',
     description: 'AI-powered copywriting tool for content optimization with your own styles and requirements.',
     tech: ['Next.js', 'PostgreSQL', 'Docker', "TipTap"],
     gradient: 'from-blue-500 to-purple-500',
@@ -130,38 +139,9 @@ export const PROJECTS = [
     livePreview: "",
   },
   {
-    title: 'Employee Management System',
-    category: 'Pet Project',
-    description: 'Secure employee management system with authentication and real-time collaboration.',
-    tech: ['React', 'Firebase', 'Tailwind CSS', "Typescript"],
-    gradient: 'from-purple-500 to-pink-500',
-    icon: Code,
-    sourceCode: "",
-    livePreview: "",
-  },
-  {
-    title: 'Notes',
-    category: 'Pet Project',
-    description: 'A simple note-taking app with authentication and real-time collaboration.',
-    tech: ['React', 'C#', 'PostgreSQL', 'ASP.Net', 'Azure'],
-    gradient: 'from-pink-500 to-red-500',
-    icon: Layers,
-    sourceCode: "https://github.com/fleddd/notes",
-    livePreview: "",
-  },
-  {
-    title: 'Real-Time Chatting Tool',
-    category: 'Pet Project',
-    description: 'Chat with live messaging, editing, video, gifs and emojis.',
-    tech: ['React', 'Socket.io', 'Express', 'MongoDB', 'Mongoose ORM'],
-    gradient: 'from-orange-500 to-yellow-500',
-    icon: Zap,
-    sourceCode: "https://github.com/fleddd/realtimemessanger",
-    livePreview: "",
-  },
-  {
+    id: 'telegram-bot',
     title: 'Telegram Bot with Web API',
-    category: 'Telegram Bots',
+    category: 'Lead Automation',
     description: 'Telegram bot with web API for real-time data management.',
     tech: ['React', 'Tailwind', 'REST API', "Telegram API"],
     gradient: 'from-green-500 to-emerald-500',

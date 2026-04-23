@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   keywords: [
     "Full-Stack Developer",
     "Oleh Fedkiv",
-    "Олег Федків",
+    "Олег Федьків",
     "Фулстек розробник",
     "Веб-розробка",
     "Створення сайтів",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
     languages: {
       "en-US": SITE_URL,
-      "uk-UA": `${SITE_URL}/uk`,
+      "uk-UA": `${SITE_URL}/ua`,
       "x-default": SITE_URL,
     },
   },

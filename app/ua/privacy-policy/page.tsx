@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Політика конфіденційності",
   description: "Політика конфіденційності сайту fedkiv.tech.",
   alternates: {
-    canonical: `${SITE_URL}/uk/privacy-policy`,
+    canonical: `${SITE_URL}/ua/privacy-policy`,
   },
 };
 

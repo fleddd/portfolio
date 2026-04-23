@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Умови користування",
   description: "Умови користування сайтом fedkiv.tech.",
   alternates: {
-    canonical: `${SITE_URL}/uk/terms-of-service`,
+    canonical: `${SITE_URL}/ua/terms-of-service`,
   },
 };
 

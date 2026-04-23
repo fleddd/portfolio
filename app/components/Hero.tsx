@@ -14,50 +14,25 @@ type HeroProps = {
 export function Hero({ locale }: HeroProps) {
   const scrollTo = useScrollTo();
   const t = getCopy(locale).hero;
+  const badges = locale === 'ua'
+    ? ['Next.js', 'SEO-архітектура', 'Оптимізація лідів']
+    : ['Next.js', 'SEO-ready architecture', 'Lead funnel optimization'];
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-[#0a0a0f]">
         <div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-30"
           style={{
-            backgroundImage: `linear-gradient(to right, rgba(6, 182, 212, 0.1) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(6, 182, 212, 0.1) 1px, transparent 1px)`,
-            backgroundSize: '80px 80px',
+            backgroundImage: `linear-gradient(to right, rgba(6, 182, 212, 0.08) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(6, 182, 212, 0.08) 1px, transparent 1px)`,
+            backgroundSize: '72px 72px',
           }}
         />
       </div>
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{ rotateX: [0, 360], rotateY: [0, 360], rotateZ: [0, 360] }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="absolute top-20 left-10 w-32 h-32 opacity-10"
-          style={{ transformStyle: 'preserve-3d' }}
-        >
-          <div className="absolute inset-0 border-2 border-cyan-400 bg-cyan-500/5 backdrop-blur-sm" />
-        </motion.div>
-        <motion.div
-          animate={{ rotateX: [360, 0], rotateY: [360, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-          className="absolute bottom-32 right-20 w-40 h-40 opacity-10"
-          style={{ transformStyle: 'preserve-3d' }}
-        >
-          <div className="absolute inset-0 border-2 border-blue-400 bg-blue-500/5 backdrop-blur-sm transform rotate-45" />
-        </motion.div>
-        <motion.div
-          animate={{ y: [0, -30, 0], rotateZ: [0, 180, 360] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-1/3 right-1/4 w-24 h-24 opacity-20"
-        >
-          <svg viewBox="0 0 100 100" className="w-full h-full fill-none stroke-cyan-400 stroke-2">
-            <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" />
-          </svg>
-        </motion.div>
-      </div>
-
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
+      <div className="absolute -top-20 right-10 w-[420px] h-[420px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 left-0 w-[380px] h-[380px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 text-center">
         <motion.div
@@ -66,16 +41,6 @@ export function Hero({ locale }: HeroProps) {
           transition={{ duration: 0.8 }}
           className="space-y-6"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10"
-          >
-            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-sm text-gray-300">{t.available}</span>
-          </motion.div>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -89,6 +54,14 @@ export function Hero({ locale }: HeroProps) {
             </h1>
             <div className="text-2xl md:text-3xl lg:text-4xl font-medium text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text">
               {t.role}
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-2 pt-3">
+              {badges.map((badge) => (
+                <span key={badge} className="px-3 py-1.5 text-xs text-gray-300 bg-white/5 border border-white/10 rounded-full">
+                  {badge}
+                </span>
+              ))}
             </div>
           </motion.div>
 

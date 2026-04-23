@@ -1,4 +1,4 @@
-import { About, Contact, Footer, Hero, Navigation, Projects, Skills } from "@/components/index";
+import { About, Contact, Footer, Hero, Navigation, Projects } from "@/components/index";
 import { Locale } from "@/constants/i18n";
 
 type HomePageProps = {
@@ -8,17 +8,16 @@ type HomePageProps = {
 export function HomePage({ locale }: HomePageProps) {
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
-      <Navigation locale={locale} />
+      <Navigation locale={locale} mode="business" />
 
       <main>
         <Hero locale={locale} />
         <About locale={locale} />
-        <Skills locale={locale} />
-        <Projects locale={locale} />
+        <Projects locale={locale} mode="business" />
         <Contact locale={locale} />
       </main>
 
-      <Footer locale={locale} />
+      <Footer locale={locale} mode="business" />
     </div>
   );
 }

@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { AnimatedCounter, Button, Section, SectionHeader } from '@/components/ui';
+import Image from 'next/image';
+import { Button, Section, SectionHeader } from '@/components/ui';
 import { SKILL_CATEGORIES } from '@/constants';
 import { Locale, getCopy } from '@/constants/i18n';
 
@@ -11,6 +12,16 @@ type SkillsProps = {
 
 export function Skills({ locale }: SkillsProps) {
   const t = getCopy(locale).skills;
+  const technologiesLabel = locale === 'ua' ? 'Технології' : 'Technologies';
+  const categoryTitleMap: Record<string, string> = locale === 'ua'
+    ? {
+      Frontend: 'Фронтенд',
+      Backend: 'Бекенд',
+      Database: 'Бази даних',
+      DevOps: 'DevOps',
+      Tools: 'Інструменти',
+    }
+    : {};
 
   return (
     <Section id="skills" bg="gradient-down">
@@ -32,7 +43,7 @@ export function Skills({ locale }: SkillsProps) {
           title={
             <>
               {t.titleLeft}{' '}
-              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text">{t.titleRight}</span>
+              <span className="text-transparent bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text">{t.titleRight}</span>
             </>
           }
           description={t.description}
@@ -46,43 +57,40 @@ export function Skills({ locale }: SkillsProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: categoryIndex * 0.1 }}
-              whileHover={{ y: -10 }}
               className="group relative"
             >
               <div className="relative h-full p-8 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all">
                 <div className="relative space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-br ${category.color} bg-opacity-20`}>
+                    <div className={`p-3 rounded-xl bg-linear-to-br ${category.color} bg-opacity-20`}>
                       <category.icon className="w-6 h-6 text-white" strokeWidth={2} />
                     </div>
-                    <h3 className="text-2xl font-bold text-white">{category.title}</h3>
+                    <h3 className="text-2xl font-bold text-white">{categoryTitleMap[category.title] || category.title}</h3>
                   </div>
 
                   <div className="space-y-4">
-                    {category.skills.map((skill, skillIndex) => (
+                    <p className="text-xs uppercase tracking-[0.15em] text-gray-400">{technologiesLabel}</p>
+                    <div className="grid grid-cols-2 gap-3">
+                    {category.technologies.map((technology, skillIndex) => (
                       <motion.div
                         key={`${category.title}-${skillIndex}`}
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: categoryIndex * 0.1 + skillIndex * 0.05 }}
-                        className="space-y-2"
+                        className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2"
                       >
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="text-gray-300 font-medium">{skill.name}</span>
-                          <AnimatedCounter text={`${skill.level}%`} durationSeconds={2} />
-                        </div>
-                        <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${skill.level}%` }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, delay: categoryIndex * 0.1 + skillIndex * 0.05 }}
-                            className={`h-full rounded-full bg-gradient-to-r ${category.color}`}
-                          />
-                        </div>
+                        <Image
+                          src={technology.icon}
+                          alt={`${technology.name} icon`}
+                          width={24}
+                          height={24}
+                          className="h-6 w-6 object-contain"
+                        />
+                        <span className="text-sm font-medium text-gray-200">{technology.name}</span>
                       </motion.div>
                     ))}
+                    </div>
                   </div>
                 </div>
               </div>

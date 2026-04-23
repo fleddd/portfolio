@@ -5,22 +5,39 @@ import { motion } from 'motion/react';
 import { Code2, Menu, X } from 'lucide-react';
 import { useScrollTo } from '@/hooks/useScrollTo';
 import { Locale, getCopy } from '@/constants/i18n';
+import { usePathname } from 'next/navigation';
 
 type NavigationProps = {
   locale: Locale;
+  mode: 'business' | 'technical';
 };
 
-export function Navigation({ locale }: NavigationProps) {
+export function Navigation({ locale, mode }: NavigationProps) {
   const scrollTo = useScrollTo();
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = getCopy(locale).nav;
-  const navItems = [
-    { label: t.about, id: 'about' },
-    { label: t.skills, id: 'skills' },
-    { label: t.projects, id: 'projects' },
-    { label: t.contact, id: 'contact' },
-  ];
+  const navItems = mode === 'business'
+    ? [
+      { label: t.about, id: 'about' },
+      { label: t.solution, id: 'projects' },
+      { label: t.contact, id: 'contact' },
+    ]
+    : [
+      { label: t.solution, id: 'projects' },
+      { label: locale === 'ua' ? 'Навички' : 'Skills', id: 'skills' },
+      { label: t.contact, id: 'contact' },
+    ];
+
+  const technicalHref = locale === 'ua' ? '/ua/technical' : '/technical';
+  const languageSwitchHref = locale === 'ua'
+    ? pathname === '/ua/technical'
+      ? '/technical'
+      : '/'
+    : pathname === '/technical'
+      ? '/ua/technical'
+      : '/ua';
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -47,8 +64,15 @@ export function Navigation({ locale }: NavigationProps) {
           <motion.button
             whileHover={{ scale: 1.05 }}
             className="flex items-center gap-2 cursor-pointer"
-            onClick={() => handleNav('hero')}
-            aria-label={locale === 'uk' ? 'Перейти на головний екран' : 'Go to hero section'}
+            onClick={() => {
+              if (mode === 'technical') {
+                window.location.href = locale === 'ua' ? '/ua' : '/';
+                return;
+              }
+
+              handleNav('hero');
+            }}
+            aria-label={locale === 'ua' ? 'Перейти на головну сторінку' : 'Go to homepage'}
             type="button"
           >
             <div className="relative">
@@ -82,11 +106,19 @@ export function Navigation({ locale }: NavigationProps) {
               {t.hireMe}
             </motion.a>
             <motion.a
-              href={t.switchLanguageHref}
+              href={technicalHref}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-4 py-2.5 bg-white/5 backdrop-blur-sm border border-white/10 text-white font-medium rounded-lg hover:bg-white/10 hover:border-cyan-400/50 transition-all"
-              aria-label={locale === 'uk' ? 'Switch to English version' : 'Перейти на українську версію'}
+            >
+              {t.technical}
+            </motion.a>
+            <motion.a
+              href={languageSwitchHref}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-4 py-2.5 bg-white/5 backdrop-blur-sm border border-white/10 text-white font-medium rounded-lg hover:bg-white/10 hover:border-cyan-400/50 transition-all"
+              aria-label={locale === 'ua' ? 'Switch to English version' : 'Перейти на українську версію'}
             >
               {t.switchLanguage}
             </motion.a>
@@ -128,7 +160,13 @@ export function Navigation({ locale }: NavigationProps) {
               {t.hireMe}
             </a>
             <a
-              href={t.switchLanguageHref}
+              href={technicalHref}
+              className="block w-full px-6 py-3 bg-white/5 border border-white/10 text-white font-medium rounded-lg text-center"
+            >
+              {t.technical}
+            </a>
+            <a
+              href={languageSwitchHref}
               className="block w-full px-6 py-3 bg-white/5 border border-white/10 text-white font-medium rounded-lg text-center"
             >
               {t.switchLanguage}

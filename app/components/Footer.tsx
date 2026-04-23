@@ -6,18 +6,29 @@ import { Locale, getCopy } from '@/constants/i18n';
 
 type FooterProps = {
   locale: Locale;
+  mode: 'business' | 'technical';
 };
 
-export function Footer({ locale }: FooterProps) {
+export function Footer({ locale, mode }: FooterProps) {
   const currentYear = new Date().getFullYear();
   const t = getCopy(locale).footer;
 
-  const links = [
-    { label: locale === 'uk' ? 'Про мене' : 'About', href: locale === 'uk' ? '/uk#about' : '#about' },
-    { label: locale === 'uk' ? 'Навички' : 'Skills', href: locale === 'uk' ? '/uk#skills' : '#skills' },
-    { label: locale === 'uk' ? 'Проєкти' : 'Projects', href: locale === 'uk' ? '/uk#projects' : '#projects' },
-    { label: locale === 'uk' ? 'Контакти' : 'Contact', href: locale === 'uk' ? '/uk#contact' : '#contact' },
-  ];
+  const isUa = locale === 'ua';
+  const links = mode === 'business'
+    ? [
+      { label: isUa ? 'Про мене' : 'About', href: isUa ? '/ua#about' : '#about' },
+      { label: isUa ? 'Послуги' : 'Services', href: isUa ? '/ua/services' : '/services' },
+      { label: isUa ? 'Рішення' : 'Solutions', href: isUa ? '/ua#projects' : '#projects' },
+      { label: isUa ? 'Контакти' : 'Contact', href: isUa ? '/ua#contact' : '#contact' },
+      { label: isUa ? 'Технічні навички' : 'Technical Skills', href: isUa ? '/ua/technical' : '/technical' },
+    ]
+    : [
+      { label: isUa ? 'Навички' : 'Skills', href: isUa ? '/ua/technical#skills' : '/technical#skills' },
+      { label: isUa ? 'Кейси' : 'Cases', href: isUa ? '/ua/technical#projects' : '/technical#projects' },
+      { label: isUa ? 'Контакти' : 'Contact', href: isUa ? '/ua/technical#contact' : '/technical#contact' },
+      { label: isUa ? 'Послуги' : 'Services', href: isUa ? '/ua/services' : '/services' },
+      { label: isUa ? 'Бізнес-сторінка' : 'Business Page', href: isUa ? '/ua' : '/' },
+    ];
 
   return (
     <footer className="relative bg-[#0a0a0f] border-t border-white/5">
@@ -66,8 +77,15 @@ export function Footer({ locale }: FooterProps) {
           className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4"
         >
           <p className="text-gray-500 text-sm flex items-center gap-2">
-            © {currentYear} Oleh Fedkiv. Built with <Heart className="w-4 h-4 text-red-500" /> and
-            {t.copyrightSuffix}
+            {locale === 'ua' ? (
+              <>
+                © {currentYear} Oleh Fedkiv. Створено з <Heart className="w-4 h-4 text-red-500" /> {t.copyrightSuffix}
+              </>
+            ) : (
+              <>
+                © {currentYear} Oleh Fedkiv. Built with <Heart className="w-4 h-4 text-red-500" /> {t.copyrightSuffix}
+              </>
+            )}
           </p>
           <div className="flex gap-6">
             <a href={t.privacyHref} className="text-gray-500 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
