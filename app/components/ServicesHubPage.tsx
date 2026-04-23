@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Locale } from '@/constants/i18n';
-import { SERVICE_SLUGS, getServiceContent, ServiceSlug } from '@/constants/services';
+import { SERVICE_SLUGS, getServiceContent } from '@/constants/services';
 import { Button, Section, SectionHeader } from '@/components/ui';
 import { Contact, Footer, Navigation } from '@/components/index';
 
@@ -54,7 +54,7 @@ export function ServicesHubPage({ locale }: ServicesHubPageProps) {
               }
             />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {SERVICE_SLUGS.map((slug: ServiceSlug, idx) => {
+              {SERVICE_SLUGS.map((slug, idx) => {
                 const service = getServiceContent(locale, slug);
                 return (
                   <motion.a
