@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { mailService } from '@/app/services/mail.service';
+import { mailService } from '@/app/lib/mail.service';
 
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;

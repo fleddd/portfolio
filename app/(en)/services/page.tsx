@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { ServicesHubPage } from "@/components/ServicesHubPage";
-import { getCopy } from "@/constants/i18n";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fedkiv.tech";
-
-const seo = getCopy("en");
+import { SITE_URL } from "@/constants/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Services | Web Development & API Integration",
   description: "Next.js development, MVP creation, and API integrations for business growth. Learn about each service and choose what fits your needs.",
   alternates: {
@@ -22,6 +19,12 @@ export const metadata: Metadata = {
     url: `${SITE_URL}/services`,
     title: "Services | Web Development & API Integration",
     description: "Next.js development, MVP creation, and API integrations for business growth.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services | Web Development & API Integration",
+    description: "Next.js development, MVP creation, and API integrations for business growth.",
+    images: [`${SITE_URL}/opengraph-image`],
   },
 };
 

@@ -5,6 +5,7 @@ import { Locale } from '@/constants/i18n';
 import { SERVICE_SLUGS, getServiceContent } from '@/constants/services';
 import { Button, Section, SectionHeader } from '@/components/ui';
 import { Contact, Footer, Navigation } from '@/components/index';
+import { SITE_URL } from '@/constants/site';
 
 type ServicesHubPageProps = {
   locale: Locale;
@@ -13,6 +14,42 @@ type ServicesHubPageProps = {
 export function ServicesHubPage({ locale }: ServicesHubPageProps) {
   const homeHref = locale === 'ua' ? '/ua' : '/';
   const servicesBase = locale === 'ua' ? '/ua/services' : '/services';
+  const pageUrl = `${SITE_URL}${servicesBase}`;
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#services`,
+    name: locale === 'ua' ? 'Послуги веб-розробки' : 'Web Development Services',
+    itemListElement: SERVICE_SLUGS.map((slug, index) => {
+      const service = getServiceContent(locale, slug);
+
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `${pageUrl}/${slug}`,
+        name: service.title,
+        description: service.summary,
+      };
+    }),
+  };
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: locale === 'ua' ? 'Головна' : 'Home',
+        item: `${SITE_URL}${homeHref === '/' ? '' : homeHref}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: locale === 'ua' ? 'Послуги' : 'Services',
+        item: pageUrl,
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
@@ -109,6 +146,13 @@ export function ServicesHubPage({ locale }: ServicesHubPageProps) {
       </main>
 
       <Footer locale={locale} mode="business" />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([itemListSchema, breadcrumbSchema]),
+        }}
+      />
     </div>
   );
 }

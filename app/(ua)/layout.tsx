@@ -1,34 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
-import { Toaster } from "./components/Toaster";
-import { JsonLd } from "./components/JsonLd";
+import "../globals.css";
+import { Toaster } from "@/components/Toaster";
+import { JsonLd } from "@/components/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fedkiv.tech";
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/constants/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: "Oleh Fedkiv | Full-Stack Developer",
-    template: "%s | Oleh Fedkiv",
-  },
-  description:
-    "Full-Stack Developer crafting high-performance websites, MVPs, and business modules with technical SEO and strong Core Web Vitals.",
-  keywords: [
-    "Full-Stack Developer",
-    "Oleh Fedkiv",
-    "Олег Федьків",
-    "Фулстек розробник",
-    "Веб-розробка",
-    "Створення сайтів",
-    "React",
-    "Next.js",
-    "NestJS",
-    "TypeScript",
-    "Node.js",
-    "Portfolio",
-  ],
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   authors: [{ name: "Oleh Fedkiv", url: SITE_URL }],
   creator: "Oleh Fedkiv",
   publisher: "Oleh Fedkiv",
@@ -39,13 +20,12 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    alternateLocale: ["uk_UA"],
-    url: SITE_URL,
+    locale: "uk_UA",
+    alternateLocale: ["en_US"],
+    url: `${SITE_URL}/ua`,
     siteName: "Oleh Fedkiv Portfolio",
-    title: "Oleh Fedkiv | Full-Stack Developer",
-    description:
-      "Full-Stack Developer crafting high-performance websites, MVPs, and business modules with technical SEO.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
       {
         url: `${SITE_URL}/opengraph-image`,
@@ -57,9 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Oleh Fedkiv | Full-Stack Developer",
-    description:
-      "Full-Stack Developer crafting high-performance websites, MVPs, and business modules with technical SEO.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [`${SITE_URL}/opengraph-image`],
   },
   robots: {
@@ -74,7 +53,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: SITE_URL,
+    canonical: `${SITE_URL}/ua`,
     languages: {
       "en-US": SITE_URL,
       "uk-UA": `${SITE_URL}/ua`,
@@ -94,13 +73,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default function UkrainianRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="uk">
       <body className="antialiased overflow-x-hidden">
         <JsonLd />
         {children}

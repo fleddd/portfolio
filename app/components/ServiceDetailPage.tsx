@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Locale, getCopy } from '@/constants/i18n';
+import { Locale } from '@/constants/i18n';
 import { getServiceContent, ServiceSlug } from '@/constants/services';
 import { Button, Section, SectionHeader } from '@/components/ui';
 import { Contact, Footer, Navigation } from '@/components/index';
+import { CONTACT_EMAIL, SITE_URL } from '@/constants/site';
 
 type ServiceDetailPageProps = {
   locale: Locale;
@@ -15,7 +16,61 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
   const service = getServiceContent(locale, slug);
   const baseHref = locale === 'ua' ? '/ua/services' : '/services';
   const homeHref = locale === 'ua' ? '/ua' : '/';
-  const t = getCopy(locale);
+  const pageUrl = `${SITE_URL}${baseHref}/${slug}`;
+  const servicesUrl = `${SITE_URL}${baseHref}`;
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${pageUrl}#service`,
+    name: service.title,
+    description: service.summary,
+    url: pageUrl,
+    serviceType: service.primaryKeyword,
+    areaServed: ['Ukraine', 'Europe', 'Worldwide'],
+    availableLanguage: locale === 'ua' ? ['Ukrainian', 'English'] : ['English', 'Ukrainian'],
+    provider: {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: 'Oleh Fedkiv',
+      email: CONTACT_EMAIL,
+    },
+  };
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: locale === 'ua' ? 'Головна' : 'Home',
+        item: `${SITE_URL}${homeHref === '/' ? '' : homeHref}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: locale === 'ua' ? 'Послуги' : 'Services',
+        item: servicesUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: service.title,
+        item: pageUrl,
+      },
+    ],
+  };
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: service.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
@@ -196,18 +251,7 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: service.faqs.map((faq) => ({
-              '@type': 'Question',
-              name: faq.question,
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: faq.answer,
-              },
-            })),
-          }),
+          __html: JSON.stringify([serviceSchema, breadcrumbSchema, faqSchema]),
         }}
       />
     </div>

@@ -1,0 +1,32 @@
+# Oleh Fedkiv
+
+> Full-stack developer focused on fast business websites, lead-focused landing pages, MVP web applications, and API/CRM integrations.
+
+Canonical site: https://www.fedkiv.tech
+Primary language: English
+Additional language: Ukrainian
+Location: Lviv, Ukraine
+Contact: fedkiv20172@gmail.com
+
+## Services
+
+- Lead-Focused Landing Page: conversion-oriented landing pages with technical SEO, responsive implementation, contact forms, analytics-ready structure, and fast launch cycles.
+- MVP Web Application: focused full-stack Next.js applications for validating product ideas and launching early versions without overbuilding.
+- API & CRM Integration: integrations between websites, CRMs, payment providers, booking tools, Telegram, REST APIs, GraphQL APIs, and internal systems.
+
+## Important URLs
+
+- Home: https://www.fedkiv.tech
+- Ukrainian home: https://www.fedkiv.tech/ua
+- Services: https://www.fedkiv.tech/services
+- Ukrainian services: https://www.fedkiv.tech/ua/services
+- Technical profile: https://www.fedkiv.tech/technical
+- Privacy policy: https://www.fedkiv.tech/privacy-policy
+- Terms of service: https://www.fedkiv.tech/terms-of-service
+
+## Social Profiles
+
+- GitHub: https://github.com/fleddd
+- LinkedIn: https://www.linkedin.com/in/olehfedkiv/
+- Telegram: https://telegram.me/olehfedkiv
+

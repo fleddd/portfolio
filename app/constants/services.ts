@@ -71,6 +71,11 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
           answer:
             'Hosting is not included but I can recommend and help configure a suitable provider (Vercel, Netlify, or your own VPS).',
         },
+        {
+          question: 'What do you need from me before starting?',
+          answer:
+            'I need your offer, target audience, preferred call to action, brand assets if available, and any examples of pages you like or dislike.',
+        },
       ],
       metaTitle: 'Lead-Focused Landing Page | Web Development Services',
       metaDescription:
@@ -121,6 +126,11 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
           answer:
             'I offer a post-launch support period and can continue as a development partner for further iterations.',
         },
+        {
+          question: 'Can the MVP scale after validation?',
+          answer:
+            'Yes. The initial architecture is kept focused but maintainable, so validated features can be extended without rebuilding the product from scratch.',
+        },
       ],
       metaTitle: 'MVP Web Application Development | Fast, Focused Launch',
       metaDescription:
@@ -170,6 +180,11 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
           question: 'How do you handle sensitive credentials?',
           answer:
             'All secrets are stored as environment variables, never in source code, following security best practices.',
+        },
+        {
+          question: 'Can you monitor integration failures?',
+          answer:
+            'Yes. I can add error logging, retry behavior, and notifications so failed webhooks or API requests are visible quickly.',
         },
       ],
       metaTitle: 'API & CRM Integration Services | Connect Your Business Tools',
@@ -223,6 +238,11 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
           answer:
             'Хостинг не входить у вартість, але я можу порекомендувати та допомогти налаштувати відповідний провайдер (Vercel, Netlify або ваш VPS).',
         },
+        {
+          question: 'Що потрібно від мене перед стартом?',
+          answer:
+            'Потрібні ваша пропозиція, цільова аудиторія, основна дія на сторінці, брендові матеріали за наявності та приклади сторінок, які вам подобаються або не підходять.',
+        },
       ],
       metaTitle: 'Лендінг під заявки | Розробка веб-сайтів',
       metaDescription:
@@ -273,6 +293,11 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
           answer:
             'Я пропоную період підтримки після запуску та можу продовжити як партнер з розробки для подальших ітерацій.',
         },
+        {
+          question: 'Чи можна масштабувати MVP після валідації?',
+          answer:
+            'Так. Початкова архітектура залишається сфокусованою, але підтримуваною, щоб перевірені функції можна було розвивати без повної переробки продукту.',
+        },
       ],
       metaTitle: 'Розробка MVP веб-додатку | Швидкий, зосереджений запуск',
       metaDescription:
@@ -322,6 +347,11 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
           question: 'Як ви зберігаєте конфіденційні дані?',
           answer:
             'Усі секрети зберігаються як змінні середовища, ніколи в коді — відповідно до найкращих практик безпеки.',
+        },
+        {
+          question: 'Чи можна відстежувати збої інтеграції?',
+          answer:
+            'Так. Я можу додати логування помилок, повторні спроби та сповіщення, щоб проблеми з вебхуками або API-запитами були швидко помітні.',
         },
       ],
       metaTitle: 'API та CRM-інтеграція | Підключення бізнес-інструментів',

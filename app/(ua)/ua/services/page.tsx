@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { ServicesHubPage } from "@/components/ServicesHubPage";
-import { getCopy } from "@/constants/i18n";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fedkiv.tech";
+import { SITE_URL } from "@/constants/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Послуги | Розробка Next.js та API-інтеграції",
   description: "Розробка Next.js, створення MVP, інтеграції та автоматизація для росту бізнесу. Ознайомтеся з кожною послугою і оберіть потрібну.",
   alternates: {
@@ -19,7 +18,13 @@ export const metadata: Metadata = {
     locale: "uk_UA",
     url: `${SITE_URL}/ua/services`,
     title: "Послуги | Розробка Next.js та API-інтеграції",
-    description: "Розробка Next.js, création MVP, інтеграції та автоматизація для росту бізнесу.",
+    description: "Розробка Next.js, створення MVP, інтеграції та автоматизація для росту бізнесу.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Послуги | Розробка Next.js та API-інтеграції",
+    description: "Розробка Next.js, створення MVP, інтеграції та автоматизація для росту бізнесу.",
+    images: [`${SITE_URL}/opengraph-image`],
   },
 };
 

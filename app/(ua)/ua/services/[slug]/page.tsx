@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { ServiceDetailPage } from "@/components/ServiceDetailPage";
 import { SERVICE_SLUGS, getServiceContent, ServiceSlug } from "@/constants/services";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fedkiv.tech";
+import { SITE_URL } from "@/constants/site";
 
 type Params = Promise<{ slug: string }>;
 
@@ -19,41 +18,48 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
   const slug = params.slug as ServiceSlug;
 
   if (!SERVICE_SLUGS.includes(slug)) {
-    return { title: "Not found" };
+    return { title: "Не знайдено" };
   }
 
-  const service = getServiceContent("en", slug);
-  const url = `${SITE_URL}/services/${slug}`;
+  const service = getServiceContent("ua", slug);
+  const url = `${SITE_URL}/ua/services/${slug}`;
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: service.metaTitle,
     description: service.metaDescription,
-    keywords: [service.primaryKeyword, "web development", "business solution"],
+    keywords: [service.primaryKeyword, "розробка сайтів", "бізнес-рішення"],
     alternates: {
       canonical: url,
       languages: {
-        "en-US": url,
-        "uk-UA": `${SITE_URL}/ua/services/${slug}`,
+        "en-US": `${SITE_URL}/services/${slug}`,
+        "uk-UA": url,
         "x-default": url,
       },
     },
     openGraph: {
-      locale: "en_US",
+      locale: "uk_UA",
       url,
       title: service.metaTitle,
       description: service.metaDescription,
       type: "website",
     },
+    twitter: {
+      card: "summary_large_image",
+      title: service.metaTitle,
+      description: service.metaDescription,
+      images: [`${SITE_URL}/opengraph-image`],
+    },
   };
 }
 
-export default async function ServicePage(props: { params: Params }) {
+export default async function ServiceUaPage(props: { params: Params }) {
   const params = await props.params;
   const slug = params.slug as ServiceSlug;
 
   if (!SERVICE_SLUGS.includes(slug)) {
-    return <div>Service not found</div>;
+    return <div>Послуга не знайдена</div>;
   }
 
-  return <ServiceDetailPage locale="en" slug={slug} />;
+  return <ServiceDetailPage locale="ua" slug={slug} />;
 }

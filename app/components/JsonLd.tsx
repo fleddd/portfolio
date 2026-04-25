@@ -1,13 +1,14 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fedkiv.tech";
+import { CONTACT_EMAIL, SITE_DESCRIPTION, SITE_URL } from "@/constants/site";
 
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": `${SITE_URL}/#person`,
   name: "Oleh Fedkiv",
   url: SITE_URL,
+  email: CONTACT_EMAIL,
   jobTitle: "Full-Stack Developer",
-  description:
-    "Full-Stack Developer crafting high-performance websites and SEO-ready products.",
+  description: SITE_DESCRIPTION,
   inLanguage: ["en", "uk"],
   knowsAbout: [
     "React",
@@ -29,21 +30,24 @@ const personSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
   name: "Oleh Fedkiv Portfolio",
   url: SITE_URL,
-  description: "Portfolio of Oleh Fedkiv - Full-Stack Developer | React, Next.js, Node.js, NestJS",
+  description: SITE_DESCRIPTION,
   inLanguage: ["en", "uk"],
   author: {
     "@type": "Person",
-    name: "Oleh Fedkiv",
+    "@id": `${SITE_URL}/#person`,
   },
 };
 
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": `${SITE_URL}/#professional-service`,
   name: "Oleh Fedkiv - Full-Stack Development Services",
   url: SITE_URL,
+  email: CONTACT_EMAIL,
   areaServed: ["Ukraine", "Europe", "Worldwide"],
   availableLanguage: ["English", "Ukrainian"],
   serviceType: [
@@ -55,7 +59,7 @@ const serviceSchema = {
   ],
   provider: {
     "@type": "Person",
-    name: "Oleh Fedkiv",
+    "@id": `${SITE_URL}/#person`,
   },
 };
 
