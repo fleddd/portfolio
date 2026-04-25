@@ -142,12 +142,12 @@ export const copy = {
       termsHref: "/terms-of-service",
     },
     seo: {
-      title: "Oleh Fedkiv | Web Development for Business",
+      title: "Web Development for Business | Oleh Fedkiv",
       description:
         "Web development for SMB and startups: fast websites, lead-focused landing pages, MVP delivery, and API/CRM integrations.",
     },
     seoTechnical: {
-      title: "Oleh Fedkiv | Technical Profile",
+      title: "Technical Profile | Oleh Fedkiv",
       description:
         "Technical page with stack details, architecture capabilities, integrations, and engineering focus areas.",
     },
@@ -289,12 +289,12 @@ export const copy = {
       termsHref: "/ua/terms-of-service",
     },
     seo: {
-      title: "Олег Федьків | Розробка сайтів і веб-рішень для бізнесу",
+      title: "Розробка сайтів і веб-рішень для бізнесу | Олег Федьків",
       description:
         "Розробка швидких сайтів, лендінгів і MVP для бізнесу: заявки, автоматизація процесів, технічне SEO та інтеграції API/CRM.",
     },
     seoTechnical: {
-      title: "Олег Федьків | Технічний профіль",
+      title: "Технічний профіль | Олег Федьків",
       description:
         "Технічні навички: стек, архітектурні підходи, інтеграції, продуктивність та технічне SEO.",
     },
