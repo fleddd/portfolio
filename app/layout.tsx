@@ -9,10 +9,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fedkiv.tech";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: "Oleh Fedkiv | Full-Stack Developer",
-    template: "%s | Oleh Fedkiv",
-  },
+  title: "Oleh Fedkiv | Full-Stack Developer",
   description:
     "Full-Stack Developer crafting high-performance websites, MVPs, and business modules with technical SEO and strong Core Web Vitals.",
   keywords: [
