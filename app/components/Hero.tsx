@@ -14,9 +14,6 @@ type HeroProps = {
 export function Hero({ locale }: HeroProps) {
   const scrollTo = useScrollTo();
   const t = getCopy(locale).hero;
-  const badges = locale === 'ua'
-    ? ['Next.js', 'SEO-архітектура', 'Оптимізація лідів']
-    : ['Next.js', 'SEO-ready architecture', 'Lead funnel optimization'];
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -56,13 +53,6 @@ export function Hero({ locale }: HeroProps) {
               {t.role}
             </div>
 
-            <div className="flex flex-wrap justify-center gap-2 pt-3">
-              {badges.map((badge) => (
-                <span key={badge} className="px-3 py-1.5 text-xs text-gray-300 bg-white/5 border border-white/10 rounded-full">
-                  {badge}
-                </span>
-              ))}
-            </div>
           </motion.div>
 
           <motion.p

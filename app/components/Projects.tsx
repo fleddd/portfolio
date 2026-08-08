@@ -1,9 +1,10 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { ExternalLink, Github, Code } from 'lucide-react';
+import { ArrowRight, ExternalLink, Github, Code } from 'lucide-react';
+import Link from 'next/link';
 import { Section, SectionHeader, Button } from '@/components/ui';
-import { PROJECTS, CODE_SNIPPET, CONTACT_SOCIAL_LINKS } from '@/constants';
+import { PROJECTS, CODE_SNIPPET, CONTACT_SOCIAL_LINKS, getProjectContent } from '@/constants';
 import { Locale, getCopy } from '@/constants/i18n';
 
 type ProjectsProps = {
@@ -11,13 +12,24 @@ type ProjectsProps = {
   mode?: 'business' | 'technical';
 };
 
+const PROJECT_DISPLAY_ORDER = [
+  'sea-travel',
+  'qwiktwik',
+  'mevdev-frontend',
+  'night-light-configurator',
+];
+
+const DISPLAYED_PROJECTS = [...PROJECTS].sort(
+  (a, b) => PROJECT_DISPLAY_ORDER.indexOf(a.id) - PROJECT_DISPLAY_ORDER.indexOf(b.id),
+);
+
 export function Projects({ locale, mode = 'business' }: ProjectsProps) {
   const t = getCopy(locale).projects;
 
   return (
     <Section id="projects">
       <div
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-10 pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(to right, rgba(6, 182, 212, 0.3) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(6, 182, 212, 0.3) 1px, transparent 1px)`,
@@ -39,12 +51,13 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PROJECTS.map((project, index) => {
-            const localizedItem = t.items[index];
+          {DISPLAYED_PROJECTS.map((project, index) => {
+            const content = getProjectContent(project, locale);
+            const detailHref = `${locale === 'ua' ? '/ua' : ''}/projects/${project.id}`;
 
             return (
             <motion.div
-              key={project.title}
+              key={project.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -52,8 +65,8 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
               className="group relative"
             >
               <div className="relative h-full flex flex-col p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all overflow-hidden">
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${project.gradient}`} />
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${project.gradient} pointer-events-none`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none`} />
 
                 <motion.div
                   whileHover={{ rotate: 360, scale: 1.1 }}
@@ -64,12 +77,12 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
                 </motion.div>
 
                 <span className="text-xs font-medium text-cyan-400 mb-2 uppercase tracking-wider">
-                  {localizedItem?.category || project.category}
+                  {content.category}
                 </span>
                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">
-                  {localizedItem?.title || project.title}
+                  <Link href={detailHref}>{content.title}</Link>
                 </h3>
-                <p className="text-gray-400 leading-relaxed mb-6 flex-grow">{localizedItem?.description || project.description}</p>
+                <p className="text-gray-400 leading-relaxed mb-6 flex-grow">{content.description}</p>
 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tech.map((tech) => (
@@ -82,12 +95,23 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
                   ))}
                 </div>
 
-                <div className={`flex items-center gap-4 pt-4 ${project.livePreview || project.sourceCode ? 'border-t border-white/10' : ''}`}>
+                <div className="relative z-20 flex flex-wrap items-center gap-4 pt-4 border-t border-white/10">
+                  <motion.div className="relative z-20" whileHover={{ scale: 1.05, x: 5 }}>
+                    <Link
+                      href={detailHref}
+                      className="flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
+                    >
+                      <span>{t.caseDetails}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </motion.div>
                   {project.livePreview && (
                     <motion.a
-                      href={project.livePreview || "#"}
+                      href={project.livePreview}
+                      target="_blank"
+                      rel="noreferrer"
                       whileHover={{ scale: 1.05, x: 5 }}
-                      className="z-10 flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer"
+                      className="relative z-20 flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer"
                     >
                       <ExternalLink className="w-4 h-4" />
                       <span>{t.liveDemo}</span>
@@ -95,9 +119,11 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
                   )}
                   {project.sourceCode && (
                     <motion.a
-                      href={project.sourceCode || "#"}
+                      href={project.sourceCode}
+                      target="_blank"
+                      rel="noreferrer"
                       whileHover={{ scale: 1.05, x: 5 }}
-                      className="z-10 flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer"
+                      className="relative z-20 flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer"
                     >
                       <Github className="w-4 h-4" />
                       <span>{t.sourceCode}</span>
@@ -106,7 +132,7 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
 
                 </div>
 
-                <div className="absolute bottom-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                <div className="absolute bottom-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none" aria-hidden="true">
                   <Code className="w-24 h-24 text-cyan-400" strokeWidth={1} />
                 </div>
               </div>

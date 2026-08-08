@@ -16,10 +16,10 @@ export function Footer({ locale, mode }: FooterProps) {
   const isUa = locale === 'ua';
   const links = mode === 'business'
     ? [
-      { label: isUa ? 'Про мене' : 'About', href: isUa ? '/ua#about' : '#about' },
+      { label: isUa ? 'Про мене' : 'About', href: isUa ? '/ua#about' : '/#about' },
       { label: isUa ? 'Послуги' : 'Services', href: isUa ? '/ua/services' : '/services' },
-      { label: isUa ? 'Рішення' : 'Solutions', href: isUa ? '/ua#projects' : '#projects' },
-      { label: isUa ? 'Контакти' : 'Contact', href: isUa ? '/ua#contact' : '#contact' },
+      { label: isUa ? 'Рішення' : 'Solutions', href: isUa ? '/ua#projects' : '/#projects' },
+      { label: isUa ? 'Контакти' : 'Contact', href: isUa ? '/ua#contact' : '/#contact' },
       { label: isUa ? 'Технічні навички' : 'Technical Skills', href: isUa ? '/ua/technical' : '/technical' },
     ]
     : [

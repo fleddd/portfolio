@@ -5,6 +5,8 @@ import { Locale } from '@/constants/i18n';
 import { getServiceContent, ServiceSlug } from '@/constants/services';
 import { Button, Section, SectionHeader } from '@/components/ui';
 import { Contact, Footer, Navigation } from '@/components/index';
+import { ServiceProjectCards } from '@/components/ServiceProjectCards';
+import { ServicePattern } from '@/components/ServicePattern';
 import { CONTACT_EMAIL, SITE_URL } from '@/constants/site';
 
 type ServiceDetailPageProps = {
@@ -79,6 +81,8 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
       <main className="pt-20">
         {/* Hero Section */}
         <Section id="service-hero" bg="gradient-down" className="pt-40">
+          <ServicePattern variant="orbit" className="-right-20 top-16 h-96 w-96 opacity-70" />
+          <ServicePattern variant="dots" className="bottom-0 left-4" />
           <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -96,12 +100,15 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
               transition={{ delay: 0.1 }}
               className="max-w-4xl space-y-6"
             >
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400">
+                {service.heroHook}
+              </p>
               <h1 className="text-5xl md:text-6xl font-bold tracking-tight">{service.title}</h1>
               <p className="text-xl text-gray-300">{service.summary}</p>
-              <div className="flex gap-4 pt-4">
-                <Button href="#details">{locale === 'ua' ? 'Детальніше' : 'View Details'}</Button>
-                <Button href={`${homeHref}#contact`} variant="secondary">
-                  {locale === 'ua' ? 'Обговорити' : 'Discuss'}
+              <div className="flex flex-wrap gap-4 pt-4">
+                <Button href="#contact">{service.ctaLabel}</Button>
+                <Button href="#work" variant="secondary">
+                  {locale === 'ua' ? 'Переглянути релевантні кейси' : 'See Relevant Work'}
                 </Button>
               </div>
             </motion.div>
@@ -110,9 +117,10 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
 
         {/* Problems Section */}
         <Section id="problems" bg="solid">
+          <ServicePattern variant="network" className="-left-24 top-16 h-52 w-96" />
           <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
             <SectionHeader
-              title={locale === 'ua' ? 'Проблеми, що ми вирішуємо' : 'Problems We Solve'}
+              title={locale === 'ua' ? 'Проблеми, які я вирішую' : 'Problems I Solve'}
               description={locale === 'ua' ? 'Звичайні хибні кроки, які гальмують ріст' : 'Common obstacles that slow your growth'}
             />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -134,6 +142,7 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
 
         {/* Deliverables Section */}
         <Section id="deliverables" bg="gradient-down">
+          <ServicePattern variant="dots" className="-right-8 top-20" />
           <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
             <SectionHeader
               title={locale === 'ua' ? 'Що входить у послугу' : 'What You Get'}
@@ -159,11 +168,28 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
           </div>
         </Section>
 
-        {/* Process Section */}
-        <Section id="process" bg="solid">
+        {/* Relevant Work Section */}
+        <Section id="work" bg="solid">
+          <ServicePattern variant="orbit" className="-bottom-24 -left-20 h-72 w-72" />
           <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
             <SectionHeader
-              title={locale === 'ua' ? 'Як ми працюємо' : 'Our Process'}
+              title={locale === 'ua' ? 'Релевантні роботи' : 'Relevant Work'}
+              description={
+                locale === 'ua'
+                  ? 'Реальні проєкти, де можна оцінити підхід, інтерфейси та технічну реалізацію'
+                  : 'Real projects that demonstrate the delivery approach, interfaces, and technical implementation'
+              }
+            />
+            <ServiceProjectCards locale={locale} items={service.relatedProjects} />
+          </div>
+        </Section>
+
+        {/* Process Section */}
+        <Section id="process" bg="gradient-down">
+          <ServicePattern variant="network" className="right-0 top-10 h-52 w-96 opacity-70" />
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
+            <SectionHeader
+              title={locale === 'ua' ? 'Як я працюю' : 'How I Work'}
               description={locale === 'ua' ? 'Чіткі етапи від ідеї до запуску' : 'Clear phases from discovery to launch'}
             />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -218,6 +244,7 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
 
         {/* CTA Section */}
         <Section id="cta" bg="solid">
+          <ServicePattern variant="dots" className="bottom-0 right-4" />
           <div className="relative max-w-4xl mx-auto px-6 lg:px-12 text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -235,7 +262,7 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
                   ? 'Обговоримо деталі вашого проєкту та знайдемо оптимальний варіант реалізації.'
                   : 'Let\'s discuss your specific needs and find the best approach for your stage.'}
               </p>
-              <Button href={`${homeHref}#contact`} className="px-10 py-4 text-lg">
+              <Button href="#contact" className="px-10 py-4 text-lg">
                 {locale === 'ua' ? 'Запитати про послугу' : 'Inquiry Now'}
               </Button>
             </motion.div>

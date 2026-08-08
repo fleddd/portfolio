@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { ServiceDetailPage } from "@/components/ServiceDetailPage";
 import { SERVICE_SLUGS, getServiceContent, ServiceSlug } from "@/constants/services";
 import { SITE_URL } from "@/constants/site";
@@ -28,7 +29,6 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
     metadataBase: new URL(SITE_URL),
     title: service.metaTitle,
     description: service.metaDescription,
-    keywords: [service.primaryKeyword, "web development", "business solution"],
     alternates: {
       canonical: url,
       languages: {
@@ -58,7 +58,7 @@ export default async function ServicePage(props: { params: Params }) {
   const slug = params.slug as ServiceSlug;
 
   if (!SERVICE_SLUGS.includes(slug)) {
-    return <div>Service not found</div>;
+    notFound();
   }
 
   return <ServiceDetailPage locale="en" slug={slug} />;

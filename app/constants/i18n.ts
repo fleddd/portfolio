@@ -18,7 +18,7 @@ export const copy = {
     },
     hero: {
       available: "Available for work",
-      role: "Web Solutions Developer",
+      role: "Expert Web Developer",
       description:
         "I build fast websites and digital systems that turn traffic into qualified leads.",
       scroll: "Scroll to explore",
@@ -32,6 +32,8 @@ export const copy = {
         "I help small and medium businesses launch websites and web tools that directly support sales, bookings, and lead collection.",
       p2:
         "You get a clear delivery process, predictable timelines, and a product focused on measurable outcomes.",
+      keywords:
+        "When the project calls for it, I use Next.js and an SEO-ready architecture, with lead funnel optimization integrated into the overall user journey.",
       chips: [
         "Lead-focused landing pages",
         "MVP launch in weeks, not months",
@@ -53,15 +55,13 @@ export const copy = {
         },
       ],
       stats: {
-        years: "Years of hands-on development",
-        months: "Months of direct commercial delivery",
+        years: "Years in web development",
+        months: "Months in commercial development",
         projects: "Completed client and product projects",
         clients: "Satisfied clients",
         commitment: "Response and ownership",
       },
       values: {
-        years: "3+",
-        months: "12+",
         projects: "15+",
         clients: "5+",
         commitment: "24h",
@@ -74,34 +74,15 @@ export const copy = {
       note: "If you need implementation details, architecture decisions, or stack fit, this page is for you",
       resume: "Download Resume",
     },
-    projects: {
+      projects: {
       titleLeft: "Featured",
       titleRight: "Business Cases",
       description: "Selected projects relevant to booking flows, lead generation, and business automation",
-      liveDemo: "Live Demo",
+      liveDemo: "Live",
       sourceCode: "Source Code",
+      caseDetails: "View Details",
       more: "Need a similar solution for your business?",
       github: "View GitHub Profile",
-      items: [
-        {
-          title: "Sea Travel Booking Platform",
-          category: "Booking System",
-          description:
-            "Multi-vendor booking platform with real-time availability, secure checkout, and scalable admin logic.",
-        },
-        {
-          title: "AI-Powered Copywriting Tool",
-          category: "SaaS MVP",
-          description:
-            "Content optimization product with custom style settings for teams that need faster marketing production.",
-        },
-        {
-          title: "Telegram Bot with Web API",
-          category: "Lead Automation",
-          description:
-            "Automation flow with API integration and notifications to reduce missed requests and speed up response time.",
-        },
-      ],
     },
     technicalPage: {
       title: "Technical Profile",
@@ -179,6 +160,8 @@ export const copy = {
         "Працюю з бізнесами та стартапами, яким потрібен не просто сайт, а інструмент для лідів, продажів і стабільної обробки заявок.",
       p2:
         "Ви отримуєте зрозумілий процес, контроль термінів і продукт, який вирішує конкретну бізнес-задачу.",
+      keywords:
+        "Залежно від задачі використовую Next.js, закладаю SEO-архітектуру та оптимізую шлях користувача від першого переходу до заявки.",
       chips: [
         "Лендінги під заявки",
         "MVP запуск за тижні",
@@ -200,15 +183,13 @@ export const copy = {
         },
       ],
       stats: {
-        years: "Років практичного досвіду розробки",
-        months: "Місяців прямої комерційної роботи",
+        years: "Років у веброзробці (з 2023)",
+        months: "Місяців комерційної розробки (із серпня 2025)",
         projects: "Завершених проєктів",
         clients: "Задоволених клієнтів",
         commitment: "Швидкість зворотного зв'язку",
       },
       values: {
-        years: "3+",
-        months: "12+",
         projects: "15+",
         clients: "5+",
         commitment: "24h",
@@ -227,28 +208,9 @@ export const copy = {
       description: "Лише ті роботи, що релевантні для лідів, бронювань та бізнес-автоматизації",
       liveDemo: "Демо",
       sourceCode: "Вихідний код",
+      caseDetails: "Детальніше про кейс",
       more: "Потрібне схоже рішення під ваш бізнес?",
       github: "Переглянути GitHub профіль",
-      items: [
-        {
-          title: "Sea Travel Booking Platform",
-          category: "Система бронювання",
-          description:
-            "Мультивендорна платформа бронювання з онлайн-доступністю, безпечними оплатами та масштабованою адмін-логікою.",
-        },
-        {
-          title: "AI-Powered Copywriting Tool",
-          category: "SaaS MVP",
-          description:
-            "Продукт для оптимізації контенту з налаштуванням власного стилю та пришвидшенням маркетингового продакшну.",
-        },
-        {
-          title: "Telegram Bot with Web API",
-          category: "Автоматизація заявок",
-          description:
-            "Автоматизований потік із API-інтеграціями та сповіщеннями, щоб не втрачати звернення й швидше відповідати клієнтам.",
-        },
-      ],
     },
     technicalPage: {
       title: "Технічні навички",

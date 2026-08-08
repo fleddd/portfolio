@@ -43,6 +43,8 @@ export function Navigation({ locale, mode }: NavigationProps) {
       ? '/technical'
       : pathname.startsWith('/ua/services')
         ? pathname.replace('/ua/services', '/services')
+        : pathname.startsWith('/ua/projects')
+          ? pathname.replace('/ua/projects', '/projects')
         : pathname === '/ua'
           ? '/'
           : homeHref
@@ -50,6 +52,8 @@ export function Navigation({ locale, mode }: NavigationProps) {
       ? '/ua/technical'
       : pathname.startsWith('/services')
         ? pathname.replace('/services', '/ua/services')
+        : pathname.startsWith('/projects')
+          ? pathname.replace('/projects', '/ua/projects')
         : pathname === '/'
           ? '/ua'
           : homeHref;

@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Section, AnimatedCounter } from '@/components/ui';
 import { Locale, getCopy } from '@/constants/i18n';
 import { Target, Zap, ShieldCheck } from 'lucide-react';
+import { getExperienceStats } from '@/constants/experience';
 
 type AboutProps = {
   locale: Locale;
@@ -12,10 +13,11 @@ type AboutProps = {
 export function About({ locale }: AboutProps) {
   const t = getCopy(locale).about;
   const icons = [Target, Zap, ShieldCheck];
+  const experience = getExperienceStats();
 
   const localizedStats = [
-    { value: t.values.years, label: t.stats.years },
-    { value: t.values.months, label: t.stats.months },
+    { value: `${experience.developmentYears}+`, label: t.stats.years },
+    { value: `${experience.commercialMonths}+`, label: t.stats.months },
     { value: t.values.projects, label: t.stats.projects },
     { value: t.values.clients, label: t.stats.clients },
     { value: t.values.commitment, label: t.stats.commitment },
@@ -54,6 +56,10 @@ export function About({ locale }: AboutProps) {
 
             <p className="text-lg text-gray-400 leading-relaxed">
               {t.p2}
+            </p>
+
+            <p className="text-base text-gray-500 leading-relaxed">
+              {t.keywords}
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">

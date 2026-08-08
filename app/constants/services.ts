@@ -1,4 +1,5 @@
 import { Locale } from './i18n';
+import type { ProjectSlug } from './projects';
 
 export const SERVICE_SLUGS = [
   'landing-page',
@@ -15,6 +16,8 @@ type FAQ = {
 
 type ServiceContent = {
   title: string;
+  heroHook: string;
+  ctaLabel: string;
   summary: string;
   problems: string[];
   deliverables: string[];
@@ -23,12 +26,15 @@ type ServiceContent = {
   metaTitle: string;
   metaDescription: string;
   primaryKeyword: string;
+  relatedProjects: { id: ProjectSlug; note: string }[];
 };
 
 const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
   en: {
     'landing-page': {
       title: 'Lead-Focused Landing Page',
+      heroHook: 'Make the next visitor understand your offer — and take the next step.',
+      ctaLabel: 'Plan My Landing Page',
       summary:
         'A conversion-optimised landing page built to turn visitors into qualified leads — fast to launch, easy to measure.',
       problems: [
@@ -81,9 +87,15 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       metaDescription:
         'Custom landing pages built for lead generation. Fast load times, mobile-first design, and conversion-focused structure. Launch in 1–2 weeks.',
       primaryKeyword: 'landing page development',
+      relatedProjects: [
+        { id: 'sea-travel', note: 'A booking-focused customer journey with search UX, regional landing content, and clear conversion paths.' },
+        { id: 'qwiktwik', note: 'A product website connecting high-intent landing pages, downloads, pricing, documentation, and search content.' },
+      ],
     },
     'mvp-development': {
       title: 'MVP Web Application',
+      heroHook: 'Validate the product before you invest in the wrong scope.',
+      ctaLabel: 'Scope My MVP',
       summary:
         'A focused, production-ready web application that validates your idea and attracts early users — without overbuilding.',
       problems: [
@@ -136,9 +148,15 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       metaDescription:
         'Production-ready MVP development with Next.js. From idea to working product in 4–8 weeks. Clean code, scalable architecture, deployment included.',
       primaryKeyword: 'MVP web application development',
+      relatedProjects: [
+        { id: 'qwiktwik', note: 'A full-stack product with account flows, dashboard UI, PostgreSQL, Redis, Prisma ORM, and AI integrations.' },
+        { id: 'night-light-configurator', note: 'An interactive product configurator that turns a custom ordering idea into a testable user flow.' },
+      ],
     },
     'api-integration': {
       title: 'API & CRM Integration',
+      heroHook: 'Stop copying data between tools by hand.',
+      ctaLabel: 'Audit My Integration',
       summary:
         'Connect your website or app to the tools your business runs on — CRMs, payment gateways, booking systems, and more.',
       problems: [
@@ -164,7 +182,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
         {
           question: 'Which CRMs and platforms can you integrate with?',
           answer:
-            'I have experience with HubSpot, Pipedrive, Notion, Airtable, Stripe, Telegram, and any service that exposes a REST or GraphQL API.',
+            'I can connect CRMs, payment providers, messaging tools, and internal systems that expose a REST or GraphQL API. I confirm compatibility and platform limitations during the integration audit.',
         },
         {
           question: 'Will the integration break if the third-party API changes?',
@@ -191,11 +209,17 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       metaDescription:
         'Custom API and CRM integrations for web applications. Connect HubSpot, Stripe, Telegram, and more. Automated data flows and webhook handling.',
       primaryKeyword: 'API CRM integration',
+      relatedProjects: [
+        { id: 'qwiktwik', note: 'A full-stack platform using Nest.js, PostgreSQL, Redis, Prisma ORM, and AI integrations.' },
+        { id: 'sea-travel', note: 'Structured availability, search, pricing, and reservation flows inside a travel booking platform.' },
+      ],
     },
   },
   ua: {
     'landing-page': {
       title: 'Лендінг під заявки',
+      heroHook: 'Допоможіть наступному відвідувачу зрозуміти пропозицію — і залишити заявку.',
+      ctaLabel: 'Спланувати лендінг',
       summary:
         'Лендінг, оптимізований під конверсію: перетворює відвідувачів на потенційних клієнтів — швидкий запуск, прозора аналітика.',
       problems: [
@@ -248,9 +272,15 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       metaDescription:
         'Індивідуальні лендінги для генерації лідів. Швидке завантаження, mobile-first дизайн і структура під конверсію. Запуск за 1–2 тижні.',
       primaryKeyword: 'розробка лендінгу',
+      relatedProjects: [
+        { id: 'sea-travel', note: 'Користувацький шлях до бронювання з пошуком, регіональними SEO-сторінками та чіткими conversion-сценаріями.' },
+        { id: 'qwiktwik', note: 'Продуктовий сайт, що поєднує посадкові сторінки, завантаження, pricing, документацію та пошуковий контент.' },
+      ],
     },
     'mvp-development': {
       title: 'MVP веб-додаток',
+      heroHook: 'Перевірте продукт до того, як вкладати час у неправильний scope.',
+      ctaLabel: 'Визначити scope MVP',
       summary:
         'Зосереджений, готовий до виробництва веб-додаток, який валідує вашу ідею та залучає перших користувачів — без зайвої розробки.',
       problems: [
@@ -303,9 +333,15 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       metaDescription:
         'Розробка готового до виробництва MVP на Next.js. Від ідеї до працюючого продукту за 4–8 тижнів. Чистий код, масштабована архітектура, деплой включено.',
       primaryKeyword: 'розробка MVP веб-додатку',
+      relatedProjects: [
+        { id: 'qwiktwik', note: 'Full-stack продукт з акаунтами, dashboard, PostgreSQL, Redis, Prisma ORM та AI-інтеграціями.' },
+        { id: 'night-light-configurator', note: 'Інтерактивний конфігуратор, який перетворює ідею кастомного замовлення на перевірюваний користувацький сценарій.' },
+      ],
     },
     'api-integration': {
       title: 'API та CRM-інтеграція',
+      heroHook: 'Припиніть переносити дані між інструментами вручну.',
+      ctaLabel: 'Провести аудит інтеграції',
       summary:
         'Підключіть ваш сайт або додаток до інструментів, на яких працює бізнес — CRM, платіжні шлюзи, системи бронювання та інше.',
       problems: [
@@ -331,7 +367,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
         {
           question: 'З якими CRM та платформами ви працюєте?',
           answer:
-            'Маю досвід з HubSpot, Pipedrive, Notion, Airtable, Stripe, Telegram та будь-яким сервісом з REST або GraphQL API.',
+            'Можу підключати CRM, платіжні сервіси, месенджери та внутрішні системи, якщо вони мають REST або GraphQL API. Сумісність і обмеження конкретного сервісу перевіряю під час аудиту.',
         },
         {
           question: 'Що буде, якщо API сторонньої служби зміниться?',
@@ -358,6 +394,10 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       metaDescription:
         'Кастомні API та CRM-інтеграції для веб-додатків. Підключення HubSpot, Stripe, Telegram та інших. Автоматизовані потоки даних і обробка вебхуків.',
       primaryKeyword: 'API CRM інтеграція',
+      relatedProjects: [
+        { id: 'qwiktwik', note: 'Full-stack платформа на Nest.js, PostgreSQL, Redis і Prisma ORM з AI-інтеграціями.' },
+        { id: 'sea-travel', note: 'Структуровані сценарії доступності, пошуку, ціноутворення та бронювання у travel-платформі.' },
+      ],
     },
   },
 };

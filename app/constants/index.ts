@@ -12,10 +12,11 @@ import {
   Cloud,
   Server,
   GitBranch,
-  Code,
-  Layers,
   Send,
 } from 'lucide-react';
+
+export { PROJECTS, PROJECT_SLUGS, getProject, getProjectContent } from './projects';
+export type { Project, ProjectSlug } from './projects';
 
 // Navigation
 export const NAV_ITEMS = ['About', 'Skills', 'Projects', 'Contact'] as const;
@@ -41,14 +42,6 @@ export const FEATURES = [
 ] as const;
 
 export const TECH_STACK = ['React / Next', 'TypeScript', 'Nest.js', 'PostgreSQL', 'Docker'] as const;
-
-export const STATS = [
-  { value: '3+', label: 'Years in Tech' },
-  { value: '8+', label: 'Months of commercial experience' },
-  { value: '5+', label: 'Projects Completed' },
-  { value: '5+', label: 'Happy Clients' },
-  { value: '100%', label: 'Commitment' },
-] as const;
 
 // Skills
 export const SKILL_CATEGORIES = [
@@ -111,43 +104,6 @@ export const SKILL_CATEGORIES = [
       { name: 'Postman', icon: '/assets/yellow-circle.svg' },
       { name: 'Jira', icon: '/assets/green-circle.svg' },
     ],
-  },
-] as const;
-
-// Projects
-export const PROJECTS = [
-  {
-    id: 'sea-travel',
-    title: 'Sea Travel Booking Platform',
-    category: 'Web Application',
-    description: 'A multi-vendor travel booking platform with real-time availability and secure payments.',
-    tech: ['Next.js', 'PostgreSQL', 'Prisma ORM', 'VPS'],
-    gradient: 'from-cyan-500 to-blue-500',
-    icon: Layers,
-    sourceCode: "",
-    livePreview: "https://seatravel.hr",
-  },
-  {
-    id: 'ai-copywriting',
-    title: 'AI-Powered Copywriting Tool',
-    category: 'SaaS MVP',
-    description: 'AI-powered copywriting tool for content optimization with your own styles and requirements.',
-    tech: ['Next.js', 'PostgreSQL', 'Docker', "TipTap"],
-    gradient: 'from-blue-500 to-purple-500',
-    icon: Zap,
-    sourceCode: "",
-    livePreview: "",
-  },
-  {
-    id: 'telegram-bot',
-    title: 'Telegram Bot with Web API',
-    category: 'Lead Automation',
-    description: 'Telegram bot with web API for real-time data management.',
-    tech: ['React', 'Tailwind', 'REST API', "Telegram API"],
-    gradient: 'from-green-500 to-emerald-500',
-    icon: Code,
-    sourceCode: "",
-    livePreview: "",
   },
 ] as const;
 
