@@ -5,28 +5,27 @@ import { Send, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Section, SectionHeader } from '@/components/ui';
-import { CONTACT_INFO, CONTACT_SOCIAL_LINKS, INPUT_CLASS } from '@/constants';
+import { INPUT_CLASS } from '@/constants';
 import { Locale, getCopy } from '@/constants/i18n';
 
 const INITIAL_FORM = { name: '', email: '', subject: '', message: '' };
 
 type ContactProps = {
   locale: Locale;
+  sectionIndex?: string;
 };
 
-export function Contact({ locale }: ContactProps) {
+export function Contact({ locale, sectionIndex }: ContactProps) {
   const [formData, setFormData] = useState(INITIAL_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ kind: 'success' | 'error'; message: string } | null>(null);
   const t = getCopy(locale).contact;
-  const infoLabels = {
-    email: locale === 'ua' ? 'Пошта' : 'Email',
-    location: locale === 'ua' ? 'Локація' : 'Location',
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
 
+    setStatus(null);
     setIsSubmitting(true);
     try {
       const res = await fetch('/api/contact', {
@@ -41,35 +40,31 @@ export function Contact({ locale }: ContactProps) {
       }
 
       toast.success(t.success);
+      setStatus({ kind: 'success', message: t.success });
       setFormData(INITIAL_FORM);
     } catch {
       toast.error(t.error);
+      setStatus({ kind: 'error', message: t.error });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setStatus(null);
+    setFormData((current) => ({ ...current, [e.target.name]: e.target.value }));
   };
 
   return (
     <Section id="contact" bg="gradient-up">
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.1, 0.05] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] bg-cyan-500 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.1, 0.05] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-          className="absolute -bottom-1/2 -left-1/4 w-[800px] h-[800px] bg-blue-600 rounded-full blur-3xl"
-        />
+        <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] bg-cyan-500/8 rounded-full blur-3xl" aria-hidden="true" />
+        <div className="absolute -bottom-1/2 -left-1/4 w-[800px] h-[800px] bg-blue-600/8 rounded-full blur-3xl" aria-hidden="true" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
         <SectionHeader
+          index={sectionIndex}
           title={
             <>
               {t.titleLeft}{' '}
@@ -81,84 +76,8 @@ export function Contact({ locale }: ContactProps) {
           description={t.description}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <div className="space-y-6">
-              {CONTACT_INFO.map((info, index) => (
-                <motion.a
-                  key={info.label}
-                  href={info.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ x: 10 }}
-                  className="flex items-start gap-4 p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-cyan-400/30 transition-all group cursor-pointer"
-                >
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-400/20 group-hover:scale-110 transition-transform">
-                    <info.icon className="w-6 h-6 text-cyan-400" strokeWidth={2} />
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-sm text-gray-500 mb-1">{info.label === 'Email' ? infoLabels.email : infoLabels.location}</div>
-                    <div className="text-white font-medium">{info.value}</div>
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="space-y-4"
-            >
-              <h3 className="text-white font-semibold">{t.followMe}</h3>
-              <div className="flex gap-4">
-                {CONTACT_SOCIAL_LINKS.map((social) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    whileHover={{ scale: 1.1, y: -5 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all group cursor-pointer"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-6 h-6 text-gray-400 group-hover:text-cyan-400 transition-colors" />
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="p-6 rounded-2xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-xl border border-green-500/20"
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
-                </span>
-                <span className="text-white font-semibold">{t.available}</span>
-              </div>
-              <p className="text-sm text-gray-400">{t.availableDescription}</p>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-2"
-          >
+        <div className="mx-auto max-w-3xl">
+          <motion.div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="hidden" aria-hidden="true">
                 <label htmlFor="website">Website</label>
@@ -184,6 +103,7 @@ export function Contact({ locale }: ContactProps) {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    autoComplete="name"
                     placeholder={t.placeholders.name}
                     className={INPUT_CLASS}
                   />
@@ -199,6 +119,9 @@ export function Contact({ locale }: ContactProps) {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    autoComplete="email"
+                    inputMode="email"
+                    spellCheck={false}
                     placeholder={t.placeholders.email}
                     className={INPUT_CLASS}
                   />
@@ -216,6 +139,7 @@ export function Contact({ locale }: ContactProps) {
                   value={formData.subject}
                   onChange={handleChange}
                   required
+                  autoComplete="off"
                   placeholder={t.placeholders.subject}
                   className={INPUT_CLASS}
                 />
@@ -231,10 +155,25 @@ export function Contact({ locale }: ContactProps) {
                   value={formData.message}
                   onChange={handleChange}
                   required
+                  autoComplete="off"
                   rows={6}
                   placeholder={t.placeholders.message}
-                  className={`${INPUT_CLASS} resize-none`}
+                  className={`${INPUT_CLASS} resize-y`}
                 />
+              </div>
+
+              <div id="form-status" aria-live="polite" aria-atomic="true">
+                {status && (
+                  <p
+                    role={status.kind === 'error' ? 'alert' : 'status'}
+                    className={`rounded-lg border px-4 py-3 text-sm ${status.kind === 'error'
+                      ? 'border-red-500/30 bg-red-500/10 text-red-200'
+                      : 'border-green-500/30 bg-green-500/10 text-green-200'
+                      }`}
+                  >
+                    {status.message}
+                  </p>
+                )}
               </div>
 
               <motion.button
@@ -242,17 +181,17 @@ export function Contact({ locale }: ContactProps) {
                 whileTap={!isSubmitting ? { scale: 0.98 } : undefined}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-xl hover:shadow-2xl hover:shadow-cyan-500/25 transition-all flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-xl hover:shadow-2xl hover:shadow-cyan-500/25 transition-[box-shadow,opacity,transform] flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
                     <span>{t.sending}</span>
                   </>
                 ) : (
                   <>
                     <span>{t.send}</span>
-                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true" />
                   </>
                 )}
               </motion.button>

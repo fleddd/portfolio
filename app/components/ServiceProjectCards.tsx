@@ -22,7 +22,7 @@ export function ServiceProjectCards({ locale, items }: ServiceProjectCardsProps)
 
   return (
     <div className={`grid grid-cols-1 gap-8 ${items.length > 2 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'}`}>
-      {items.map((item, index) => {
+      {items.map((item) => {
         const project = getProject(item.id);
         if (!project) return null;
 
@@ -32,10 +32,6 @@ export function ServiceProjectCards({ locale, items }: ServiceProjectCardsProps)
         return (
           <motion.article
             key={project.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
             className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 hover:border-cyan-400/40 transition-colors"
           >
             <Link href={`${baseHref}/${project.id}`} className="flex h-full flex-col">
@@ -61,7 +57,7 @@ export function ServiceProjectCards({ locale, items }: ServiceProjectCardsProps)
                 <h3 className="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
                   {content.title}
                 </h3>
-                <p className="mt-4 flex-1 leading-relaxed text-gray-400">
+                <p className="mt-4 flex-1 leading-relaxed text-gray-300">
                   {item.note || content.description}
                 </p>
 

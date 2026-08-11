@@ -48,18 +48,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
-    {
-      url: `${SITE_URL}/services`,
-      lastModified: LAST_MODIFIED,
-      changeFrequency: "monthly" as const,
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/ua/services`,
-      lastModified: LAST_MODIFIED,
-      changeFrequency: "monthly" as const,
-      priority: 0.9,
-    },
     ...servicePages,
     ...projectPages,
     {

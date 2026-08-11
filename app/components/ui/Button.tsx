@@ -12,7 +12,7 @@ type Props = {
 };
 
 const base =
-  'cursor-pointer font-medium rounded-xl transition-all inline-flex items-center justify-center gap-2';
+  'cursor-pointer font-medium rounded-xl transition-[color,background-color,border-color,box-shadow,transform] inline-flex items-center justify-center gap-2';
 
 const variants = {
   primary:
@@ -35,8 +35,8 @@ export function Button({
     return (
       <motion.a
         href={href}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
         className={cn}
       >
         {children}
@@ -48,8 +48,8 @@ export function Button({
     <motion.button
       type={type}
       onClick={onClick}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       className={cn}
     >
       {children}

@@ -2,8 +2,6 @@ import type { LucideIcon } from 'lucide-react';
 import {
   Github,
   Linkedin,
-  Mail,
-  MapPin,
   User,
   Target,
   Zap,
@@ -122,12 +120,6 @@ server.listen(PORT, () => {
   console.log(\`🚀 Server running on port \${PORT}\`);
 });`;
 
-// Contact
-export const CONTACT_INFO = [
-  { icon: Mail, label: 'Email', value: 'fedkiv20172@gmail.com', href: 'mailto:fedkiv20172@gmail.com' },
-  { icon: MapPin, label: 'Location', value: 'Ukraine, Lviv', href: '#' },
-] as const;
-
 export const CONTACT_SOCIAL_LINKS: { icon: LucideIcon; href: string; label: string }[] = [
   { icon: Github, href: 'https://github.com/fleddd/', label: 'GitHub' },
   { icon: Linkedin, href: 'https://www.linkedin.com/in/olehfedkiv/', label: 'LinkedIn' },
@@ -135,7 +127,7 @@ export const CONTACT_SOCIAL_LINKS: { icon: LucideIcon; href: string; label: stri
 ];
 
 export const INPUT_CLASS =
-  'w-full px-4 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-white placeholder-gray-500 focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all outline-none';
+  'w-full px-4 py-3 rounded-xl bg-[#111116] border border-white/10 text-white placeholder-gray-400 focus-visible:border-cyan-400/70 focus-visible:ring-2 focus-visible:ring-cyan-400/30 transition-[border-color,box-shadow,background-color]';
 
 // Footer
 export const FOOTER_LINKS = [

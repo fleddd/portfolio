@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/constants/site";
+import { MotionProvider } from "@/components/MotionProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -81,11 +82,14 @@ export default function UkrainianRootLayout({
   return (
     <html lang="uk">
       <body className="antialiased overflow-x-hidden">
-        <JsonLd />
-        {children}
-        <Toaster />
-        <Analytics />
-        <SpeedInsights />
+        <a href="#main-content" className="skip-link">Перейти до основного вмісту</a>
+        <MotionProvider>
+          <JsonLd />
+          {children}
+          <Toaster />
+          <Analytics />
+          <SpeedInsights />
+        </MotionProvider>
       </body>
     </html>
   );

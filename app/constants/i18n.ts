@@ -18,22 +18,24 @@ export const copy = {
     },
     hero: {
       available: "Available for work",
-      role: "Expert Web Developer",
+      role: "Oleh Fedkiv · Full-Stack Web Developer",
+      headlineMain: "Websites & web systems",
+      headlineAccent: "built for your goals",
       description:
-        "I build fast websites and digital systems that turn traffic into qualified leads.",
+        "I design and build fast digital products that help you attract leads, manage bookings, and automate day-to-day workflows.",
       scroll: "Scroll to explore",
       primaryCta: "See Relevant Cases",
       secondaryCta: "Discuss Your Task",
     },
     about: {
-      titleMain: "Business-Driven",
+      titleMain: "Outcome-Focused",
       titleAccent: "Development",
       p1:
-        "I help small and medium businesses launch websites and web tools that directly support sales, bookings, and lead collection.",
+        "I help companies, teams, and startups launch websites and web tools that directly support sales, bookings, and lead collection.",
       p2:
         "You get a clear delivery process, predictable timelines, and a product focused on measurable outcomes.",
       keywords:
-        "When the project calls for it, I use Next.js and an SEO-ready architecture, with lead funnel optimization integrated into the overall user journey.",
+        "When appropriate for the project, I use Next.js and an SEO-ready architecture, with lead funnel optimization integrated into the overall user journey.",
       chips: [
         "Lead-focused landing pages",
         "MVP launch in weeks, not months",
@@ -42,8 +44,8 @@ export const copy = {
       ],
       features: [
         {
-          title: "Business First",
-          description: "Every section is built to drive an action: call, form submit, booking, or inquiry.",
+          title: "Your Goal First",
+          description: "Every section is built to drive an action: message, form submit, booking, or inquiry.",
         },
         {
           title: "Fast Delivery",
@@ -51,19 +53,19 @@ export const copy = {
         },
         {
           title: "Long-Term Reliability",
-          description: "Clean architecture and maintainable code so your site stays stable as your business grows.",
+          description: "Clean architecture and maintainable code so your site stays stable as your needs grow.",
         },
       ],
       stats: {
         years: "Years in web development",
         months: "Months in commercial development",
-        projects: "Completed client and product projects",
-        clients: "Satisfied clients",
-        commitment: "Response and ownership",
+        projects: "Featured case studies",
+        clients: "Live products shown",
+        commitment: "Response target",
       },
       values: {
-        projects: "15+",
-        clients: "5+",
+        projects: "4",
+        clients: "2",
         commitment: "24h",
       },
     },
@@ -76,12 +78,12 @@ export const copy = {
     },
       projects: {
       titleLeft: "Featured",
-      titleRight: "Business Cases",
-      description: "Selected projects relevant to booking flows, lead generation, and business automation",
+      titleRight: "Case Studies",
+      description: "Selected projects relevant to booking flows, lead generation, and workflow automation",
       liveDemo: "Live",
       sourceCode: "Source Code",
       caseDetails: "View Details",
-      more: "Need a similar solution for your business?",
+      more: "Need a similar solution for your project?",
       github: "View GitHub Profile",
     },
     technicalPage: {
@@ -106,15 +108,15 @@ export const copy = {
         name: "Your name",
         email: "your.email@example.com",
         subject: "What's this about?",
-        message: "Tell me about your project...",
+        message: "Tell me about your project…",
       },
       send: "Send Message",
-      sending: "Sending...",
+      sending: "Sending…",
       success: "Message sent! I'll get back to you soon.",
       error: "Could not send message. Please try again or email me directly.",
     },
     footer: {
-      subtitle: "Web developer focused on measurable business outcomes.",
+      subtitle: "Web developer focused on useful, measurable outcomes.",
       quickLinks: "Quick Links",
       copyrightSuffix: "precision",
       privacy: "Privacy Policy",
@@ -146,9 +148,11 @@ export const copy = {
     },
     hero: {
       available: "Відкритий до співпраці",
-      role: "Розробник веб-рішень для бізнесу",
+      role: "Олег Федьків · розробник веб-рішень для бізнесу",
+      headlineMain: "Сайти та вебсистеми",
+      headlineAccent: "під ваші задачі",
       description:
-        "Створюю швидкі сайти та веб-системи, які генерують заявки, автоматизують процеси й не гальмують ріст бізнесу.",
+        "Проєктую та розробляю швидкі цифрові продукти, які допомагають залучати заявки, керувати бронюваннями й автоматизувати щоденні процеси.",
       scroll: "Гортай, щоб дізнатися більше",
       primaryCta: "Переглянути релевантні кейси",
       secondaryCta: "Обговорити проєкт",
@@ -157,9 +161,9 @@ export const copy = {
       titleMain: "Розробка з фокусом",
       titleAccent: "на результат",
       p1:
-        "Працюю з бізнесами та стартапами, яким потрібен не просто сайт, а інструмент для лідів, продажів і стабільної обробки заявок.",
+        "Працюю з компаніями, командами та стартапами, яким потрібен не просто сайт, а інструмент для лідів, продажів і стабільної обробки заявок.",
       p2:
-        "Ви отримуєте зрозумілий процес, контроль термінів і продукт, який вирішує конкретну бізнес-задачу.",
+        "Ви отримуєте зрозумілий процес, контроль термінів і продукт, який вирішує конкретну задачу.",
       keywords:
         "Залежно від задачі використовую Next.js, закладаю SEO-архітектуру та оптимізую шлях користувача від першого переходу до заявки.",
       chips: [
@@ -170,8 +174,8 @@ export const copy = {
       ],
       features: [
         {
-          title: "Бізнес-логіка на першому місці",
-          description: "Кожен блок сторінки працює на дію: заявка, дзвінок, бронювання або контакт.",
+          title: "Спочатку — ваша задача",
+          description: "Кожен блок сторінки працює на дію: заявка, повідомлення, бронювання або контакт.",
         },
         {
           title: "Швидкий запуск без хаосу",
@@ -185,13 +189,13 @@ export const copy = {
       stats: {
         years: "Років у веброзробці (з 2023)",
         months: "Місяців комерційної розробки (із серпня 2025)",
-        projects: "Завершених проєктів",
-        clients: "Задоволених клієнтів",
-        commitment: "Швидкість зворотного зв'язку",
+        projects: "Опублікованих кейсів",
+        clients: "Показаних live-продуктів",
+        commitment: "Орієнтир для відповіді",
       },
       values: {
-        projects: "15+",
-        clients: "5+",
+        projects: "4",
+        clients: "2",
         commitment: "24h",
       },
     },
@@ -204,12 +208,12 @@ export const copy = {
     },
     projects: {
       titleLeft: "Реалізовані",
-      titleRight: "бізнес-кейси",
-      description: "Лише ті роботи, що релевантні для лідів, бронювань та бізнес-автоматизації",
+      titleRight: "кейси",
+      description: "Роботи, що релевантні для лідів, бронювань та автоматизації процесів",
       liveDemo: "Демо",
       sourceCode: "Вихідний код",
       caseDetails: "Детальніше про кейс",
-      more: "Потрібне схоже рішення під ваш бізнес?",
+      more: "Потрібне схоже рішення під вашу задачу?",
       github: "Переглянути GitHub профіль",
     },
     technicalPage: {
@@ -234,15 +238,15 @@ export const copy = {
         name: "Ваше ім'я",
         email: "your.email@example.com",
         subject: "Коротко про задачу",
-        message: "Опишіть ваш проєкт, цілі, дедлайн та очікування...",
+        message: "Опишіть ваш проєкт, цілі, дедлайн та очікування…",
       },
       send: "Надіслати",
-      sending: "Надсилаю...",
+      sending: "Надсилаю…",
       success: "Повідомлення надіслано! Відповім найближчим часом.",
       error: "Не вдалося надіслати. Спробуйте ще раз або напишіть напряму на email.",
     },
     footer: {
-      subtitle: "Розробляю цифрові рішення, що працюють на бізнес-результат.",
+      subtitle: "Розробляю цифрові рішення, що приносять вимірюваний результат.",
       quickLinks: "Швидкі посилання",
       copyrightSuffix: "увагою до деталей",
       privacy: "Політика конфіденційності",

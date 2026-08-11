@@ -16,10 +16,9 @@ type ServiceDetailPageProps = {
 
 export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
   const service = getServiceContent(locale, slug);
-  const baseHref = locale === 'ua' ? '/ua/services' : '/services';
+  const servicesBase = locale === 'ua' ? '/ua/services' : '/services';
   const homeHref = locale === 'ua' ? '/ua' : '/';
-  const pageUrl = `${SITE_URL}${baseHref}/${slug}`;
-  const servicesUrl = `${SITE_URL}${baseHref}`;
+  const pageUrl = `${SITE_URL}${servicesBase}/${slug}`;
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -50,12 +49,6 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
       {
         '@type': 'ListItem',
         position: 2,
-        name: locale === 'ua' ? 'Послуги' : 'Services',
-        item: servicesUrl,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
         name: service.title,
         item: pageUrl,
       },
@@ -78,26 +71,21 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
     <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
       <Navigation locale={locale} mode="business" />
 
-      <main className="pt-20">
+      <main id="main-content" tabIndex={-1} className="pt-20">
         {/* Hero Section */}
         <Section id="service-hero" bg="gradient-down" className="pt-40">
           <ServicePattern variant="orbit" className="-right-20 top-16 h-96 w-96 opacity-70" />
           <ServicePattern variant="dots" className="bottom-0 left-4" />
           <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
               className="mb-8"
             >
-              <a href={baseHref} className="text-sm text-cyan-300 hover:text-cyan-200 transition-colors">
-                ← {locale === 'ua' ? 'Усі послуги' : 'All services'}
+              <a href={homeHref} className="text-sm text-cyan-300 hover:text-cyan-200 transition-colors">
+                ← {locale === 'ua' ? 'На головну' : 'Back home'}
               </a>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
               className="max-w-4xl space-y-6"
             >
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400">
@@ -127,10 +115,6 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
               {service.problems.map((problem, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
                   className="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur"
                 >
                   <p className="text-gray-300">{problem}</p>
@@ -152,10 +136,6 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
               {service.deliverables.map((deliverable, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
                   className="flex gap-4 p-6 rounded-xl border border-cyan-400/20 bg-cyan-500/10"
                 >
                   <div className="shrink-0 w-6 h-6 rounded-full bg-linear-to-r from-cyan-400 to-blue-500 flex items-center justify-center mt-1">
@@ -190,16 +170,12 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
           <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
             <SectionHeader
               title={locale === 'ua' ? 'Як я працюю' : 'How I Work'}
-              description={locale === 'ua' ? 'Чіткі етапи від ідеї до запуску' : 'Clear phases from discovery to launch'}
+              description={locale === 'ua' ? 'Чіткі етапи від ідеї до запуску' : 'Clear phases from planning to launch'}
             />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {service.process.map((step, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
                   className="relative"
                 >
                   <div className="rounded-xl border border-white/10 bg-white/5 p-6 h-full">
@@ -225,10 +201,6 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
               {service.faqs.map((faq, idx) => (
                 <motion.details
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
                   className="group rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 cursor-pointer hover:border-cyan-400/30 transition-colors"
                 >
                   <summary className="flex items-center justify-between select-none">
@@ -247,10 +219,7 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
           <ServicePattern variant="dots" className="bottom-0 right-4" />
           <div className="relative max-w-4xl mx-auto px-6 lg:px-12 text-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="rounded-2xl border border-cyan-400/20 bg-cyan-500/10 p-12 space-y-6"
+              className="rounded-2xl border border-cyan-400/20 bg-cyan-500/10 p-7 space-y-6 md:p-12"
             >
               <h2 className="text-3xl font-bold">
                 {locale === 'ua'

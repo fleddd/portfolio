@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE_URL, CONTACT_EMAIL } from "@/constants/site";
+import { Footer, Navigation } from "@/components/index";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -36,8 +37,10 @@ export default function PrivacyPolicyUkPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0f] text-white">
-      <div className="max-w-4xl mx-auto px-6 py-20 space-y-6">
+    <div className="min-h-screen bg-[#0a0a0f] text-white">
+      <Navigation locale="ua" mode="business" />
+      <main id="main-content" tabIndex={-1}>
+      <div className="max-w-4xl mx-auto px-6 pb-20 pt-32 space-y-6">
         <h1 className="text-4xl font-bold">Політика конфіденційності</h1>
         <p className="text-gray-300">Оновлено: 16 червня 2026</p>
         <p className="text-gray-300">
@@ -59,7 +62,7 @@ export default function PrivacyPolicyUkPage() {
           Ви можете запросити доступ, виправлення або видалення надісланих даних.
         </p>
         <p className="text-gray-300">
-          Контакт: {CONTACT_EMAIL}.
+          Контакт: <a href={`mailto:${CONTACT_EMAIL}`} className="text-cyan-400 hover:text-cyan-300 transition-colors">{CONTACT_EMAIL}</a>.
         </p>
       </div>
       <script
@@ -68,6 +71,8 @@ export default function PrivacyPolicyUkPage() {
           __html: JSON.stringify(breadcrumbSchema),
         }}
       />
-    </main>
+      </main>
+      <Footer locale="ua" mode="business" />
+    </div>
   );
 }

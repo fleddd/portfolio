@@ -51,7 +51,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
         'Deployment-ready codebase or direct launch on your infrastructure',
       ],
       process: [
-        'Discovery call to align on goals, audience, and key conversion action',
+        'Written project brief covering goals, audience, and the primary customer action',
         'Content structure and wireframe review',
         'Development with iterative feedback rounds',
         'Launch, analytics setup, and post-launch check',
@@ -80,7 +80,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
         {
           question: 'What do you need from me before starting?',
           answer:
-            'I need your offer, target audience, preferred call to action, brand assets if available, and any examples of pages you like or dislike.',
+            'I need your offer, target audience, preferred customer action, brand assets if available, and any examples of pages you like or dislike.',
         },
       ],
       metaTitle: 'Lead-Focused Landing Page | Web Development Services',
@@ -112,7 +112,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
         'Documentation for handoff or continued development',
       ],
       process: [
-        'Scope workshop to define the minimum feature set that proves the concept',
+        'Written scope definition for the minimum feature set that proves the concept',
         'Architecture decision and tech stack confirmation',
         'Iterative development with weekly progress updates',
         'Testing, deployment, and handoff',
@@ -126,7 +126,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
         {
           question: 'How long does MVP development take?',
           answer:
-            'Typically 4–8 weeks for a focused scope. Larger or more complex products are estimated after the discovery session.',
+            'Typically 4–8 weeks for a focused scope. Larger or more complex products are estimated after reviewing the requirements.',
         },
         {
           question: 'Can you work with my existing design?',
@@ -236,7 +236,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
         'Готовий до деплою код або пряме розгортання на вашій інфраструктурі',
       ],
       process: [
-        'Ознайомлювальна зустріч: цілі, аудиторія, ключова дія',
+        'Письмовий бриф із цілями, аудиторією та ключовою дією користувача',
         'Структура контенту та погодження вайрфрейму',
         'Розробка з ітеративними раундами зворотного зв\'язку',
         'Запуск, налаштування аналітики та перевірка після старту',
@@ -297,7 +297,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
         'Документація для передачі або подальшої розробки',
       ],
       process: [
-        'Воркшоп по скоупу: мінімальний набір функцій для підтвердження концепції',
+        'Письмове визначення скоупу: мінімальний набір функцій для підтвердження концепції',
         'Вибір архітектури та підтвердження технічного стеку',
         'Ітеративна розробка з щотижневими оновленнями',
         'Тестування, деплой і передача',
@@ -311,7 +311,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
         {
           question: 'Скільки часу займає розробка MVP?',
           answer:
-            'Зазвичай 4–8 тижнів для зосередженого скоупу. Більші або складніші продукти оцінюються після сесії discovery.',
+            'Зазвичай 4–8 тижнів для зосередженого скоупу. Більші або складніші продукти оцінюються після аналізу вимог.',
         },
         {
           question: 'Чи можете ви працювати з моїм наявним дизайном?',

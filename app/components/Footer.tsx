@@ -17,8 +17,8 @@ export function Footer({ locale, mode }: FooterProps) {
   const links = mode === 'business'
     ? [
       { label: isUa ? 'Про мене' : 'About', href: isUa ? '/ua#about' : '/#about' },
-      { label: isUa ? 'Послуги' : 'Services', href: isUa ? '/ua/services' : '/services' },
-      { label: isUa ? 'Рішення' : 'Solutions', href: isUa ? '/ua#projects' : '/#projects' },
+      { label: isUa ? 'Досвід' : 'Experience', href: isUa ? '/ua#experience' : '/#experience' },
+      { label: isUa ? 'Рішення' : 'Solutions', href: isUa ? '/ua#solutions' : '/#solutions' },
       { label: isUa ? 'Контакти' : 'Contact', href: isUa ? '/ua#contact' : '/#contact' },
       { label: isUa ? 'Технічні навички' : 'Technical Skills', href: isUa ? '/ua/technical' : '/technical' },
     ]
@@ -26,7 +26,7 @@ export function Footer({ locale, mode }: FooterProps) {
       { label: isUa ? 'Навички' : 'Skills', href: isUa ? '/ua/technical#skills' : '/technical#skills' },
       { label: isUa ? 'Кейси' : 'Cases', href: isUa ? '/ua/technical#projects' : '/technical#projects' },
       { label: isUa ? 'Контакти' : 'Contact', href: isUa ? '/ua/technical#contact' : '/technical#contact' },
-      { label: isUa ? 'Послуги' : 'Services', href: isUa ? '/ua/services' : '/services' },
+      { label: isUa ? 'Досвід' : 'Experience', href: isUa ? '/ua#experience' : '/#experience' },
       { label: isUa ? 'Бізнес-сторінка' : 'Business Page', href: isUa ? '/ua' : '/' },
     ];
 
@@ -35,9 +35,6 @@ export function Footer({ locale, mode }: FooterProps) {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             className="space-y-4"
           >
             <h3 className="text-2xl font-bold text-white">Oleh Fedkiv</h3>
@@ -47,10 +44,6 @@ export function Footer({ locale, mode }: FooterProps) {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
             className="space-y-4"
           >
             <h4 className="font-semibold text-white">{t.quickLinks}</h4>
@@ -70,13 +63,9 @@ export function Footer({ locale, mode }: FooterProps) {
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
           className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4"
         >
-          <p className="text-gray-500 text-sm flex items-center gap-2">
+          <p className="text-gray-400 text-sm flex items-center gap-2">
             {locale === 'ua' ? (
               <>
                 © {currentYear} Oleh Fedkiv. Створено з <Heart className="w-4 h-4 text-red-500" /> {t.copyrightSuffix}
@@ -88,10 +77,10 @@ export function Footer({ locale, mode }: FooterProps) {
             )}
           </p>
           <div className="flex gap-6">
-            <a href={t.privacyHref} className="text-gray-500 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
+            <a href={t.privacyHref} className="text-gray-400 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
               {t.privacy}
             </a>
-            <a href={t.termsHref} className="text-gray-500 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
+            <a href={t.termsHref} className="text-gray-400 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
               {t.terms}
             </a>
           </div>

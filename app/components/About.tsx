@@ -36,10 +36,6 @@ export function About({ locale }: AboutProps) {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
             className="space-y-8"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
@@ -58,18 +54,14 @@ export function About({ locale }: AboutProps) {
               {t.p2}
             </p>
 
-            <p className="text-base text-gray-500 leading-relaxed">
+            <p className="text-base text-gray-400 leading-relaxed">
               {t.keywords}
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
-              {t.chips.map((tech, index) => (
+              {t.chips.map((tech) => (
                 <motion.span
                   key={tech}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 * index }}
                   className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-gray-300 text-sm font-medium"
                 >
                   {tech}
@@ -79,10 +71,6 @@ export function About({ locale }: AboutProps) {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
             className="space-y-6"
           >
             {t.features.map((feature, index) => {
@@ -91,16 +79,11 @@ export function About({ locale }: AboutProps) {
               return (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 * index }}
-                whileHover={{ scale: 1.02, x: 10 }}
-                className="group relative p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm border border-white/10 hover:border-cyan-400/30 transition-all"
+                className="group relative rounded-2xl border border-white/10 bg-[#111116] p-6 transition-colors hover:border-cyan-400/30"
               >
                 <div className="relative flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-400/20">
-                    <Icon className="w-6 h-6 text-cyan-400" strokeWidth={2} />
+                  <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 p-3">
+                    <Icon className="h-6 w-6 text-cyan-400" strokeWidth={2} aria-hidden="true" />
                   </div>
                   <div className="flex-1 space-y-2">
                     <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
@@ -113,19 +96,11 @@ export function About({ locale }: AboutProps) {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="grid grid-cols-2 md:grid-cols-5 gap-8 mt-24 pt-12 border-t border-white/10"
+          className="grid grid-cols-2 md:grid-cols-5 gap-8 mt-16 md:mt-24 pt-10 md:pt-12 border-t border-white/10"
         >
-          {localizedStats.map((stat, index) => (
+          {localizedStats.map((stat) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 * index }}
               className="text-center space-y-2"
             >
               <div className="text-4xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text">

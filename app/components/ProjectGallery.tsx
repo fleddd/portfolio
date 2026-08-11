@@ -39,6 +39,8 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [direction, setDirection] = useState<-1 | 1>(1);
   const touchStartX = useRef<number | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
   const t = labels[locale];
   const availableScreenshots = useMemo(
     () => screenshots.filter((screenshot) => screenshot.src.trim().length > 0),
@@ -46,7 +48,10 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
   );
   const activeScreenshot = activeIndex === null ? null : availableScreenshots[activeIndex];
 
-  const closeGallery = useCallback(() => setActiveIndex(null), []);
+  const closeGallery = useCallback(() => {
+    setActiveIndex(null);
+    requestAnimationFrame(() => previouslyFocusedRef.current?.focus());
+  }, []);
   const move = useCallback((nextDirection: -1 | 1) => {
     setDirection(nextDirection);
     setActiveIndex((current) => {
@@ -65,8 +70,27 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
       if (event.key === 'Escape') closeGallery();
       if (event.key === 'ArrowLeft') move(-1);
       if (event.key === 'ArrowRight') move(1);
+      if (event.key === 'Tab' && dialogRef.current) {
+        const focusable = Array.from(
+          dialogRef.current.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'),
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (!first || !last) {
+          event.preventDefault();
+          dialogRef.current.focus();
+        } else if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     };
 
+    dialogRef.current?.focus();
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
@@ -75,12 +99,13 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
     };
   }, [activeIndex, closeGallery, move]);
 
-  const openScreenshot = (screenshot: ProjectScreenshot) => {
+  const openScreenshot = (screenshot: ProjectScreenshot, trigger: HTMLElement) => {
     const index = availableScreenshots.findIndex(
       (available) => available.src === screenshot.src && available.alt === screenshot.alt,
     );
 
     if (index >= 0) {
+      previouslyFocusedRef.current = trigger;
       setDirection(1);
       setActiveIndex(index);
     }
@@ -107,17 +132,13 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
           return (
             <motion.figure
               key={`${screenshot.alt}-${index}`}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.45, delay: Math.min(index * 0.06, 0.24) }}
               className={index === 0 ? 'lg:col-span-2' : ''}
             >
               <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-[#08080c] shadow-xl shadow-black/10">
                 {screenshot.src ? (
                   <button
                     type="button"
-                    onClick={() => openScreenshot(screenshot)}
+                    onClick={(event) => openScreenshot(screenshot, event.currentTarget)}
                     className="group absolute inset-0 w-full overflow-hidden text-left"
                     aria-label={`${t.open}: ${screenshot.alt}`}
                   >
@@ -129,8 +150,8 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                       className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                     <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors duration-300">
-                      <span className="p-3 rounded-full bg-black/65 border border-white/15 opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
-                        <Expand className="w-6 h-6 text-white" />
+                      <span className="p-3 rounded-full bg-black/65 border border-white/15 opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-[opacity,transform] duration-300">
+                        <Expand className="w-6 h-6 text-white" aria-hidden="true" />
                       </span>
                     </span>
                     <span className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-sm font-medium text-white">
@@ -138,7 +159,7 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                     </span>
                   </button>
                 ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 border-2 border-dashed border-white/10 text-gray-500">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 border-2 border-dashed border-white/10 text-gray-400">
                     <ImageIcon className="w-10 h-10" strokeWidth={1.5} />
                     <span className="text-sm font-medium uppercase tracking-widest">
                       {placeholderLabel} {index + 1}
@@ -155,20 +176,28 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
       <AnimatePresence>
         {activeScreenshot && activeIndex !== null && (
           <motion.div
-            className="fixed inset-0 z-[100] flex flex-col bg-black/95 backdrop-blur-sm"
+            ref={dialogRef}
+            className="fixed inset-0 z-[100] flex flex-col overflow-hidden overscroll-contain bg-black/95 backdrop-blur-sm"
             role="dialog"
             aria-modal="true"
             aria-label={activeScreenshot.alt}
+            tabIndex={-1}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            onClick={closeGallery}
             onTouchStart={(event) => {
               touchStartX.current = event.touches[0].clientX;
             }}
             onTouchEnd={handleTouchEnd}
           >
+            <button
+              type="button"
+              className="absolute inset-0 z-0 cursor-default"
+              onClick={closeGallery}
+              aria-label={t.close}
+              tabIndex={-1}
+            />
             <div className="relative z-30 flex items-center justify-between gap-4 px-4 md:px-8 py-4">
               <div className="min-w-0">
                 <AnimatePresence initial={false} mode="wait">
@@ -182,7 +211,7 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                     {activeScreenshot.alt}
                   </motion.p>
                 </AnimatePresence>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-400">
                   {activeIndex + 1} / {availableScreenshots.length} · {t.hint}
                 </p>
               </div>
@@ -191,13 +220,12 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                 onClick={closeGallery}
                 className="shrink-0 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                 aria-label={t.close}
-                autoFocus
               >
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6" aria-hidden="true" />
               </button>
             </div>
 
-            <div className="relative flex-1 min-h-0 px-4 md:px-20 pb-20" onClick={(event) => event.stopPropagation()}>
+            <div className="relative z-10 flex-1 min-h-0 px-4 md:px-20 pb-20">
               <AnimatePresence initial={false} mode="popLayout">
                 <motion.div
                   key={activeScreenshot.src}
@@ -223,18 +251,18 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                   <button
                     type="button"
                     onClick={() => move(-1)}
-                    className="absolute z-20 left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 border border-white/15 hover:bg-cyan-500 transition-all duration-300"
+                    className="absolute z-20 left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 border border-white/15 hover:bg-cyan-500 transition-colors duration-300"
                     aria-label={t.previous}
                   >
-                    <ChevronLeft className="w-7 h-7" />
+                    <ChevronLeft className="w-7 h-7" aria-hidden="true" />
                   </button>
                   <button
                     type="button"
                     onClick={() => move(1)}
-                    className="absolute z-20 right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 border border-white/15 hover:bg-cyan-500 transition-all duration-300"
+                    className="absolute z-20 right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 border border-white/15 hover:bg-cyan-500 transition-colors duration-300"
                     aria-label={t.next}
                   >
-                    <ChevronRight className="w-7 h-7" />
+                    <ChevronRight className="w-7 h-7" aria-hidden="true" />
                   </button>
                 </>
               )}

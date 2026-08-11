@@ -106,7 +106,7 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
     <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
       <Navigation locale={locale} mode="business" />
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <section className="relative overflow-hidden pt-36 pb-24 bg-gradient-to-b from-[#0a0a0f] to-[#12121a]">
           <div
             className="absolute inset-0 opacity-20"
@@ -132,7 +132,7 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-cyan-400 mb-4">
                 {content.category}
               </p>
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-7">
+              <h1 className="text-4xl md:text-7xl font-bold tracking-tight text-white text-balance mb-7">
                 {content.title}
               </h1>
               <p className="max-w-3xl text-xl md:text-2xl text-gray-300 leading-relaxed">
@@ -146,7 +146,7 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
                       href={project.livePreview}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-medium hover:shadow-lg hover:shadow-cyan-500/20 transition-all"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-medium hover:shadow-lg hover:shadow-cyan-500/20 transition-[box-shadow,transform]"
                     >
                       <ExternalLink className="w-4 h-4" />
                       {t.live}
@@ -237,7 +237,7 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
             <p className="text-lg text-gray-400 mb-9">{t.ctaText}</p>
             <Link
               href={`${homeHref}#contact`}
-              className="inline-flex px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-medium hover:shadow-xl hover:shadow-cyan-500/20 transition-all"
+              className="inline-flex px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-medium hover:shadow-xl hover:shadow-cyan-500/20 transition-[box-shadow,transform]"
             >
               {t.cta}
             </Link>

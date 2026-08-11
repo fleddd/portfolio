@@ -1,4 +1,4 @@
-import { About, Contact, Footer, Hero, Navigation, Projects } from "@/components/index";
+import { About, BusinessSolutions, Contact, Experience, Footer, Hero, Navigation, Projects } from "@/components/index";
 import { Locale } from "@/constants/i18n";
 
 type HomePageProps = {
@@ -10,11 +10,13 @@ export function HomePage({ locale }: HomePageProps) {
     <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
       <Navigation locale={locale} mode="business" />
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero locale={locale} />
         <About locale={locale} />
+        <BusinessSolutions locale={locale} />
+        <Experience locale={locale} />
         <Projects locale={locale} mode="business" />
-        <Contact locale={locale} />
+        <Contact locale={locale} sectionIndex="04" />
       </main>
 
       <Footer locale={locale} mode="business" />
