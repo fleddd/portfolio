@@ -1,6 +1,7 @@
 import { EXPERIENCE_TIMELINE } from '@/constants/experience';
 import type { Locale } from '@/constants/i18n';
 import { Section, SectionHeader } from '@/components/ui';
+import { getTechnologyDescription } from '@/constants/technology';
 
 type ExperienceProps = {
   locale: Locale;
@@ -52,7 +53,11 @@ export function Experience({ locale }: ExperienceProps) {
 
                   <ul className="mt-5 flex flex-wrap gap-2" aria-label={locale === 'ua' ? 'Технології' : 'Technologies'}>
                     {item.technologies.map((technology) => (
-                      <li key={technology} className="rounded-lg border border-white/10 bg-black/20 px-2.5 py-1 text-xs font-medium text-gray-300">
+                      <li
+                        key={technology}
+                        className="rounded-lg border border-white/10 bg-black/20 px-2.5 py-1 text-xs font-medium text-gray-200"
+                        title={getTechnologyDescription(technology, locale)}
+                      >
                         {technology}
                       </li>
                     ))}

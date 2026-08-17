@@ -44,16 +44,16 @@ export const copy = {
       ],
       features: [
         {
-          title: "Your Goal First",
-          description: "Every section is built to drive an action: message, form submit, booking, or inquiry.",
+          title: "Define Your Goals",
+          description: "We align on your audience, business outcome, primary user action, scope, and success criteria before development begins.",
         },
         {
-          title: "Fast Delivery",
-          description: "From structure to launch without unnecessary complexity and with clear milestones.",
+          title: "Build & Validate",
+          description: "I turn the agreed priorities into a responsive product, sharing clear milestones and validating the important flows as we build.",
         },
         {
-          title: "Long-Term Reliability",
-          description: "Clean architecture and maintainable code so your site stays stable as your needs grow.",
+          title: "Launch, Measure & Maintain",
+          description: "After launch, we verify the result, monitor the experience, and improve or maintain the product as your needs evolve.",
         },
       ],
       stats: {
@@ -66,7 +66,6 @@ export const copy = {
       values: {
         projects: "4",
         clients: "2",
-        commitment: "24h",
       },
     },
     skills: {
@@ -105,15 +104,23 @@ export const copy = {
         message: "Message",
       },
       placeholders: {
-        name: "Your name",
-        email: "your.email@example.com",
-        subject: "What's this about?",
+        name: "e.g., Alex Morgan…",
+        email: "alex@example.com…",
+        subject: "e.g., Booking platform…",
         message: "Tell me about your project…",
       },
       send: "Send Message",
       sending: "Sending…",
       success: "Message sent! I'll get back to you soon.",
       error: "Could not send message. Please try again or email me directly.",
+      validation: {
+        required: "Please complete this field.",
+        email: "Enter a valid email address, for example alex@example.com.",
+        summary: "Check the highlighted fields and try again.",
+      },
+      privacyPrefix: "By sending this message, you agree to the",
+      privacyLink: "Privacy Policy",
+      replyTime: "I usually reply within 24 hours.",
     },
     footer: {
       subtitle: "Web developer focused on useful, measurable outcomes.",
@@ -174,21 +181,21 @@ export const copy = {
       ],
       features: [
         {
-          title: "Спочатку — ваша задача",
-          description: "Кожен блок сторінки працює на дію: заявка, повідомлення, бронювання або контакт.",
+          title: "Визначаємо ваші цілі",
+          description: "До початку розробки узгоджуємо аудиторію, бізнес-результат, основну дію користувача, scope і критерії успіху.",
         },
         {
-          title: "Швидкий запуск без хаосу",
-          description: "Етапи прозорі, дедлайни фіксуються, пріоритети узгоджуються до старту робіт.",
+          title: "Розробляю та перевіряю",
+          description: "Перетворюю узгоджені пріоритети на адаптивний продукт, показую зрозумілі етапи й перевіряю ключові сценарії в процесі.",
         },
         {
-          title: "Надійність у довгу",
-          description: "Чиста архітектура і підтримуваний код, щоб продукт спокійно масштабувався далі.",
+          title: "Запускаємо, вимірюємо й підтримуємо",
+          description: "Після запуску перевіряємо результат, стежимо за користувацьким досвідом і розвиваємо або підтримуємо продукт разом із вашими потребами.",
         },
       ],
       stats: {
-        years: "Років у веброзробці (з 2023)",
-        months: "Місяців комерційної розробки (із серпня 2025)",
+        years: "Років у веброзробці",
+        months: "Місяців комерційної розробки",
         projects: "Опублікованих кейсів",
         clients: "Показаних live-продуктів",
         commitment: "Орієнтир для відповіді",
@@ -196,7 +203,7 @@ export const copy = {
       values: {
         projects: "4",
         clients: "2",
-        commitment: "24h",
+        commitment: "12h",
       },
     },
     skills: {
@@ -235,15 +242,23 @@ export const copy = {
         message: "Повідомлення",
       },
       placeholders: {
-        name: "Ваше ім'я",
-        email: "your.email@example.com",
-        subject: "Коротко про задачу",
+        name: "Наприклад, Олександр Коваль…",
+        email: "oleksandr@example.com…",
+        subject: "Наприклад, платформа бронювання…",
         message: "Опишіть ваш проєкт, цілі, дедлайн та очікування…",
       },
       send: "Надіслати",
       sending: "Надсилаю…",
       success: "Повідомлення надіслано! Відповім найближчим часом.",
       error: "Не вдалося надіслати. Спробуйте ще раз або напишіть напряму на email.",
+      validation: {
+        required: "Заповніть це поле.",
+        email: "Вкажіть коректну email-адресу, наприклад oleksandr@example.com.",
+        summary: "Перевірте виділені поля та спробуйте ще раз.",
+      },
+      privacyPrefix: "Надсилаючи повідомлення, ви погоджуєтеся з",
+      privacyLink: "Політикою конфіденційності",
+      replyTime: "Зазвичай відповідаю протягом 24 годин.",
     },
     footer: {
       subtitle: "Розробляю цифрові рішення, що приносять вимірюваний результат.",

@@ -11,9 +11,10 @@ type HeroProps = {
 
 export function Hero({ locale }: HeroProps) {
   const t = getCopy(locale).hero;
+  const inquiryHref = locale === 'ua' ? '/ua/inquiry' : '/inquiry';
 
   return (
-    <section id="hero" className="relative flex min-h-[100svh] w-full min-w-0 items-center justify-center overflow-hidden pb-6 pt-20 md:pb-8 md:pt-24">
+    <section id="hero" className="relative flex min-h-[100svh] w-full min-w-0 items-center justify-center overflow-hidden pb-6 pt-16 md:pb-8 xl:pt-20">
       <div className="absolute inset-0 bg-[#0a0a0f]" aria-hidden="true">
         <div
           className="absolute inset-0 opacity-30"
@@ -29,11 +30,8 @@ export function Hero({ locale }: HeroProps) {
       <div className="absolute -bottom-20 left-0 h-[380px] w-[380px] rounded-full bg-blue-600/10 blur-3xl pointer-events-none" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto w-full min-w-0 max-w-5xl px-6 text-center lg:px-12">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.16em] ">
-          {t.role}
-        </p>
         <h1 className="break-words text-4xl font-bold leading-[1.1] tracking-tight text-balance sm:text-5xl md:text-6xl">
-          <span className="block text-white">{t.headlineMain}</span>
+          <span className="block text-white">{t.headlineMain} </span>
           <span className="mt-1 block pb-[0.12em] bg-gradient-to-r from-cyan-300 to-blue-500 bg-clip-text text-transparent">
             {t.headlineAccent}
           </span>
@@ -42,9 +40,8 @@ export function Hero({ locale }: HeroProps) {
           {t.description}
         </p>
 
-        <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-          <Button href="#projects" className="!px-6 !py-3.5">{t.primaryCta}</Button>
-          <Button variant="secondary" href="#contact" className="!px-6 !py-3.5">{t.secondaryCta}</Button>
+        <div className="mt-5 flex justify-center">
+          <Button href={inquiryHref} className="!px-6 !py-3.5">{t.secondaryCta}</Button>
         </div>
 
         <div className="mt-4 flex items-center justify-center gap-3" aria-label={locale === 'ua' ? 'Профілі та контакти' : 'Profiles and contact links'}>
@@ -52,10 +49,13 @@ export function Hero({ locale }: HeroProps) {
             <motion.a
               key={social.label}
               href={social.href}
+              target="_blank"
+              rel="noreferrer"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="rounded-lg border border-white/10 bg-white/5 p-2.5 hover:border-cyan-400/50 hover:bg-white/10 transition-colors"
-              aria-label={social.label}
+              className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 bg-white/5 hover:border-cyan-400/50 hover:bg-white/10 transition-colors"
+              aria-label={`${social.label} (${locale === 'ua' ? 'відкриється в новій вкладці' : 'opens in a new tab'})`}
+              title={social.label}
             >
               <social.icon className="h-5 w-5 text-gray-300" aria-hidden="true" />
             </motion.a>

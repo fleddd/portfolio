@@ -63,7 +63,6 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
   const projectsHref = `${homeHref}#projects`;
   const pagePath = `${isUa ? '/ua' : ''}/projects/${project.id}`;
   const pageUrl = `${SITE_URL}${pagePath}`;
-  const Icon = project.icon;
   const projectSchema = {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
@@ -126,12 +125,6 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
             </Link>
 
             <div className="max-w-4xl">
-              <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${project.gradient} mb-7`}>
-                <Icon className="w-7 h-7 text-white" strokeWidth={2} />
-              </div>
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-cyan-400 mb-4">
-                {content.category}
-              </p>
               <h1 className="text-4xl md:text-7xl font-bold tracking-tight text-white text-balance mb-7">
                 {content.title}
               </h1>
@@ -236,7 +229,7 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
             <h2 className="text-4xl md:text-5xl font-bold mb-5">{t.ctaTitle}</h2>
             <p className="text-lg text-gray-400 mb-9">{t.ctaText}</p>
             <Link
-              href={`${homeHref}#contact`}
+              href={isUa ? '/ua/inquiry' : '/inquiry'}
               className="inline-flex px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-medium hover:shadow-xl hover:shadow-cyan-500/20 transition-[box-shadow,transform]"
             >
               {t.cta}

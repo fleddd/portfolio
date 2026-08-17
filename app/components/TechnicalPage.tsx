@@ -32,7 +32,7 @@ export function TechnicalPage({ locale }: TechnicalPageProps) {
     <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
       <Navigation locale={locale} mode="technical" />
 
-      <main id="main-content" tabIndex={-1} className="pt-20">
+      <main id="main-content" tabIndex={-1} className="pt-16 xl:pt-20">
         <Skills locale={locale} />
         <Projects locale={locale} mode="technical" />
         <Contact locale={locale} />

@@ -1,5 +1,6 @@
 import { About, BusinessSolutions, Contact, Experience, Footer, Hero, Navigation, Projects } from "@/components/index";
 import { Locale } from "@/constants/i18n";
+import { BackToTop } from "@/components/BackToTop";
 
 type HomePageProps = {
   locale: Locale;
@@ -20,6 +21,7 @@ export function HomePage({ locale }: HomePageProps) {
       </main>
 
       <Footer locale={locale} mode="business" />
+      <BackToTop locale={locale} />
     </div>
   );
 }

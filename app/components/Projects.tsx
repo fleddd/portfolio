@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Section, SectionHeader, Button } from '@/components/ui';
 import { PROJECTS, CODE_SNIPPET, CONTACT_SOCIAL_LINKS, getProjectContent } from '@/constants';
 import { Locale, getCopy } from '@/constants/i18n';
+import { getTechnologyDescription } from '@/constants/technology';
 
 type ProjectsProps = {
   locale: Locale;
@@ -63,7 +64,7 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
                 key={project.id}
                 className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#111116] transition-colors hover:border-cyan-400/35"
               >
-                <Link href={detailHref} className="relative block aspect-2/1 overflow-hidden bg-[#08080c]">
+                <div className="relative aspect-2/1 overflow-hidden bg-[#08080c]">
                   {screenshot && (
                     <Image
                       src={screenshot.src}
@@ -74,27 +75,31 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
                     />
                   )}
                   <span className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/70 via-transparent to-transparent" aria-hidden="true" />
-                </Link>
+                </div>
 
                 <div className="flex flex-1 flex-col p-4 md:p-5">
                   <span className="mb-2 text-xs font-medium uppercase tracking-wider text-cyan-400">
                     {content.category}
                   </span>
-                  <h3 className="mb-3 text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                    <Link href={detailHref}>{content.title}</Link>
+                  <h3 className="mb-3 text-2xl font-bold text-white transition-colors group-hover:text-cyan-300">
+                    {content.title}
                   </h3>
                   <p className="mb-4 leading-relaxed text-gray-300">{content.description}</p>
 
                   <div className="mb-4 flex flex-wrap gap-2">
                     {project.tech.map((tech) => (
-                      <span key={tech} className="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-gray-300">
+                      <span
+                        key={tech}
+                        className="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-gray-200"
+                        title={getTechnologyDescription(tech, locale)}
+                      >
                         {tech}
                       </span>
                     ))}
                   </div>
 
                   <div className="mt-auto flex flex-wrap items-center gap-4 border-t border-white/10 pt-4">
-                    <Link href={detailHref} className="flex items-center gap-2 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                    <Link href={detailHref} className="inline-flex min-h-11 items-center gap-2 rounded-md px-1 text-sm font-medium text-cyan-400 transition-colors hover:text-cyan-300">
                       <span>{t.caseDetails}</span>
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </Link>
@@ -103,7 +108,7 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
                         href={project.livePreview}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-2 text-sm text-gray-300 hover:text-cyan-400 transition-colors"
+                        className="inline-flex min-h-11 items-center gap-2 rounded-md px-1 text-sm text-gray-200 transition-colors hover:text-cyan-400"
                       >
                         <ExternalLink className="h-4 w-4" aria-hidden="true" />
                         <span>{t.liveDemo}</span>
@@ -115,7 +120,7 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
                         href={project.sourceCode}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-2 text-sm text-gray-300 hover:text-cyan-400 transition-colors"
+                        className="inline-flex min-h-11 items-center gap-2 rounded-md px-1 text-sm text-gray-200 transition-colors hover:text-cyan-400"
                       >
                         <Github className="h-4 w-4" aria-hidden="true" />
                         <span>{t.sourceCode}</span>
@@ -128,22 +133,6 @@ export function Projects({ locale, mode = 'business' }: ProjectsProps) {
             );
           })}
         </div>
-
-        {mode === 'technical' && (
-          <div className="mt-16 overflow-hidden rounded-2xl border border-white/10 bg-[#111116] p-6 md:mt-20 md:p-8">
-            <div className="mb-6 flex items-center gap-3" aria-hidden="true">
-              <div className="flex gap-2">
-                <div className="h-3 w-3 rounded-full bg-red-500" />
-                <div className="h-3 w-3 rounded-full bg-yellow-500" />
-                <div className="h-3 w-3 rounded-full bg-green-500" />
-              </div>
-              <span className="font-mono text-sm text-gray-400">server.ts</span>
-            </div>
-            <pre className="overflow-x-auto font-mono text-sm text-gray-300">
-              <code>{CODE_SNIPPET}</code>
-            </pre>
-          </div>
-        )}
 
         <div className="mt-14 text-center md:mt-16">
           <p className="mb-6 text-gray-300">{t.more}</p>

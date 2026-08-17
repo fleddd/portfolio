@@ -1,5 +1,5 @@
 type Props = {
-  id: string;
+  id?: string;
   children: React.ReactNode;
   bg?: 'solid' | 'gradient-down' | 'gradient-up';
   className?: string;

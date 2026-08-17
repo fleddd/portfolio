@@ -6,6 +6,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/constants/site";
 import { MotionProvider } from "@/components/MotionProvider";
+import { LanguageTransitionScript } from "@/components/LanguageTransitionScript";
+import { SiteMotion } from "@/components/SiteMotion";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -96,8 +98,10 @@ export default function EnglishRootLayout({
   return (
     <html lang="en">
       <body className="antialiased overflow-x-hidden">
+        <LanguageTransitionScript />
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <MotionProvider>
+          <SiteMotion />
           <JsonLd />
           {children}
           <Toaster />

@@ -1,12 +1,13 @@
 'use client';
 
-import { motion } from 'motion/react';
+import Link from 'next/link';
+import { useState } from 'react';
 import { Locale } from '@/constants/i18n';
 import { getServiceContent, ServiceSlug } from '@/constants/services';
-import { Button, Section, SectionHeader } from '@/components/ui';
+import { INQUIRY_FEATURES } from '@/constants/inquiry';
+import { Button, Section } from '@/components/ui';
 import { Contact, Footer, Navigation } from '@/components/index';
 import { ServiceProjectCards } from '@/components/ServiceProjectCards';
-import { ServicePattern } from '@/components/ServicePattern';
 import { CONTACT_EMAIL, SITE_URL } from '@/constants/site';
 
 type ServiceDetailPageProps = {
@@ -16,8 +17,17 @@ type ServiceDetailPageProps = {
 
 export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
   const service = getServiceContent(locale, slug);
+  const [selectedOfferIndex, setSelectedOfferIndex] = useState(0);
+  const selectedOffer = service.offers[selectedOfferIndex];
+  const availableFeatures = INQUIRY_FEATURES[locale][service.inquiryProjectType];
+  const includedFeatures = selectedOffer.features.map((value) => ({
+    value,
+    label: availableFeatures.find((feature) => feature.value === value)?.label ?? value,
+  }));
   const servicesBase = locale === 'ua' ? '/ua/services' : '/services';
   const homeHref = locale === 'ua' ? '/ua' : '/';
+  const inquiryHref = locale === 'ua' ? '/ua/inquiry' : '/inquiry';
+  const configuredInquiryHref = `${inquiryHref}?projectType=${service.inquiryProjectType}&features=${selectedOffer.features.join(',')}`;
   const pageUrl = `${SITE_URL}${servicesBase}/${slug}`;
   const serviceSchema = {
     '@context': 'https://schema.org',
@@ -71,170 +81,181 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
     <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
       <Navigation locale={locale} mode="business" />
 
-      <main id="main-content" tabIndex={-1} className="pt-20">
+      <main id="main-content" tabIndex={-1} className="pt-16 xl:pt-20">
         {/* Hero Section */}
-        <Section id="service-hero" bg="gradient-down" className="pt-40">
-          <ServicePattern variant="orbit" className="-right-20 top-16 h-96 w-96 opacity-70" />
-          <ServicePattern variant="dots" className="bottom-0 left-4" />
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
-            <motion.div
-              className="mb-8"
+        <Section id="service-hero" bg="solid" className="border-b border-white/10 pb-16 pt-10 md:pb-20 md:pt-14 lg:pb-24 lg:pt-16">
+          <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <a
+              href={servicesBase}
+              className="inline-flex min-h-10 items-center text-sm text-gray-400 transition-colors hover:text-white"
             >
-              <a href={homeHref} className="text-sm text-cyan-300 hover:text-cyan-200 transition-colors">
-                ← {locale === 'ua' ? 'На головну' : 'Back home'}
-              </a>
-            </motion.div>
+              ← {locale === 'ua' ? 'Усі послуги' : 'All services'}
+            </a>
 
-            <motion.div
-              className="max-w-4xl space-y-6"
-            >
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400">
+            <div className="mt-8 max-w-5xl">
+              <p className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-cyan-400">
+                {locale === 'ua' ? 'Розробка для бізнесу' : 'Web development for business'}
+              </p>
+              <h1 className="max-w-4xl text-4xl font-bold tracking-tight text-balance md:text-5xl lg:text-6xl">
+                {service.title}
+              </h1>
+              <p className="mt-7 max-w-3xl text-lg font-medium leading-relaxed text-white md:text-xl">
                 {service.heroHook}
               </p>
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight">{service.title}</h1>
-              <p className="text-xl text-gray-300">{service.summary}</p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Button href="#contact">{service.ctaLabel}</Button>
-                <Button href="#work" variant="secondary">
-                  {locale === 'ua' ? 'Переглянути релевантні кейси' : 'See Relevant Work'}
-                </Button>
+              <p className="mt-3 max-w-3xl leading-relaxed text-gray-400 md:text-lg">{service.summary}</p>
+              <div className="mt-7">
+                <Button href={inquiryHref}>{service.ctaLabel}</Button>
               </div>
-            </motion.div>
-          </div>
-        </Section>
-
-        {/* Problems Section */}
-        <Section id="problems" bg="solid">
-          <ServicePattern variant="network" className="-left-24 top-16 h-52 w-96" />
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
-            <SectionHeader
-              title={locale === 'ua' ? 'Проблеми, які я вирішую' : 'Problems I Solve'}
-              description={locale === 'ua' ? 'Звичайні хибні кроки, які гальмують ріст' : 'Common obstacles that slow your growth'}
-            />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {service.problems.map((problem, idx) => (
-                <motion.div
-                  key={idx}
-                  className="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur"
-                >
-                  <p className="text-gray-300">{problem}</p>
-                </motion.div>
-              ))}
             </div>
           </div>
         </Section>
 
-        {/* Deliverables Section */}
-        <Section id="deliverables" bg="gradient-down">
-          <ServicePattern variant="dots" className="-right-8 top-20" />
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
-            <SectionHeader
-              title={locale === 'ua' ? 'Що входить у послугу' : 'What You Get'}
-              description={locale === 'ua' ? 'Конкретні результати, які ви отримаєте' : 'Concrete deliverables and outcomes'}
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {service.deliverables.map((deliverable, idx) => (
-                <motion.div
-                  key={idx}
-                  className="flex gap-4 p-6 rounded-xl border border-cyan-400/20 bg-cyan-500/10"
-                >
-                  <div className="shrink-0 w-6 h-6 rounded-full bg-linear-to-r from-cyan-400 to-blue-500 flex items-center justify-center mt-1">
-                    <span className="text-xs font-bold text-white">✓</span>
+        {/* Interactive service configurator */}
+        <Section id="solutions" bg="solid" className="border-b border-white/10 py-16 md:py-24">
+          <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <div className="mb-10 max-w-3xl md:mb-14">
+              <p className="mb-4 text-sm font-medium text-cyan-400">
+                {locale === 'ua' ? 'Конфігуратор послуги' : 'Service configurator'}
+              </p>
+              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+                {locale === 'ua' ? 'Оберіть потрібний формат' : 'Choose the Right Format'}
+              </h2>
+              <p className="mt-4 max-w-2xl leading-relaxed text-gray-400">
+                {locale === 'ua'
+                  ? 'Перемикайте варіанти, щоб побачити, які функції входять у кожне рішення. Обраний набір можна одразу перенести у форму заявки.'
+                  : 'Switch between options to see the features included in each solution. You can send the selected setup straight to the inquiry form.'}
+              </p>
+            </div>
+
+            <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#101016] shadow-2xl shadow-black/20 lg:grid lg:grid-cols-[minmax(18rem,0.8fr)_minmax(0,1.2fr)]">
+              <div
+                className="border-b border-white/10 lg:border-b-0 lg:border-r"
+                aria-label={locale === 'ua' ? 'Варіанти послуги' : 'Service options'}
+              >
+                {service.offers.map((offer, idx) => (
+                  <button
+                    key={offer.title}
+                    id={`service-option-${idx}`}
+                    type="button"
+                    aria-pressed={selectedOfferIndex === idx}
+                    onClick={() => setSelectedOfferIndex(idx)}
+                    className={`relative flex w-full items-start gap-5 border-b border-white/10 px-6 py-5 text-left transition-colors last:border-b-0 focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cyan-300 md:px-7 md:py-6 ${
+                      selectedOfferIndex === idx
+                        ? 'bg-cyan-400/8 text-white'
+                        : 'text-gray-400 hover:bg-white/4 hover:text-white'
+                    }`}
+                  >
+                    <span
+                      className={`mt-1 font-mono text-xs transition-colors ${selectedOfferIndex === idx ? 'text-cyan-300' : 'text-gray-600'}`}
+                      aria-hidden="true"
+                    >
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <span>
+                      <span className="block text-lg font-semibold tracking-tight md:text-xl">{offer.title}</span>
+                      <span className={`mt-2 block text-sm leading-relaxed ${selectedOfferIndex === idx ? 'text-gray-300' : 'text-gray-500'}`}>
+                        {offer.description}
+                      </span>
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              <div
+                id="service-features"
+                aria-live="polite"
+                className="relative flex min-h-full flex-col overflow-hidden p-6 md:p-8 lg:p-10"
+              >
+                <div
+                  className="pointer-events-none absolute -right-32 -top-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl"
+                  aria-hidden="true"
+                />
+                <div className="relative">
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">
+                    {locale === 'ua' ? 'Входить у цей варіант' : 'Included in this option'}
+                  </p>
+                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white md:text-3xl">
+                    {selectedOffer.title}
+                  </h3>
+
+                  <div className="mt-8 grid border-t border-white/12 sm:grid-cols-2">
+                    {includedFeatures.map((feature, idx) => (
+                      <div
+                        key={feature.value}
+                        className="grid grid-cols-[1.75rem_1fr] gap-3 border-b border-white/12 py-4 sm:odd:pr-5 sm:even:border-l sm:even:pl-5"
+                      >
+                        <span className="font-mono text-xs text-gray-600" aria-hidden="true">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <span className="text-sm leading-relaxed text-gray-200 md:text-base">{feature.label}</span>
+                      </div>
+                    ))}
                   </div>
-                  <p className="text-gray-200">{deliverable}</p>
-                </motion.div>
-              ))}
+                </div>
+
+                <div className="relative mt-auto pt-9">
+                  <Link
+                    href={configuredInquiryHref}
+                    className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-[#071014] transition-colors hover:bg-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101016]"
+                  >
+                    {locale === 'ua' ? 'Перенести у форму' : 'Continue with this setup'}
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                  <p className="mt-3 text-sm text-gray-500">
+                    {locale === 'ua'
+                      ? 'У формі можна додати або прибрати будь-яку функцію.'
+                      : 'You can add or remove any feature in the form.'}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </Section>
 
         {/* Relevant Work Section */}
-        <Section id="work" bg="solid">
-          <ServicePattern variant="orbit" className="-bottom-24 -left-20 h-72 w-72" />
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
-            <SectionHeader
-              title={locale === 'ua' ? 'Релевантні роботи' : 'Relevant Work'}
-              description={
-                locale === 'ua'
+        <Section bg="solid" className="border-b border-white/10 py-16 md:py-24">
+          <div id="work" className="mx-auto max-w-7xl px-6 lg:px-12">
+            <div className="mb-10 max-w-2xl md:mb-14">
+              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+                {locale === 'ua' ? 'Релевантні роботи' : 'Relevant Work'}
+              </h2>
+              <p className="mt-4 leading-relaxed text-gray-400">
+                {locale === 'ua'
                   ? 'Реальні проєкти, де можна оцінити підхід, інтерфейси та технічну реалізацію'
-                  : 'Real projects that demonstrate the delivery approach, interfaces, and technical implementation'
-              }
-            />
+                  : 'Real projects that demonstrate the delivery approach, interfaces, and technical implementation'}
+              </p>
+            </div>
             <ServiceProjectCards locale={locale} items={service.relatedProjects} />
           </div>
         </Section>
 
-        {/* Process Section */}
-        <Section id="process" bg="gradient-down">
-          <ServicePattern variant="network" className="right-0 top-10 h-52 w-96 opacity-70" />
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
-            <SectionHeader
-              title={locale === 'ua' ? 'Як я працюю' : 'How I Work'}
-              description={locale === 'ua' ? 'Чіткі етапи від ідеї до запуску' : 'Clear phases from planning to launch'}
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {service.process.map((step, idx) => (
-                <motion.div
-                  key={idx}
-                  className="relative"
-                >
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-6 h-full">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-linear-to-r from-cyan-500 to-blue-600 mb-4">
-                      <span className="font-bold text-white text-lg">{idx + 1}</span>
-                    </div>
-                    <p className="text-gray-200">{step}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </Section>
-
         {/* FAQ Section */}
-        <Section id="details" bg="gradient-down">
-          <div className="relative max-w-4xl mx-auto px-6 lg:px-12">
-            <SectionHeader
-              title={locale === 'ua' ? 'Часті запитання' : 'Frequently Asked'}
-              description={locale === 'ua' ? 'Все, що потрібно знати перед початком' : 'Everything you should know before starting'}
-            />
-            <div className="space-y-6">
-              {service.faqs.map((faq, idx) => (
-                <motion.details
-                  key={idx}
-                  className="group rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 cursor-pointer hover:border-cyan-400/30 transition-colors"
-                >
-                  <summary className="flex items-center justify-between select-none">
+        <Section id="details" bg="solid" className="py-16 md:py-24">
+          <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20 lg:px-12">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+                {locale === 'ua' ? 'Часті запитання' : 'Frequently Asked'}
+              </h2>
+              <p className="mt-4 max-w-md leading-relaxed text-gray-400">
+                {locale === 'ua' ? 'Що варто знати перед початком' : 'What to know before getting started'}
+              </p>
+            </div>
+            <div className="border-t border-white/15">
+              {service.faqs.map((faq) => (
+                <details key={faq.question} className="group border-b border-white/15">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 select-none">
                     <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
-                    <span className="text-cyan-400 group-open:rotate-180 transition-transform">▶</span>
+                    <span
+                      className="text-xl font-light text-gray-400 transition-transform group-open:rotate-45"
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
                   </summary>
-                  <p className="mt-4 text-gray-300 leading-relaxed">{faq.answer}</p>
-                </motion.details>
+                  <p className="max-w-2xl pb-6 leading-relaxed text-gray-300">{faq.answer}</p>
+                </details>
               ))}
             </div>
-          </div>
-        </Section>
-
-        {/* CTA Section */}
-        <Section id="cta" bg="solid">
-          <ServicePattern variant="dots" className="bottom-0 right-4" />
-          <div className="relative max-w-4xl mx-auto px-6 lg:px-12 text-center">
-            <motion.div
-              className="rounded-2xl border border-cyan-400/20 bg-cyan-500/10 p-7 space-y-6 md:p-12"
-            >
-              <h2 className="text-3xl font-bold">
-                {locale === 'ua'
-                  ? 'Готові розпочати?'
-                  : 'Ready to get started?'}
-              </h2>
-              <p className="text-lg text-gray-300">
-                {locale === 'ua'
-                  ? 'Обговоримо деталі вашого проєкту та знайдемо оптимальний варіант реалізації.'
-                  : 'Let\'s discuss your specific needs and find the best approach for your stage.'}
-              </p>
-              <Button href="#contact" className="px-10 py-4 text-lg">
-                {locale === 'ua' ? 'Запитати про послугу' : 'Inquiry Now'}
-              </Button>
-            </motion.div>
           </div>
         </Section>
 

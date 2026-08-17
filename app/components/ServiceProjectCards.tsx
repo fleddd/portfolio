@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { motion } from 'motion/react';
 import type { Locale } from '@/constants/i18n';
 import { getProject, getProjectContent, type ProjectSlug } from '@/constants/projects';
 
@@ -30,12 +29,12 @@ export function ServiceProjectCards({ locale, items }: ServiceProjectCardsProps)
         const screenshot = content.screenshots.find((image) => image.src);
 
         return (
-          <motion.article
+          <article
             key={project.id}
-            className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 hover:border-cyan-400/40 transition-colors"
+            className="group"
           >
             <Link href={`${baseHref}/${project.id}`} className="flex h-full flex-col">
-              <div className="relative aspect-[16/10] overflow-hidden bg-[#08080c]">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[#08080c]">
                 {screenshot ? (
                   <Image
                     src={screenshot.src}
@@ -45,37 +44,28 @@ export function ServiceProjectCards({ locale, items }: ServiceProjectCardsProps)
                     className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                 ) : (
-                  <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20`} />
+                  <div className="absolute inset-0 bg-white/5" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/80 via-transparent to-transparent" />
               </div>
 
-              <div className="flex flex-1 flex-col p-7">
-                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-cyan-400">
+              <div className="flex flex-1 flex-col pt-5">
+                <p className="mb-2 text-sm text-gray-500">
                   {content.category}
                 </p>
-                <h3 className="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-2xl font-semibold text-white transition-colors group-hover:text-cyan-300">
                   {content.title}
                 </h3>
-                <p className="mt-4 flex-1 leading-relaxed text-gray-300">
+                <p className="mt-3 flex-1 leading-relaxed text-gray-400">
                   {item.note || content.description}
                 </p>
 
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {project.tech.slice(0, 4).map((tech) => (
-                    <span key={tech} className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-gray-300">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <span className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-cyan-400">
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-cyan-400">
                   {locale === 'ua' ? `Переглянути кейс ${content.title}` : `View the ${content.title} case study`}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </span>
               </div>
             </Link>
-          </motion.article>
+          </article>
         );
       })}
     </div>

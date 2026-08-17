@@ -13,7 +13,13 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 65px;
+}
+
+@media (min-width: 80rem) {
+  html {
+    scroll-padding-top: 81px;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -45,6 +51,200 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html.language-transition-leave {
+  cursor: progress;
+}
+
+html.language-transition-leave::before,
+html.language-transition-leave::after,
+html.language-transition-enter::before,
+html.language-transition-enter::after {
+  position: fixed;
+  left: 50%;
+  z-index: 9999;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+html.language-transition-leave::before,
+html.language-transition-enter::before {
+  content: "";
+  inset: 0;
+  background: #0a0a0f;
+  transform: none;
+}
+
+html.language-transition-leave::before {
+  animation: language-overlay-in 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.language-transition-leave::after,
+html.language-transition-enter::after {
+  content: attr(data-language-transition-message);
+  top: 50%;
+  width: min(90vw, 42rem);
+  color: #a5f3fc;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+  text-shadow: 0 0 2rem rgb(34 211 238 / 0.35);
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+}
+
+html.language-transition-leave::after {
+  animation: language-message-in 300ms 40ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.language-transition-enter::before {
+  animation: language-overlay-exit 540ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.language-transition-enter::after {
+  animation: language-message-out 460ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+html.language-transition-leave body {
+  opacity: 0.15;
+  transform: scale(0.995);
+  pointer-events: none;
+  will-change: opacity, transform;
+  transition:
+    opacity 340ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 340ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.language-transition-enter body {
+  animation: language-page-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+html.profile-transition-leave-left,
+html.profile-transition-leave-right,
+html.profile-transition-enter-left,
+html.profile-transition-enter-right {
+  cursor: progress;
+  overflow: hidden;
+  --profile-slide-distance: min(12vw, 8rem);
+}
+
+html.profile-transition-leave-left body,
+html.profile-transition-leave-right body {
+  pointer-events: none;
+  transition:
+    opacity 360ms ease,
+    transform 360ms cubic-bezier(0.4, 0, 1, 1),
+    filter 360ms ease;
+}
+
+html.profile-transition-leave-left body {
+  opacity: 0;
+  transform: translateX(calc(-1 * var(--profile-slide-distance)));
+  filter: blur(2px);
+}
+
+html.profile-transition-leave-right body {
+  opacity: 0;
+  transform: translateX(var(--profile-slide-distance));
+  filter: blur(2px);
+}
+
+html.profile-transition-enter-right body {
+  animation: profile-page-enter-right 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.profile-transition-enter-left body {
+  animation: profile-page-enter-left 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes language-overlay-exit {
+  0%,
+  28% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes language-overlay-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes language-message-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 0.5rem));
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes language-message-out {
+  0%,
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% - 0.25rem));
+  }
+}
+
+@keyframes profile-page-enter-right {
+  from {
+    opacity: 0;
+    transform: translateX(var(--profile-slide-distance));
+    filter: blur(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes profile-page-enter-left {
+  from {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--profile-slide-distance)));
+    filter: blur(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes language-page-enter {
+  from {
+    opacity: 0.15;
+    transform: scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 button,
 a,
 [role="button"] {
@@ -61,19 +261,21 @@ a,
 .skip-link {
   position: fixed;
   top: max(0.75rem, env(safe-area-inset-top));
-  left: max(0.75rem, env(safe-area-inset-left));
+  left: 50%;
   z-index: 1000;
+  max-width: calc(100vw - 1.5rem);
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   background: #fefefe;
   color: #0a0a0f;
   font-weight: 700;
-  transform: translateY(-150%);
+  text-align: center;
+  transform: translate(-50%, -200%);
   transition: transform 150ms ease;
 }
 
-.skip-link:focus {
-  transform: translateY(0);
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
 }
 
 .safe-area-x {
@@ -92,6 +294,104 @@ a,
   padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
 }
 
+@media (max-width: 47.99rem) {
+  html.language-transition-leave::after,
+  html.language-transition-enter::after {
+    top: 50dvh;
+    width: 100vw;
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  html.language-transition-leave body {
+    transform: scale(0.998);
+    transition-duration: 300ms;
+  }
+
+  html.language-transition-leave::before {
+    animation-duration: 300ms;
+  }
+
+  html.language-transition-leave::after {
+    animation-duration: 260ms;
+  }
+
+  html.language-transition-enter::before {
+    animation-duration: 460ms;
+  }
+
+  html.language-transition-enter::after {
+    animation-duration: 400ms;
+  }
+
+  html.language-transition-enter body {
+    animation-name: language-page-enter-mobile;
+    animation-duration: 440ms;
+  }
+
+  html.profile-transition-leave-left,
+  html.profile-transition-leave-right,
+  html.profile-transition-enter-left,
+  html.profile-transition-enter-right {
+    --profile-slide-distance: min(10vw, 2.5rem);
+  }
+
+  html.profile-transition-leave-left body,
+  html.profile-transition-leave-right body {
+    filter: none;
+    transition-duration: 260ms;
+  }
+
+  html.profile-transition-enter-right body {
+    animation-name: profile-page-enter-right-mobile;
+    animation-duration: 360ms;
+  }
+
+  html.profile-transition-enter-left body {
+    animation-name: profile-page-enter-left-mobile;
+    animation-duration: 360ms;
+  }
+
+}
+
+@keyframes language-page-enter-mobile {
+  from {
+    opacity: 0.15;
+    transform: scale(0.998);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes profile-page-enter-right-mobile {
+  from {
+    opacity: 0;
+    transform: translateX(var(--profile-slide-distance));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes profile-page-enter-left-mobile {
+  from {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--profile-slide-distance)));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -104,5 +404,26 @@ a,
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  html.language-transition-enter body,
+  html.profile-transition-enter-left body,
+  html.profile-transition-enter-right body {
+    animation: none;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .solution-card:hover {
+    transform: translateY(-0.125rem);
+    border-color: rgb(34 211 238 / 0.3);
+    background-color: #13131a;
+  }
+
+  .solution-card:hover .solution-card__label {
+    color: rgb(103 232 249);
+  }
+
+  .solution-card:hover .solution-card__arrow {
+    transform: translateX(0.25rem);
   }
 }
