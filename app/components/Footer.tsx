@@ -3,6 +3,7 @@
 import { motion } from 'motion/react';
 import { Heart } from 'lucide-react';
 import { Locale, getCopy } from '@/constants/i18n';
+import { BrandLogo } from '@/components/BrandLogo';
 
 type FooterProps = {
   locale: Locale;
@@ -19,26 +20,33 @@ export function Footer({ locale, mode }: FooterProps) {
       { label: isUa ? 'Про мене' : 'About', href: isUa ? '/ua#about' : '/#about' },
       { label: isUa ? 'Досвід' : 'Experience', href: isUa ? '/ua#experience' : '/#experience' },
       { label: isUa ? 'Рішення' : 'Solutions', href: isUa ? '/ua#solutions' : '/#solutions' },
-      { label: isUa ? 'Контакти' : 'Contact', href: isUa ? '/ua#contact' : '/#contact' },
+      { label: isUa ? 'Розпочати проєкт' : 'Start a Project', href: isUa ? '/ua/inquiry' : '/inquiry' },
       { label: isUa ? 'Технічні навички' : 'Technical Skills', href: isUa ? '/ua/technical' : '/technical' },
     ]
     : [
       { label: isUa ? 'Навички' : 'Skills', href: isUa ? '/ua/technical#skills' : '/technical#skills' },
       { label: isUa ? 'Кейси' : 'Cases', href: isUa ? '/ua/technical#projects' : '/technical#projects' },
-      { label: isUa ? 'Контакти' : 'Contact', href: isUa ? '/ua/technical#contact' : '/technical#contact' },
+      { label: isUa ? 'Розпочати проєкт' : 'Start a Project', href: isUa ? '/ua/inquiry' : '/inquiry' },
       { label: isUa ? 'Досвід' : 'Experience', href: isUa ? '/ua#experience' : '/#experience' },
       { label: isUa ? 'Бізнес-сторінка' : 'Business Page', href: isUa ? '/ua' : '/' },
     ];
 
   return (
     <footer className="relative bg-[#0a0a0f] border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="mx-auto max-w-7xl px-6 py-10 lg:px-12 lg:py-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-16">
           <motion.div
-            className="space-y-4"
+            className="max-w-lg space-y-4"
           >
-            <h3 className="text-2xl font-bold text-white">Oleh Fedkiv</h3>
-            <p className="text-gray-400 leading-relaxed">
+            <a
+              href={isUa ? '/ua' : '/'}
+              className="inline-flex min-h-11 items-center gap-3 rounded-lg"
+              aria-label={isUa ? 'Перейти на головну сторінку' : 'Go to homepage'}
+            >
+              <BrandLogo className="h-14 w-auto drop-shadow-[0_0_12px_rgba(34,211,238,0.18)]" />
+              <h2 className="text-2xl font-bold text-white">Oleh Fedkiv</h2>
+            </a>
+            <p className="text-gray-300 leading-relaxed">
               {t.subtitle}
             </p>
           </motion.div>
@@ -46,13 +54,13 @@ export function Footer({ locale, mode }: FooterProps) {
           <motion.div
             className="space-y-4"
           >
-            <h4 className="font-semibold text-white">{t.quickLinks}</h4>
-            <ul className="space-y-2">
+            <h2 className="font-semibold text-white">{t.quickLinks}</h2>
+            <ul className="grid gap-x-8 md:grid-cols-2 lg:grid-cols-3">
               {links.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors inline-block cursor-pointer"
+                    className="inline-flex min-h-11 items-center rounded-sm text-gray-300 transition-colors hover:text-cyan-300"
                   >
                     {link.label}
                   </a>
@@ -63,24 +71,24 @@ export function Footer({ locale, mode }: FooterProps) {
         </div>
 
         <motion.div
-          className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4"
+          className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 md:flex-row"
         >
-          <p className="text-gray-400 text-sm flex items-center gap-2">
+          <p className="text-gray-300 text-sm flex items-center gap-2">
             {locale === 'ua' ? (
               <>
-                © {currentYear} Oleh Fedkiv. Створено з <Heart className="w-4 h-4 text-red-500" /> {t.copyrightSuffix}
+                © {currentYear} Oleh Fedkiv. Створено з <Heart className="w-4 h-4 text-red-500" aria-hidden="true" /> {t.copyrightSuffix}
               </>
             ) : (
               <>
-                © {currentYear} Oleh Fedkiv. Built with <Heart className="w-4 h-4 text-red-500" /> {t.copyrightSuffix}
+                © {currentYear} Oleh Fedkiv. Built with <Heart className="w-4 h-4 text-red-500" aria-hidden="true" /> {t.copyrightSuffix}
               </>
             )}
           </p>
           <div className="flex gap-6">
-            <a href={t.privacyHref} className="text-gray-400 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
+            <a href={t.privacyHref} className="inline-flex min-h-11 items-center text-sm text-gray-300 transition-colors hover:text-cyan-300">
               {t.privacy}
             </a>
-            <a href={t.termsHref} className="text-gray-400 hover:text-cyan-400 transition-colors text-sm cursor-pointer">
+            <a href={t.termsHref} className="inline-flex min-h-11 items-center text-sm text-gray-300 transition-colors hover:text-cyan-300">
               {t.terms}
             </a>
           </div>

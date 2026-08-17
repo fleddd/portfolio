@@ -4,7 +4,9 @@ export const alt = "Oleh Fedkiv - Full-Stack Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export function GET() {
+export function GET(request: Request) {
+  const logoUrl = new URL("/logo.png", request.url).toString();
+
   return new ImageResponse(
     (
       <div
@@ -27,6 +29,17 @@ export function GET() {
             justifyContent: "center",
           }}
         >
+          <div
+            style={{
+              width: 132,
+              height: 156,
+              marginBottom: 20,
+              backgroundImage: `url(${logoUrl})`,
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+            }}
+          />
           <div
             style={{
               fontSize: 72,

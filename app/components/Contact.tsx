@@ -1,202 +1,88 @@
-'use client';
-
-import { motion } from 'motion/react';
-import { Send, Loader2 } from 'lucide-react';
-import { useState } from 'react';
-import { toast } from 'sonner';
+import { ArrowRight, Clock3, FileText, Save } from 'lucide-react';
+import Link from 'next/link';
 import { Section, SectionHeader } from '@/components/ui';
-import { INPUT_CLASS } from '@/constants';
-import { Locale, getCopy } from '@/constants/i18n';
-
-const INITIAL_FORM = { name: '', email: '', subject: '', message: '' };
+import type { Locale } from '@/constants/i18n';
 
 type ContactProps = {
   locale: Locale;
   sectionIndex?: string;
 };
 
+const content = {
+  en: {
+    titleLeft: 'Ready to Plan',
+    titleRight: 'Your Project?',
+    description: 'Share the essentials in four short steps. I’ll review the scope and reply with a practical next step.',
+    cta: 'Start Your Project Brief',
+    note: 'Takes about 3 minutes. Your progress is saved automatically.',
+    benefits: [
+      { icon: FileText, text: 'Only the details needed for an initial assessment' },
+      { icon: Save, text: 'Leave and return without losing your answers' },
+      { icon: Clock3, text: 'A personal response, usually within 24 hours' },
+    ],
+  },
+  ua: {
+    titleLeft: 'Готові спланувати',
+    titleRight: 'ваш проєкт?',
+    description: 'Поділіться основним за чотири короткі кроки. Я перегляну scope і запропоную практичне продовження.',
+    cta: 'Заповнити опис проєкту',
+    note: 'Приблизно 3 хвилини. Прогрес зберігається автоматично.',
+    benefits: [
+      { icon: FileText, text: 'Лише дані, потрібні для первинної оцінки' },
+      { icon: Save, text: 'Можна вийти й повернутися без втрати відповідей' },
+      { icon: Clock3, text: 'Особиста відповідь, зазвичай протягом 24 годин' },
+    ],
+  },
+} as const;
+
 export function Contact({ locale, sectionIndex }: ContactProps) {
-  const [formData, setFormData] = useState(INITIAL_FORM);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState<{ kind: 'success' | 'error'; message: string } | null>(null);
-  const t = getCopy(locale).contact;
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isSubmitting) return;
-
-    setStatus(null);
-    setIsSubmitting(true);
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, website: '' }),
-      });
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to send');
-      }
-
-      toast.success(t.success);
-      setStatus({ kind: 'success', message: t.success });
-      setFormData(INITIAL_FORM);
-    } catch {
-      toast.error(t.error);
-      setStatus({ kind: 'error', message: t.error });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setStatus(null);
-    setFormData((current) => ({ ...current, [e.target.name]: e.target.value }));
-  };
+  const copy = content[locale];
+  const inquiryHref = locale === 'ua' ? '/ua/inquiry' : '/inquiry';
 
   return (
     <Section id="contact" bg="gradient-up">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] bg-cyan-500/8 rounded-full blur-3xl" aria-hidden="true" />
-        <div className="absolute -bottom-1/2 -left-1/4 w-[800px] h-[800px] bg-blue-600/8 rounded-full blur-3xl" aria-hidden="true" />
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute -right-1/4 -top-1/2 h-[800px] w-[800px] rounded-full bg-cyan-500/8 blur-3xl" />
+        <div className="absolute -bottom-1/2 -left-1/4 h-[800px] w-[800px] rounded-full bg-blue-600/8 blur-3xl" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <SectionHeader
           index={sectionIndex}
           title={
             <>
-              {t.titleLeft}{' '}
-              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text">
-                {t.titleRight}
+              {copy.titleLeft}{' '}
+              <span className="bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                {copy.titleRight}
               </span>
             </>
           }
-          description={t.description}
+          description={copy.description}
+          className="!mb-10"
         />
 
-        <div className="mx-auto max-w-3xl">
-          <motion.div>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="hidden" aria-hidden="true">
-                <label htmlFor="website">Website</label>
-                <input
-                  type="text"
-                  id="website"
-                  name="website"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  defaultValue=""
-                />
-              </div>
+        <div className="mx-auto max-w-4xl rounded-3xl border border-cyan-300/20 bg-[#111116] p-6 shadow-2xl shadow-cyan-950/15 md:p-9">
+          <ul className="grid gap-3 md:grid-cols-3">
+            {copy.benefits.map(benefit => {
+              const Icon = benefit.icon;
+              return (
+                <li key={benefit.text} className="flex items-start gap-3 rounded-2xl border border-white/8 bg-white/3 p-4 text-sm leading-relaxed text-gray-300">
+                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-300" aria-hidden="true">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <span>{benefit.text}</span>
+                </li>
+              );
+            })}
+          </ul>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    {t.fields.name}
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    autoComplete="name"
-                    placeholder={t.placeholders.name}
-                    className={INPUT_CLASS}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    {t.fields.email}
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    autoComplete="email"
-                    inputMode="email"
-                    spellCheck={false}
-                    placeholder={t.placeholders.email}
-                    className={INPUT_CLASS}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                  {t.fields.subject}
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  autoComplete="off"
-                  placeholder={t.placeholders.subject}
-                  className={INPUT_CLASS}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  {t.fields.message}
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  autoComplete="off"
-                  rows={6}
-                  placeholder={t.placeholders.message}
-                  className={`${INPUT_CLASS} resize-y`}
-                />
-              </div>
-
-              <div id="form-status" aria-live="polite" aria-atomic="true">
-                {status && (
-                  <p
-                    role={status.kind === 'error' ? 'alert' : 'status'}
-                    className={`rounded-lg border px-4 py-3 text-sm ${status.kind === 'error'
-                      ? 'border-red-500/30 bg-red-500/10 text-red-200'
-                      : 'border-green-500/30 bg-green-500/10 text-green-200'
-                      }`}
-                  >
-                    {status.message}
-                  </p>
-                )}
-              </div>
-
-              <motion.button
-                whileHover={!isSubmitting ? { scale: 1.02 } : undefined}
-                whileTap={!isSubmitting ? { scale: 0.98 } : undefined}
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-xl hover:shadow-2xl hover:shadow-cyan-500/25 transition-[box-shadow,opacity,transform] flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
-                    <span>{t.sending}</span>
-                  </>
-                ) : (
-                  <>
-                    <span>{t.send}</span>
-                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true" />
-                  </>
-                )}
-              </motion.button>
-            </form>
-          </motion.div>
+          <div className="mt-7 text-center">
+            <Link href={inquiryHref} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-7 py-3.5 font-semibold text-white transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-500/20">
+              {copy.cta}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <p className="mt-3 text-sm text-gray-400">{copy.note}</p>
+          </div>
         </div>
       </div>
     </Section>

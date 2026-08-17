@@ -50,7 +50,7 @@ export const PROJECTS = [
       en: {
         title: 'Sea Travel Booking Platform',
         category: 'Booking System',
-        description: 'Multi-vendor booking platform with real-time availability, secure checkout, and scalable admin logic.',
+        description: 'End-to-end yacht charter and boat rental platform that connects destination discovery, fleet search, real-time availability, and a transparent booking flow with a comprehensive admin workspace for quote requests, customer messages, booking calendars, reservations, fleet management, companies, bases, and account security.',
         metaDescription: 'Sea Travel case study: a multi-vendor booking platform built with Next.js, PostgreSQL, Prisma ORM, and VPS infrastructure.',
         overview: 'Sea Travel is a yacht charter and boat rental platform for customers exploring destinations in Croatia. It combines discovery content, vessel search, availability, booking details, and regional landing pages in one customer journey.',
         challenge: 'A booking platform has to keep a large inventory understandable while preserving the details that affect a reservation: dates, vessel type, capacity, equipment, required extras, deposits, and regional availability. The interface also had to support search-oriented destination content without separating it from the booking journey.',
@@ -71,7 +71,7 @@ export const PROJECTS = [
       ua: {
         title: 'Sea Travel Booking Platform',
         category: 'Система бронювання',
-        description: 'Мультивендорна платформа бронювання з онлайн-доступністю, безпечними оплатами та масштабованою адмін-логікою.',
+        description: 'Повноцінна платформа оренди яхт і човнів, що поєднує вибір напрямку, пошук флоту, актуальну доступність і прозорий сценарій бронювання з великою адмінпанеллю для заявок, повідомлень клієнтів, календаря, бронювань, керування флотом, компаніями, базами та безпекою акаунтів.',
         metaDescription: 'Кейс Sea Travel: мультивендорна платформа бронювання на Next.js, PostgreSQL і Prisma ORM із розгортанням на VPS.',
         overview: 'Sea Travel — платформа оренди яхт і човнів для клієнтів, які планують подорожі Хорватією. Вона об’єднує контент про напрямки, пошук суден, доступність, деталі бронювання та регіональні посадкові сторінки в одному користувацькому шляху.',
         challenge: 'Платформа бронювання має зрозуміло показувати великий каталог і водночас не втрачати деталі, що впливають на замовлення: дати, тип судна, місткість, обладнання, обов’язкові доплати, депозит і регіональну доступність. Також потрібно було поєднати SEO-контент про напрямки з самим сценарієм бронювання.',
