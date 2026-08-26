@@ -412,18 +412,3 @@ a,
     animation: none;
   }
 }
-@media (hover: hover) and (pointer: fine) {
-  .solution-card:hover {
-    transform: translateY(-0.125rem);
-    border-color: rgb(34 211 238 / 0.3);
-    background-color: #13131a;
-  }
-
-  .solution-card:hover .solution-card__label {
-    color: rgb(103 232 249);
-  }
-
-  .solution-card:hover .solution-card__arrow {
-    transform: translateX(0.25rem);
-  }
-}

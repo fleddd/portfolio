@@ -9,6 +9,7 @@ test.describe('UX audit implementation', () => {
 
     await expect(page.locator('h1')).toContainText('Websites & web systems built for your goals');
     await expect(page.getByLabel('Switch to Ukrainian language')).toBeVisible();
+    await expect(page.locator('#solutions a')).toHaveCount(8);
 
     for (const sectionId of ['about', 'experience', 'solutions']) {
       await page.locator(`nav a[href="#${sectionId}"]`).click();
@@ -58,7 +59,7 @@ test.describe('UX audit implementation', () => {
     const privacyBox = await privacyNotice.boundingBox();
     expect(privacyBox).not.toBeNull();
     expect(inquiryViewportHeight - ((privacyBox?.y ?? 0) + (privacyBox?.height ?? 0))).toBeLessThanOrEqual(32);
-    await expect(page.getByText('Not Sure Yet', { exact: true })).toBeVisible();
+    await expect(page.getByText('Custom Website', { exact: true })).toBeVisible();
     const overflowingCards = await page.locator('[data-option-card]').evaluateAll(cards => cards.filter(card => {
       const content = card.querySelector('[data-option-content]');
       if (!content) return false;
@@ -67,7 +68,7 @@ test.describe('UX audit implementation', () => {
       return contentBox.top < cardBox.top || contentBox.bottom > cardBox.bottom;
     }).length);
     expect(overflowingCards).toBe(0);
-    await page.getByText('Website or Landing Page', { exact: true }).click();
+    await page.getByText('Landing Page', { exact: true }).click();
     await page.getByRole('button', { name: 'Continue' }).click();
     await expectSingleViewport();
     await page.getByRole('combobox', { name: 'Features' }).click();
@@ -90,7 +91,7 @@ test.describe('UX audit implementation', () => {
     await expect(page.locator('#details')).toHaveValue(/qualified leads/);
 
     await page.getByRole('button', { name: 'Back' }).click();
-    await expect(page.getByRole('radio', { name: /Website or Landing Page/ })).toBeChecked();
+    await expect(page.getByRole('radio', { name: /Landing Page/ })).toBeChecked();
     await page.getByRole('button', { name: 'Continue' }).click();
     await page.getByRole('button', { name: 'Continue' }).click();
     await expectSingleViewport();
@@ -164,7 +165,7 @@ test.describe('UX audit implementation', () => {
   test('mobile feature chips wrap without horizontal scrolling', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(`${baseUrl}/inquiry`, { waitUntil: 'networkidle' });
-    await page.getByText('Website or Landing Page', { exact: true }).click();
+    await page.getByText('Landing Page', { exact: true }).click();
     await page.getByRole('button', { name: 'Continue' }).click();
 
     for (const feature of ['Custom Responsive Design', 'Contact / Lead Form', 'Analytics & Conversion Tracking']) {

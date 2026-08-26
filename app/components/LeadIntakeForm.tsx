@@ -49,12 +49,13 @@ type OptionGroupProps = {
 
 function OptionGroup({ legend, hint, name, options, value, error, stretch, secondaryOption, onChange }: OptionGroupProps) {
   const errorId = `${name}-error`;
+  const dense = options.length >= 8;
 
   return (
     <fieldset aria-describedby={error ? errorId : undefined} className={stretch ? 'md:flex md:min-h-0 md:flex-1 md:flex-col' : undefined}>
       <legend className="text-xl font-bold tracking-tight text-white md:text-2xl">{legend}</legend>
       {hint && <p className="mt-1.5 text-sm leading-relaxed text-gray-300">{hint}</p>}
-      <div className={`mt-4 grid gap-3 md:mt-3 md:gap-2.5 ${secondaryOption ? 'md:grid-cols-3' : 'md:grid-cols-2'} ${stretch ? 'md:min-h-0 md:flex-1 md:grid-rows-1' : ''}`}>
+      <div className={`mt-4 grid gap-3 md:mt-3 md:gap-2.5 ${options.length >= 8 ? 'md:grid-cols-4 md:grid-rows-2' : secondaryOption ? 'md:grid-cols-3' : 'md:grid-cols-2'} ${stretch ? 'md:min-h-0 md:flex-1' : ''}`}>
         {options.map((option, index) => (
           <label key={option.value} className="block cursor-pointer">
             <input
@@ -65,7 +66,7 @@ function OptionGroup({ legend, hint, name, options, value, error, stretch, secon
               onChange={() => onChange(option.value)}
               className="peer sr-only"
             />
-            <span data-option-card className={`relative flex h-full min-h-14 flex-col justify-center rounded-xl border px-4 py-3 transition-[background-color,border-color,box-shadow,transform] peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-300 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-[#0a0a0f] md:min-h-12 md:justify-start md:px-5 md:pb-5 md:pt-12 ${value === option.value
+            <span data-option-card className={`relative flex h-full min-h-14 flex-col justify-center rounded-xl border px-4 py-3 transition-[background-color,border-color,box-shadow,transform] peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-300 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-[#0a0a0f] md:min-h-12 md:justify-start ${dense ? 'md:px-4 md:pb-3 md:pt-9' : 'md:px-5 md:pb-5 md:pt-12'} ${value === option.value
               ? 'border-cyan-300/70 bg-cyan-400/10 shadow-[0_0_0_1px_rgba(103,232,249,0.15)]'
               : 'border-white/10 bg-white/4 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/7'
               }`}>
@@ -78,9 +79,9 @@ function OptionGroup({ legend, hint, name, options, value, error, stretch, secon
                 </span>
               </span>
               <span data-option-content>
-                <span className="block text-base font-semibold text-white md:text-lg md:font-bold md:leading-snug md:tracking-tight">{option.label}</span>
+                <span className={`block text-base font-semibold text-white md:font-bold md:leading-snug md:tracking-tight ${dense ? 'md:text-base' : 'md:text-lg'}`}>{option.label}</span>
                 {option.description && (
-                  <span className="mt-1 block text-sm leading-snug text-gray-300 md:mt-2 md:max-w-[38rem] md:text-sm md:leading-relaxed">{option.description}</span>
+                  <span className={`mt-1 block text-sm leading-snug text-gray-300 md:max-w-[38rem] ${dense ? 'md:mt-1 md:text-xs md:leading-snug' : 'md:mt-2 md:text-sm md:leading-relaxed'}`}>{option.description}</span>
                 )}
               </span>
             </span>
@@ -389,8 +390,7 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
   const resetDialogRef = useRef<HTMLDivElement>(null);
   const resetDialogCancelRef = useRef<HTMLButtonElement>(null);
   const startAnotherButtonRef = useRef<HTMLButtonElement>(null);
-  const serviceOptions = options.projectTypes.filter(option => option.value !== 'unsure');
-  const unsureOption = options.projectTypes.find(option => option.value === 'unsure');
+  const serviceOptions = options.projectTypes;
   const featureOptions = draft.projectType ? INQUIRY_FEATURES[locale][draft.projectType] : [];
 
   useEffect(() => {
@@ -428,8 +428,16 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
               };
               const legacyDraft = parsed.draft as Record<string, unknown> | undefined;
               const migratedDraft = { ...parsed.draft } as Partial<InquiryDraft>;
-              if (legacyDraft?.projectType === 'booking' || legacyDraft?.projectType === 'automation') {
-                migratedDraft.projectType = 'system';
+              const legacyProjectTypes: Record<string, InquiryDraft['projectType']> = {
+                website: 'landing',
+                mvp: 'online-service',
+                system: 'online-service',
+                booking: 'online-service',
+                automation: 'online-service',
+                unsure: 'custom',
+              };
+              if (typeof legacyDraft?.projectType === 'string' && legacyProjectTypes[legacyDraft.projectType]) {
+                migratedDraft.projectType = legacyProjectTypes[legacyDraft.projectType];
               }
               if (legacyDraft?.stage === 'design') migratedDraft.stage = 'requirements';
               const legacyBudgets: Record<string, InquiryDraft['budget']> = {
@@ -733,7 +741,6 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
                 hint={copy.questions.projectTypeHint}
                 name="projectType"
                 options={serviceOptions}
-                secondaryOption={unsureOption}
                 value={draft.projectType}
                 error={errors.projectType}
                 stretch

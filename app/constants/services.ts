@@ -47,7 +47,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       ctaLabel: 'Plan My Landing Page',
       summary:
         'A conversion-optimised landing page built to turn visitors into qualified leads — fast to launch, easy to measure.',
-      inquiryProjectType: 'website',
+      inquiryProjectType: 'landing',
       offers: [
         { title: 'Service landing page', description: 'A focused page that explains your service and turns advertising traffic into inquiries.', features: ['custom-design', 'lead-form', 'seo', 'analytics', 'performance'] },
         { title: 'Product launch page', description: 'A clear presentation for a new product, waitlist, pre-order, or early demand test.', features: ['custom-design', 'lead-form', 'cms', 'analytics', 'performance'] },
@@ -115,7 +115,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       ctaLabel: 'Scope My MVP',
       summary:
         'A focused, production-ready web application that validates your idea and attracts early users — without overbuilding.',
-      inquiryProjectType: 'mvp',
+      inquiryProjectType: 'online-service',
       offers: [
         { title: 'SaaS MVP', description: 'The first usable version of a subscription product with accounts and its core customer workflow.', features: ['auth', 'roles', 'database', 'dashboard', 'payments', 'notifications', 'integrations', 'deployment'] },
         { title: 'Customer portal', description: 'A secure area where customers can manage requests, data, files, or services.', features: ['auth', 'roles', 'database', 'dashboard', 'notifications', 'deployment'] },
@@ -183,7 +183,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       ctaLabel: 'Plan My Booking System',
       summary:
         'A tailored booking or internal operations system that reduces manual coordination and gives customers and staff a clear source of truth.',
-      inquiryProjectType: 'system',
+      inquiryProjectType: 'online-service',
       offers: [
         { title: 'Online booking', description: 'A customer-facing flow for finding availability, choosing an option, and sending a booking request.', features: ['booking-flow', 'availability', 'notifications', 'payments'] },
         { title: 'Operations dashboard', description: 'One place for staff to manage availability, requests, statuses, and customer information.', features: ['admin-panel', 'permissions', 'workflow', 'reports'] },
@@ -241,7 +241,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       ctaLabel: 'Audit My Integration',
       summary:
         'Connect your website or app to the tools your business runs on — CRMs, payment gateways, booking systems, and more.',
-      inquiryProjectType: 'system',
+      inquiryProjectType: 'online-service',
       offers: [
         { title: 'CRM integration', description: 'Send leads, contacts, and deal updates between your website and CRM automatically.', features: ['integrations', 'data-sync', 'workflow', 'notifications'] },
         { title: 'Online payments', description: 'Connect checkout, subscriptions, payment statuses, and customer notifications.', features: ['payments', 'integrations', 'notifications', 'data-sync'] },
@@ -311,7 +311,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       ctaLabel: 'Обговорити лендінг',
       summary:
         'Розроблю односторінковий сайт для послуги, продукту або рекламної кампанії. Продумана структура, адаптивний дизайн, швидке завантаження та готовність до запуску реклами.',
-      inquiryProjectType: 'website',
+      inquiryProjectType: 'landing',
       offers: [
         { title: 'Лендінг для послуги', description: 'Коротко пояснює вашу пропозицію та веде відвідувача до дзвінка, заявки або консультації.', features: ['custom-design', 'lead-form', 'seo', 'analytics', 'performance'] },
         { title: 'Сторінка продукту', description: 'Підходить для запуску нового продукту, збору попередніх замовлень або перевірки попиту.', features: ['custom-design', 'lead-form', 'cms', 'analytics', 'performance'] },
@@ -379,7 +379,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       ctaLabel: 'Обговорити MVP',
       summary:
         'Створю робочу версію вебсервісу, з якою можна перевірити ідею, показати продукт інвесторам і залучити перших користувачів.',
-      inquiryProjectType: 'mvp',
+      inquiryProjectType: 'online-service',
       offers: [
         { title: 'SaaS-сервіс', description: 'Перша версія онлайн-продукту з акаунтами користувачів і головною платною функцією.', features: ['auth', 'roles', 'database', 'dashboard', 'payments', 'notifications', 'integrations', 'deployment'] },
         { title: 'Кабінет клієнта', description: 'Захищений розділ, де клієнти працюють із заявками, файлами, даними або вашими послугами.', features: ['auth', 'roles', 'database', 'dashboard', 'notifications', 'deployment'] },
@@ -447,7 +447,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       ctaLabel: 'Обговорити систему',
       summary:
         'Розроблю онлайн-систему під ваші правила роботи: клієнти бачать доступні варіанти й залишають заявку, а команда керує бронюваннями в зручній адмінпанелі.',
-      inquiryProjectType: 'system',
+      inquiryProjectType: 'online-service',
       offers: [
         { title: 'Онлайн-бронювання', description: 'Клієнт обирає дату, послугу або об’єкт, бачить доступність і надсилає заявку.', features: ['booking-flow', 'availability', 'notifications', 'payments'] },
         { title: 'Адмінпанель', description: 'Менеджери працюють із заявками, статусами, розкладом і даними клієнтів в одному місці.', features: ['admin-panel', 'permissions', 'workflow', 'reports'] },
@@ -505,7 +505,7 @@ const services: Record<Locale, Record<ServiceSlug, ServiceContent>> = {
       ctaLabel: 'Обговорити інтеграцію',
       summary:
         'Підключу сайт або вебсервіс до CRM, онлайн-оплати, месенджерів, систем бронювання та інших інструментів, якими користується ваш бізнес.',
-      inquiryProjectType: 'system',
+      inquiryProjectType: 'online-service',
       offers: [
         { title: 'Інтеграція з CRM', description: 'Заявки, контакти та зміни статусів автоматично передаються між сайтом і вашою CRM.', features: ['integrations', 'data-sync', 'workflow', 'notifications'] },
         { title: 'Онлайн-оплата', description: 'Підключення разових платежів, підписок, статусів оплати та повідомлень для клієнта.', features: ['payments', 'integrations', 'notifications', 'data-sync'] },

@@ -1,6 +1,6 @@
 # Oleh Fedkiv
 
-> Full-stack developer focused on fast business websites, lead-focused landing pages, MVP web applications, and API/CRM integrations.
+> Full-stack developer creating online stores, business and corporate websites, landing pages, promo websites, information portals, custom websites, and online services.
 
 Canonical site: https://www.fedkiv.tech
 Primary language: English
@@ -10,9 +10,14 @@ Contact: fedkiv20172@gmail.com
 
 ## Services
 
-- Lead-Focused Landing Page: conversion-oriented landing pages with technical SEO, responsive implementation, contact forms, analytics-ready structure, and fast launch cycles.
-- MVP Web Application: focused full-stack Next.js applications for validating product ideas and launching early versions without overbuilding.
-- API & CRM Integration: integrations between websites, CRMs, payment providers, booking tools, Telegram, REST APIs, GraphQL APIs, and internal systems.
+- Online Store: product catalogues, checkout, payments, order management, and CRM or delivery integrations.
+- Business Website: compact websites presenting a business, its services, and contact information.
+- Corporate Website: structured multi-page websites for companies, teams, expertise, and vacancies.
+- Landing Page: conversion-focused one-page websites for a single offer or advertising campaign.
+- Promo Website: expressive websites for product launches, events, campaigns, and special offers.
+- Information Portal: content-rich websites with categories, search, publishing, and content management.
+- Custom Website: tailored website solutions designed around specific business goals and audiences.
+- Online Service: websites with booking, payments, user accounts, dashboards, or custom online workflows.
 
 ## Important URLs
 
@@ -29,4 +34,3 @@ Contact: fedkiv20172@gmail.com
 - GitHub: https://github.com/fleddd
 - LinkedIn: https://www.linkedin.com/in/olehfedkiv/
 - Telegram: https://telegram.me/olehfedkiv
-

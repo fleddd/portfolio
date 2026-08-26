@@ -1,6 +1,9 @@
 import type { Locale } from './i18n';
 
-export const PROJECT_TYPE_VALUES = ['website', 'mvp', 'system', 'unsure'] as const;
+export const PROJECT_TYPE_VALUES = [
+  'online-store', 'business-card', 'corporate', 'landing',
+  'promo', 'portal', 'custom', 'online-service',
+] as const;
 export const FEATURE_VALUES = [
   'custom-design', 'lead-form', 'cms', 'seo', 'analytics', 'performance',
   'auth', 'roles', 'database', 'dashboard', 'payments', 'notifications',
@@ -63,10 +66,14 @@ type InquiryOptions = {
 export const INQUIRY_OPTIONS: Record<Locale, InquiryOptions> = {
   en: {
     projectTypes: [
-      { value: 'website', label: 'Website or Landing Page', description: 'Explain your offer, earn trust, and turn interested visitors into inquiries.' },
-      { value: 'mvp', label: 'MVP or Web Application', description: 'Turn an idea into a focused working product that real users can test.' },
-      { value: 'system', label: 'Booking, Internal System or Automation', description: 'Bring customer requests, operations, and connected tools into one workflow.' },
-      { value: 'unsure', label: 'Not Sure Yet', description: 'Describe the goal and I’ll recommend the right format.' },
+      { value: 'online-store', label: 'Online Store', description: 'Sell products online with a catalogue, checkout, payments, and order management.' },
+      { value: 'business-card', label: 'Business Website', description: 'Introduce your business, services, and contact details on a compact website.' },
+      { value: 'corporate', label: 'Corporate Website', description: 'Present a company, its services, team, expertise, and vacancies.' },
+      { value: 'landing', label: 'Landing Page', description: 'Present one offer and turn advertising traffic into inquiries.' },
+      { value: 'promo', label: 'Promo Website', description: 'Launch a product, event, campaign, or special offer.' },
+      { value: 'portal', label: 'Information Portal', description: 'Publish and organise a large amount of searchable content.' },
+      { value: 'custom', label: 'Custom Website', description: 'Not sure what fits? I’ll recommend and build the right format for your goals.' },
+      { value: 'online-service', label: 'Online Service', description: 'Let users book, pay, manage an account, or complete a process online.' },
     ],
     stages: [
       { value: 'idea', label: 'Early Idea' },
@@ -89,10 +96,14 @@ export const INQUIRY_OPTIONS: Record<Locale, InquiryOptions> = {
   },
   ua: {
     projectTypes: [
-      { value: 'website', label: 'Сайт або лендінг', description: 'Пояснити пропозицію, сформувати довіру та перетворити відвідувачів на заявки.' },
-      { value: 'mvp', label: 'MVP або вебзастосунок', description: 'Перетворити ідею на сфокусований робочий продукт для реальних користувачів.' },
-      { value: 'system', label: 'Бронювання, внутрішня система або автоматизація', description: 'Об’єднати заявки, операції та підключені сервіси в одному процесі.' },
-      { value: 'unsure', label: 'Поки не знаю', description: 'Опишіть ціль, і я запропоную відповідний формат.' },
+      { value: 'online-store', label: 'Інтернет-магазин', description: 'Продавати товари онлайн через каталог, кошик, оплату та керування замовленнями.' },
+      { value: 'business-card', label: 'Сайт-візитка', description: 'Коротко представити бізнес, послуги та контактну інформацію.' },
+      { value: 'corporate', label: 'Корпоративний сайт', description: 'Розповісти про компанію, послуги, команду, експертизу та вакансії.' },
+      { value: 'landing', label: 'Лендінг', description: 'Презентувати одну пропозицію та перетворювати рекламний трафік на заявки.' },
+      { value: 'promo', label: 'Промо-сайт', description: 'Запустити продукт, подію, рекламну кампанію або спеціальну пропозицію.' },
+      { value: 'portal', label: 'Інфо-портал', description: 'Публікувати й упорядковувати велику кількість матеріалів із пошуком.' },
+      { value: 'custom', label: 'Кастомний сайт', description: 'Не знаєте, що обрати? Я запропоную формат під ваші цілі та задачі.' },
+      { value: 'online-service', label: 'Онлайн-сервіс', description: 'Дати користувачам змогу бронювати, оплачувати або працювати в особистому кабінеті.' },
     ],
     stages: [
       { value: 'idea', label: 'Є початкова ідея' },
@@ -115,88 +126,115 @@ export const INQUIRY_OPTIONS: Record<Locale, InquiryOptions> = {
   },
 };
 
+const WEBSITE_FEATURES: Record<Locale, InquiryOption<ProjectFeature>[]> = {
+  en: [
+    { value: 'custom-design', label: 'Custom Responsive Design' },
+    { value: 'lead-form', label: 'Contact / Lead Form' },
+    { value: 'cms', label: 'Editable Content / CMS' },
+    { value: 'seo', label: 'SEO Foundation' },
+    { value: 'analytics', label: 'Analytics & Conversion Tracking' },
+    { value: 'performance', label: 'Performance Optimisation' },
+  ],
+  ua: [
+    { value: 'custom-design', label: 'Індивідуальний адаптивний дизайн' },
+    { value: 'lead-form', label: 'Форма для збору заявок' },
+    { value: 'cms', label: 'Самостійне редагування контенту' },
+    { value: 'seo', label: 'SEO-основа' },
+    { value: 'analytics', label: 'Аналітика та відстеження конверсій' },
+    { value: 'performance', label: 'Оптимізація швидкодії' },
+  ],
+};
+
+const STORE_FEATURES: Record<Locale, InquiryOption<ProjectFeature>[]> = {
+  en: [
+    { value: 'custom-design', label: 'Custom Responsive Design' },
+    { value: 'cms', label: 'Product Catalogue Management' },
+    { value: 'payments', label: 'Online Payments & Checkout' },
+    { value: 'database', label: 'Products, Customers & Orders' },
+    { value: 'dashboard', label: 'Store Administration' },
+    { value: 'integrations', label: 'CRM / Delivery Integrations' },
+    { value: 'notifications', label: 'Order Notifications' },
+    { value: 'seo', label: 'SEO Foundation' },
+  ],
+  ua: [
+    { value: 'custom-design', label: 'Індивідуальний адаптивний дизайн' },
+    { value: 'cms', label: 'Керування каталогом товарів' },
+    { value: 'payments', label: 'Онлайн-оплата та оформлення замовлення' },
+    { value: 'database', label: 'Товари, клієнти та замовлення' },
+    { value: 'dashboard', label: 'Адміністрування магазину' },
+    { value: 'integrations', label: 'Інтеграція з CRM і доставкою' },
+    { value: 'notifications', label: 'Сповіщення про замовлення' },
+    { value: 'seo', label: 'SEO-основа' },
+  ],
+};
+
+const SERVICE_FEATURES: Record<Locale, InquiryOption<ProjectFeature>[]> = {
+  en: [
+    { value: 'booking-flow', label: 'Booking / Customer Flow' },
+    { value: 'availability', label: 'Availability or Schedule' },
+    { value: 'auth', label: 'User Accounts & Sign-in' },
+    { value: 'roles', label: 'Roles & Permissions' },
+    { value: 'database', label: 'Database & Business Data' },
+    { value: 'dashboard', label: 'User Dashboard' },
+    { value: 'admin-panel', label: 'Administration Dashboard' },
+    { value: 'permissions', label: 'Staff Roles & Permissions' },
+    { value: 'workflow', label: 'Statuses & Workflow' },
+    { value: 'payments', label: 'Online Payments' },
+    { value: 'notifications', label: 'Email / Messaging Notifications' },
+    { value: 'integrations', label: 'CRM / API Integrations' },
+    { value: 'data-sync', label: 'Data Sync & Automation' },
+    { value: 'reports', label: 'Reports / Data Export' },
+    { value: 'deployment', label: 'Launch & Handover' },
+  ],
+  ua: [
+    { value: 'booking-flow', label: 'Бронювання або клієнтський сценарій' },
+    { value: 'availability', label: 'Доступність або розклад' },
+    { value: 'auth', label: 'Акаунти та вхід користувачів' },
+    { value: 'roles', label: 'Ролі та права доступу' },
+    { value: 'database', label: 'База даних' },
+    { value: 'dashboard', label: 'Кабінет користувача' },
+    { value: 'admin-panel', label: 'Адміністративна панель' },
+    { value: 'permissions', label: 'Ролі та права працівників' },
+    { value: 'workflow', label: 'Статуси й робочий процес' },
+    { value: 'payments', label: 'Онлайн-оплата' },
+    { value: 'notifications', label: 'Сповіщення на пошту або в месенджер' },
+    { value: 'integrations', label: 'Інтеграція з CRM та API' },
+    { value: 'data-sync', label: 'Синхронізація й автоматизація даних' },
+    { value: 'reports', label: 'Звіти та експорт даних' },
+    { value: 'deployment', label: 'Запуск і передача проєкту' },
+  ],
+};
+
+const PORTAL_FEATURES: Record<Locale, InquiryOption<ProjectFeature>[]> = {
+  en: [...WEBSITE_FEATURES.en, { value: 'database', label: 'Content Database' }, { value: 'roles', label: 'Editors & Roles' }],
+  ua: [...WEBSITE_FEATURES.ua, { value: 'database', label: 'База матеріалів' }, { value: 'roles', label: 'Редактори та ролі' }],
+};
+
+const CUSTOM_FEATURES: Record<Locale, InquiryOption<ProjectFeature>[]> = {
+  en: [...WEBSITE_FEATURES.en, { value: 'auth', label: 'User Accounts' }, { value: 'payments', label: 'Online Payments' }, { value: 'integrations', label: 'Third-party Integrations' }, { value: 'admin-panel', label: 'Administration Area' }],
+  ua: [...WEBSITE_FEATURES.ua, { value: 'auth', label: 'Акаунти користувачів' }, { value: 'payments', label: 'Онлайн-оплата' }, { value: 'integrations', label: 'Інтеграції зі сторонніми сервісами' }, { value: 'admin-panel', label: 'Адміністративна частина' }],
+};
+
 export const INQUIRY_FEATURES: Record<Locale, Record<ProjectType, InquiryOption<ProjectFeature>[]>> = {
   en: {
-    website: [
-      { value: 'custom-design', label: 'Custom Responsive Design' },
-      { value: 'lead-form', label: 'Contact / Lead Form' },
-      { value: 'cms', label: 'Editable Content / CMS' },
-      { value: 'seo', label: 'SEO Foundation' },
-      { value: 'analytics', label: 'Analytics & Conversion Tracking' },
-      { value: 'performance', label: 'Performance Optimisation' },
-    ],
-    mvp: [
-      { value: 'auth', label: 'User Accounts & Sign-in' },
-      { value: 'roles', label: 'Roles & Permissions' },
-      { value: 'database', label: 'Database & Business Data' },
-      { value: 'dashboard', label: 'User / Admin Dashboard' },
-      { value: 'payments', label: 'Online Payments' },
-      { value: 'notifications', label: 'Email / Status Notifications' },
-      { value: 'integrations', label: 'Third-party Integrations' },
-      { value: 'deployment', label: 'Launch & Handover' },
-    ],
-    system: [
-      { value: 'booking-flow', label: 'Customer Booking / Request Flow' },
-      { value: 'availability', label: 'Availability or Schedule Management' },
-      { value: 'auth', label: 'Customer Accounts & Sign-in' },
-      { value: 'admin-panel', label: 'Administration Dashboard' },
-      { value: 'permissions', label: 'Staff Roles & Permissions' },
-      { value: 'workflow', label: 'Statuses & Operational Workflow' },
-      { value: 'payments', label: 'Online Payments' },
-      { value: 'notifications', label: 'Email / Messaging Notifications' },
-      { value: 'integrations', label: 'CRM / API Integration' },
-      { value: 'data-sync', label: 'Data Sync & Automation' },
-      { value: 'reports', label: 'Reports / Data Export' },
-    ],
-    unsure: [
-      { value: 'lead-form', label: 'Collect Customer Inquiries' },
-      { value: 'auth', label: 'User Accounts' },
-      { value: 'booking-flow', label: 'Booking or Request Flow' },
-      { value: 'admin-panel', label: 'Administration Area' },
-      { value: 'integrations', label: 'Connect Existing Tools' },
-      { value: 'workflow', label: 'Automate Internal Work' },
-    ],
+    'online-store': STORE_FEATURES.en,
+    'business-card': WEBSITE_FEATURES.en,
+    corporate: WEBSITE_FEATURES.en,
+    landing: WEBSITE_FEATURES.en,
+    promo: WEBSITE_FEATURES.en,
+    portal: PORTAL_FEATURES.en,
+    custom: CUSTOM_FEATURES.en,
+    'online-service': SERVICE_FEATURES.en,
   },
   ua: {
-    website: [
-      { value: 'custom-design', label: 'Індивідуальний адаптивний дизайн' },
-      { value: 'lead-form', label: 'Форма для збору заявок' },
-      { value: 'cms', label: 'Самостійне редагування контенту' },
-      { value: 'seo', label: 'SEO-основа' },
-      { value: 'analytics', label: 'Аналітика та відстеження конверсій' },
-      { value: 'performance', label: 'Оптимізація швидкодії' },
-    ],
-    mvp: [
-      { value: 'auth', label: 'Акаунти та вхід користувачів' },
-      { value: 'roles', label: 'Ролі та права доступу' },
-      { value: 'database', label: 'База даних' },
-      { value: 'dashboard', label: 'Кабінет користувача та адмінпанель' },
-      { value: 'payments', label: 'Онлайн-оплати' },
-      { value: 'notifications', label: 'Сповіщення про важливі події' },
-      { value: 'integrations', label: 'Інтеграції зі сторонніми сервісами' },
-      { value: 'deployment', label: 'Запуск і передача проєкту' },
-    ],
-    system: [
-      { value: 'booking-flow', label: 'Онлайн-бронювання або заявка' },
-      { value: 'availability', label: 'Керування доступністю або розкладом' },
-      { value: 'auth', label: 'Акаунти та вхід клієнтів' },
-      { value: 'admin-panel', label: 'Адміністративна панель' },
-      { value: 'permissions', label: 'Ролі та права працівників' },
-      { value: 'workflow', label: 'Статуси й операційний процес' },
-      { value: 'payments', label: 'Онлайн-оплата' },
-      { value: 'notifications', label: 'Сповіщення на пошту або в месенджер' },
-      { value: 'integrations', label: 'Підключення CRM та інших сервісів' },
-      { value: 'data-sync', label: 'Синхронізація й автоматизація даних' },
-      { value: 'reports', label: 'Звіти та експорт даних' },
-    ],
-    unsure: [
-      { value: 'lead-form', label: 'Збирати заявки клієнтів' },
-      { value: 'auth', label: 'Акаунти користувачів' },
-      { value: 'booking-flow', label: 'Бронювання або заявки' },
-      { value: 'admin-panel', label: 'Адміністративна частина' },
-      { value: 'integrations', label: 'Підключення наявних сервісів' },
-      { value: 'workflow', label: 'Автоматизація внутрішньої роботи' },
-    ],
+    'online-store': STORE_FEATURES.ua,
+    'business-card': WEBSITE_FEATURES.ua,
+    corporate: WEBSITE_FEATURES.ua,
+    landing: WEBSITE_FEATURES.ua,
+    promo: WEBSITE_FEATURES.ua,
+    portal: PORTAL_FEATURES.ua,
+    custom: CUSTOM_FEATURES.ua,
+    'online-service': SERVICE_FEATURES.ua,
   },
 };
 
