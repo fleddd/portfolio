@@ -8,6 +8,7 @@ const personSchema = {
   url: SITE_URL,
   email: CONTACT_EMAIL,
   jobTitle: "Full-Stack Developer",
+  alumniOf: "Lviv Polytechnic National University",
   description: SITE_DESCRIPTION,
   inLanguage: ["en", "uk"],
   knowsAbout: [
@@ -21,9 +22,9 @@ const personSchema = {
     "API Integrations",
   ],
   sameAs: [
-    "https://github.com/fleddd",
     "https://www.linkedin.com/in/olehfedkiv/",
-    "https://telegram.me/olehfedkiv",
+    "https://github.com/fleddd/",
+    "https://x.com/olehfedkiv",
   ],
 };
 

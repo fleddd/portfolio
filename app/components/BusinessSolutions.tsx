@@ -41,7 +41,7 @@ export function BusinessSolutions({ locale }: BusinessSolutionsProps) {
               <span className="pointer-events-none absolute inset-x-5 top-0 h-px origin-left scale-x-0 bg-linear-to-r from-cyan-300 to-blue-500 transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100 md:inset-x-6" aria-hidden="true" />
               <article className="relative flex h-full flex-col">
                 <h3 className="max-w-[15rem] text-xl font-bold leading-tight text-white transition-colors group-hover:text-cyan-50 group-focus-visible:text-cyan-50 md:text-2xl">{item.label}</h3>
-                <p className="mt-4 max-w-[17rem] text-sm leading-relaxed text-gray-300 transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100">
+                <p className="mt-4 max-w-[17rem] text-sm leading-relaxed text-gray-300">
                   {item.description}
                 </p>
                 <div className="mt-auto flex items-end justify-between pt-5">

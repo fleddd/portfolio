@@ -45,7 +45,7 @@ export const EXPERIENCE_TIMELINE: Record<Locale, readonly ExperienceItem[]> = {
     {
       period: 'March 2026 — Present',
       company: 'Freshcode',
-      role: 'Full-Stack Developer',
+      role: 'Junior Full-Stack Developer',
       highlights: [
         'Stabilized a large production codebase by resolving dozens of legacy SQL, React, and Node.js issues while preserving critical product behavior.',
         'Improved code reliability by adding integration test coverage for implemented changes.',
@@ -56,7 +56,7 @@ export const EXPERIENCE_TIMELINE: Record<Locale, readonly ExperienceItem[]> = {
     {
       period: 'August 2025 — February 2026',
       company: 'Cortana.dev',
-      role: 'Full-Stack Developer',
+      role: 'Trainee Full-Stack Developer',
       highlights: [
         'Built a full-stack booking platform with a secure admin dashboard, live availability calendar, yacht management, and multilingual landing page.',
         'Delivered responsive landing pages and web applications optimized for desktop and mobile devices.',
@@ -71,7 +71,7 @@ export const EXPERIENCE_TIMELINE: Record<Locale, readonly ExperienceItem[]> = {
     {
       period: 'Березень 2026 — дотепер',
       company: 'Freshcode',
-      role: 'Full-Stack Developer',
+      role: 'Junior Full-Stack Developer',
       highlights: [
         'Стабілізував великий production-код, усунувши десятки legacy-проблем у SQL, React і Node.js без порушення критичної логіки продукту.',
         'Підвищив надійність змін завдяки покриттю реалізованого функціоналу інтеграційними тестами.',
@@ -82,7 +82,7 @@ export const EXPERIENCE_TIMELINE: Record<Locale, readonly ExperienceItem[]> = {
     {
       period: 'Серпень 2025 — лютий 2026',
       company: 'Cortana.dev',
-      role: 'Full-Stack Developer',
+      role: 'Trainee Full-Stack Developer',
       highlights: [
         'Розробив full-stack платформу для бронювання із захищеною адмінпанеллю, календарем актуальної доступності, керуванням яхтами та мультимовним лендингом.',
         'Створював адаптивні лендинги й вебзастосунки, оптимізовані для desktop і mobile пристроїв.',

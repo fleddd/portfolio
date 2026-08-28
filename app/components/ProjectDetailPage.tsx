@@ -118,17 +118,17 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
           <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
             <Link
               href={projectsHref}
-              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors mb-10"
+              className="inline-flex min-h-11 items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors mb-10"
             >
               <ArrowLeft className="w-4 h-4" />
               {t.back}
             </Link>
 
             <div className="max-w-4xl">
-              <h1 className="text-4xl md:text-7xl font-bold tracking-tight text-white text-balance mb-7">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white text-balance mb-7">
                 {content.title}
               </h1>
-              <p className="max-w-3xl text-xl md:text-2xl text-gray-300 leading-relaxed">
+              <p className="max-w-3xl text-lg md:text-xl text-gray-300 leading-relaxed">
                 {content.description}
               </p>
 
@@ -166,21 +166,21 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
           <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-16">
             <div className="space-y-16">
               <article>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">{t.overview}</h2>
-                <p className="text-lg text-gray-400 leading-relaxed">{content.overview}</p>
+                <h2 className="text-2xl md:text-3xl font-bold mb-5">{t.overview}</h2>
+                <p className="text-lg text-gray-300 leading-relaxed">{content.overview}</p>
               </article>
 
               <article>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">{t.challenge}</h2>
-                <p className="text-lg text-gray-400 leading-relaxed">{content.challenge}</p>
+                <h2 className="text-2xl md:text-3xl font-bold mb-5">{t.challenge}</h2>
+                <p className="text-lg text-gray-300 leading-relaxed">{content.challenge}</p>
               </article>
 
               <article>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">{t.contribution}</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-5">{t.contribution}</h2>
                 <ul className="space-y-4">
                   {content.contributions.map((item) => (
-                    <li key={item} className="flex gap-4 text-lg text-gray-400 leading-relaxed">
-                      <span className="mt-3 w-2 h-2 shrink-0 rounded-full bg-cyan-400" />
+                    <li key={item} className="flex gap-4 text-lg text-gray-300 leading-relaxed">
+                      <span className="mt-2.5 w-1.5 h-1.5 shrink-0 rounded-full bg-cyan-400" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -188,8 +188,8 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
               </article>
 
               <article>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">{t.outcome}</h2>
-                <p className="text-lg text-gray-400 leading-relaxed">{content.outcome}</p>
+                <h2 className="text-2xl md:text-3xl font-bold mb-5">{t.outcome}</h2>
+                <p className="text-lg text-gray-300 leading-relaxed">{content.outcome}</p>
               </article>
             </div>
 
@@ -212,8 +212,8 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
         <section className="relative py-28 bg-[#12121a]">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="max-w-3xl mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-5">{t.gallery}</h2>
-              <p className="text-lg text-gray-400">{t.galleryDescription}</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">{t.gallery}</h2>
+              <p className="text-base text-gray-300 leading-relaxed">{t.galleryDescription}</p>
             </div>
 
             <ProjectGallery
@@ -226,8 +226,8 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
 
         <section className="py-28 bg-[#0a0a0f]">
           <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-5">{t.ctaTitle}</h2>
-            <p className="text-lg text-gray-400 mb-9">{t.ctaText}</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{t.ctaTitle}</h2>
+            <p className="text-base text-gray-300 leading-relaxed mb-8">{t.ctaText}</p>
             <Link
               href={isUa ? '/ua/inquiry' : '/inquiry'}
               className="inline-flex px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-medium hover:shadow-xl hover:shadow-cyan-500/20 transition-[box-shadow,transform]"

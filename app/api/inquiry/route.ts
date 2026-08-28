@@ -23,6 +23,27 @@ function getClientIp(request: Request) {
   return forwarded?.split(',')[0].trim() || request.headers.get('x-real-ip') || 'unknown';
 }
 
+function pruneStaleEntries() {
+  const now = Date.now();
+  for (const [ip, timestamps] of requestLog) {
+    const fresh = timestamps.filter(ts => now - ts < RATE_LIMIT_WINDOW_MS);
+    if (fresh.length === 0) requestLog.delete(ip);
+    else requestLog.set(ip, fresh);
+  }
+  for (const [id, timestamp] of processedSubmissions) {
+    if (now - timestamp > IDEMPOTENCY_WINDOW_MS) processedSubmissions.delete(id);
+  }
+}
+
+// Prune every 5 minutes to prevent unbounded memory growth
+if (typeof globalThis !== 'undefined') {
+  const PRUNE_INTERVAL_MS = 5 * 60 * 1000;
+  const key = '__inquiry_prune_timer';
+  if (!(globalThis as Record<string, unknown>)[key]) {
+    (globalThis as Record<string, unknown>)[key] = setInterval(pruneStaleEntries, PRUNE_INTERVAL_MS);
+  }
+}
+
 function isRateLimited(ip: string) {
   const now = Date.now();
   const recent = (requestLog.get(ip) ?? []).filter(timestamp => now - timestamp < RATE_LIMIT_WINDOW_MS);

@@ -5,7 +5,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export function GET(request: Request) {
-  const logoUrl = new URL("/logo.png", request.url).toString();
+  const logoUrl = new URL("/logo.webp", request.url).toString();
 
   return new ImageResponse(
     (

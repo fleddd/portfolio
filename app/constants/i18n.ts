@@ -31,11 +31,11 @@ export const copy = {
       titleMain: "Outcome-Focused",
       titleAccent: "Development",
       p1:
-        "I help companies, teams, and startups launch websites and web tools that directly support sales, bookings, and lead collection.",
+        "I build websites and web tools that drive sales, bookings, and leads — delivered turnkey for companies and startups.",
       p2:
-        "You get a clear delivery process, predictable timelines, and a product focused on measurable outcomes.",
+        "Clear process. Predictable timelines. Measurable outcomes.",
       keywords:
-        "When appropriate for the project, I use Next.js and an SEO-ready architecture, with lead funnel optimization integrated into the overall user journey.",
+        "Next.js, SEO-ready architecture, and lead funnel optimization — when the project calls for it.",
       chips: [
         "Lead-focused landing pages",
         "MVP launch in weeks, not months",
@@ -44,16 +44,16 @@ export const copy = {
       ],
       features: [
         {
-          title: "Define Your Goals",
-          description: "We align on your audience, business outcome, primary user action, scope, and success criteria before development begins.",
+          title: "Define Goals",
+          description: "Align on audience, outcome, and success criteria before code starts.",
         },
         {
           title: "Build & Validate",
-          description: "I turn the agreed priorities into a responsive product, sharing clear milestones and validating the important flows as we build.",
+          description: "Ship a working product through clear milestones and validated flows.",
         },
         {
-          title: "Launch, Measure & Maintain",
-          description: "After launch, we verify the result, monitor the experience, and improve or maintain the product as your needs evolve.",
+          title: "Launch & Improve",
+          description: "Monitor the result, then iterate as your needs evolve.",
         },
       ],
       stats: {
@@ -78,7 +78,7 @@ export const copy = {
       projects: {
       titleLeft: "Featured",
       titleRight: "Case Studies",
-      description: "Selected projects relevant to booking flows, lead generation, and workflow automation",
+      description: "Booking, lead generation, and workflow automation — shipped and live",
       liveDemo: "Live",
       sourceCode: "Source Code",
       caseDetails: "View Details",
@@ -168,11 +168,11 @@ export const copy = {
       titleMain: "Розробка з фокусом",
       titleAccent: "на результат",
       p1:
-        "Працюю з компаніями, командами та стартапами, яким потрібен не просто сайт, а інструмент для лідів, продажів і стабільної обробки заявок.",
+        "Створюю сайти та вебінструменти, які приносять ліди, продажі та заявки — під ключ для компаній і стартапів.",
       p2:
-        "Ви отримуєте зрозумілий процес, контроль термінів і продукт, який вирішує конкретну задачу.",
+        "Зрозумілий процес. Контроль термінів. Вимірюваний результат.",
       keywords:
-        "Залежно від задачі використовую Next.js, закладаю SEO-архітектуру та оптимізую шлях користувача від першого переходу до заявки.",
+        "Next.js, SEO-архітектура та оптимізація воронки — коли це відповідає задачі.",
       chips: [
         "Лендінги під заявки",
         "MVP запуск за тижні",
@@ -181,16 +181,16 @@ export const copy = {
       ],
       features: [
         {
-          title: "Визначаємо ваші цілі",
-          description: "До початку розробки узгоджуємо аудиторію, бізнес-результат, основну дію користувача, scope і критерії успіху.",
+          title: "Визначаємо цілі",
+          description: "Узгоджуємо аудиторію, результат і критерії успіху до початку коду.",
         },
         {
-          title: "Розробляю та перевіряю",
-          description: "Перетворюю узгоджені пріоритети на адаптивний продукт, показую зрозумілі етапи й перевіряю ключові сценарії в процесі.",
+          title: "Розробка та перевірка",
+          description: "Випускаю робочий продукт через зрозумілі етапи та перевірені сценарії.",
         },
         {
-          title: "Запускаємо, вимірюємо й підтримуємо",
-          description: "Після запуску перевіряємо результат, стежимо за користувацьким досвідом і розвиваємо або підтримуємо продукт разом із вашими потребами.",
+          title: "Запуск і розвиток",
+          description: "Моніторимо результат, потім ітеруємо під ваші потреби.",
         },
       ],
       stats: {
@@ -216,7 +216,7 @@ export const copy = {
     projects: {
       titleLeft: "Реалізовані",
       titleRight: "кейси",
-      description: "Роботи, що релевантні для лідів, бронювань та автоматизації процесів",
+      description: "Ліди, бронювання та автоматизація — реалізовано і працює",
       liveDemo: "Демо",
       sourceCode: "Вихідний код",
       caseDetails: "Детальніше про кейс",

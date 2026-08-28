@@ -15,6 +15,23 @@ function getClientIp(req: Request) {
   return req.headers.get('x-real-ip') || 'unknown';
 }
 
+function pruneStaleEntries() {
+  const now = Date.now();
+  for (const [ip, timestamps] of requestLog) {
+    const fresh = timestamps.filter(ts => now - ts < RATE_LIMIT_WINDOW_MS);
+    if (fresh.length === 0) requestLog.delete(ip);
+    else requestLog.set(ip, fresh);
+  }
+}
+
+if (typeof globalThis !== 'undefined') {
+  const PRUNE_INTERVAL_MS = 5 * 60 * 1000;
+  const key = '__contact_prune_timer';
+  if (!(globalThis as Record<string, unknown>)[key]) {
+    (globalThis as Record<string, unknown>)[key] = setInterval(pruneStaleEntries, PRUNE_INTERVAL_MS);
+  }
+}
+
 function isRateLimited(ip: string) {
   const now = Date.now();
   const points = requestLog.get(ip) || [];

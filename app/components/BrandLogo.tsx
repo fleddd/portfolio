@@ -8,7 +8,7 @@ type BrandLogoProps = {
 export function BrandLogo({ className = 'h-10 w-auto', priority = false }: BrandLogoProps) {
   return (
     <Image
-      src="/logo.png"
+      src="/logo.webp"
       alt=""
       width={1310}
       height={1201}

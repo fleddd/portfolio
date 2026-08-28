@@ -30,21 +30,21 @@ export function Hero({ locale }: HeroProps) {
       <div className="absolute -bottom-20 left-0 h-[380px] w-[380px] rounded-full bg-blue-600/10 blur-3xl pointer-events-none" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto w-full min-w-0 max-w-5xl px-6 text-center lg:px-12">
-        <h1 className="break-words text-4xl font-bold leading-[1.1] tracking-tight text-balance sm:text-5xl md:text-6xl">
+        <h1 className="break-words text-4xl font-bold leading-[1.1] tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-7xl">
           <span className="block text-white">{t.headlineMain} </span>
           <span className="mt-1 block pb-[0.12em] italic bg-gradient-to-r from-cyan-300 to-blue-500 bg-clip-text text-transparent">
             {t.headlineAccent}
           </span>
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl break-words text-lg leading-relaxed text-gray-300 text-pretty md:text-xl">
+        <p className="mx-auto mt-5 max-w-2xl break-words text-lg leading-relaxed text-gray-300 text-pretty md:text-xl">
           {t.description}
         </p>
 
-        <div className="mt-5 flex justify-center">
-          <Button href={inquiryHref} className="!px-6 !py-3.5">{t.secondaryCta}</Button>
+        <div className="mt-7 flex justify-center">
+          <Button href={inquiryHref} className="!px-7 !py-3.5">{t.secondaryCta}</Button>
         </div>
 
-        <div className="mt-4 flex items-center justify-center gap-3" aria-label={locale === 'ua' ? 'Профілі та контакти' : 'Profiles and contact links'}>
+        <div className="mt-5 flex items-center justify-center gap-3" aria-label={locale === 'ua' ? 'Профілі та контакти' : 'Profiles and contact links'}>
           {CONTACT_SOCIAL_LINKS.map((social) => (
             <motion.a
               key={social.label}

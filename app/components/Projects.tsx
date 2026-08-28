@@ -1,10 +1,8 @@
-'use client';
-
 import { ArrowRight, ExternalLink, Github } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Section, SectionHeader, Button } from '@/components/ui';
-import { PROJECTS, CODE_SNIPPET, CONTACT_SOCIAL_LINKS, getProjectContent } from '@/constants';
+import { PROJECTS, CONTACT_SOCIAL_LINKS, getProjectContent } from '@/constants';
 import { Locale, getCopy } from '@/constants/i18n';
 import { getTechnologyDescription } from '@/constants/technology';
 

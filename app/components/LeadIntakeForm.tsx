@@ -306,7 +306,7 @@ function FeaturePicker({ label, hint, placeholder, addLabel, removeLabel, option
               <button
                 type="button"
                 onClick={() => onChange(value.filter(feature => feature !== option.value))}
-                className="flex h-7 w-7 items-center justify-center rounded-full text-cyan-200 transition-colors hover:bg-white/10 hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full text-cyan-200 transition-colors hover:bg-white/10 hover:text-white"
                 aria-label={`${removeLabel}: ${option.label}`}
               >
                 <X className="h-4 w-4" aria-hidden="true" />
@@ -558,11 +558,19 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
     try {
       const submissionId = submissionIdRef.current || crypto.randomUUID();
       submissionIdRef.current = submissionId;
-      const response = await fetch('/api/inquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...draft, locale, submissionId, website: '' }),
-      });
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15_000);
+      let response: Response;
+      try {
+        response = await fetch('/api/inquiry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...draft, locale, submissionId, website: '' }),
+          signal: controller.signal,
+        });
+      } finally {
+        clearTimeout(timeout);
+      }
       if (!response.ok) throw new Error('Request failed');
 
       const storedSubmission: StoredSubmission = {
@@ -870,7 +878,7 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
         )}
       </div>
 
-      <p className="mt-4 text-center text-xs leading-relaxed text-gray-400 md:mt-auto md:pt-6 md:[@media(max-height:800px)]:pt-2">
+      <p className="mt-4 text-center text-sm leading-relaxed text-gray-400 md:mt-auto md:pt-6 md:[@media(max-height:800px)]:pt-2 md:[@media(max-height:800px)]:text-xs">
         {locale === 'ua' ? 'Надсилаючи форму, ви погоджуєтеся з ' : 'By submitting, you agree to the '}
         <Link href={privacyHref} className="rounded-sm text-cyan-300 underline decoration-cyan-300/40 underline-offset-4 hover:text-cyan-200">
           {locale === 'ua' ? 'Політикою конфіденційності' : 'Privacy Policy'}

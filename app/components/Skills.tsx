@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'motion/react';
 import Image from 'next/image';
 import { Button, Section, SectionHeader } from '@/components/ui';
 import { SKILL_CATEGORIES } from '@/constants';
@@ -44,7 +41,7 @@ export function Skills({ locale }: SkillsProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {SKILL_CATEGORIES.map((category) => (
-            <motion.div
+            <div
               key={category.color}
               className="group relative"
             >
@@ -61,7 +58,7 @@ export function Skills({ locale }: SkillsProps) {
                     <p className="text-xs uppercase tracking-[0.15em] text-gray-400">{technologiesLabel}</p>
                     <div className="grid grid-cols-2 gap-3">
                     {category.technologies.map((technology, skillIndex) => (
-                      <motion.div
+                      <div
                         key={`${category.title}-${skillIndex}`}
                         className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2"
                       >
@@ -73,22 +70,20 @@ export function Skills({ locale }: SkillsProps) {
                           className="h-6 w-6 object-contain"
                         />
                         <span className="text-sm font-medium text-gray-200">{technology.name}</span>
-                      </motion.div>
+                      </div>
                     ))}
                     </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
-          className="mt-20 text-center"
-        >
+        <div className="mt-20 text-center">
           <p className="text-gray-400 mb-6">{t.note}</p>
           <Button href="/cv.pdf">{t.resume}</Button>
-        </motion.div>
+        </div>
       </div>
     </Section>
   );

@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'motion/react';
 import { Heart } from 'lucide-react';
 import { Locale, getCopy } from '@/constants/i18n';
 import { BrandLogo } from '@/components/BrandLogo';
@@ -35,9 +32,7 @@ export function Footer({ locale, mode }: FooterProps) {
     <footer className="relative bg-[#0a0a0f] border-t border-white/5">
       <div className="mx-auto max-w-7xl px-6 py-10 lg:px-12 lg:py-12">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-16">
-          <motion.div
-            className="max-w-lg space-y-4"
-          >
+          <div className="max-w-lg space-y-4">
             <a
               href={isUa ? '/ua' : '/'}
               className="inline-flex min-h-11 items-center gap-3 rounded-lg"
@@ -49,11 +44,9 @@ export function Footer({ locale, mode }: FooterProps) {
             <p className="text-gray-300 leading-relaxed">
               {t.subtitle}
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="space-y-4"
-          >
+          <div className="space-y-4">
             <h2 className="font-semibold text-white">{t.quickLinks}</h2>
             <ul className="grid gap-x-8 md:grid-cols-2 lg:grid-cols-3">
               {links.map((link) => (
@@ -67,12 +60,10 @@ export function Footer({ locale, mode }: FooterProps) {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 md:flex-row"
-        >
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 md:flex-row">
           <p className="text-gray-300 text-sm flex items-center gap-2">
             {locale === 'ua' ? (
               <>
@@ -92,7 +83,7 @@ export function Footer({ locale, mode }: FooterProps) {
               {t.terms}
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-20" />
