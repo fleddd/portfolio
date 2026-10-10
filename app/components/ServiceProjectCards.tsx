@@ -32,7 +32,7 @@ export function ServiceProjectCards({ locale, items }: ServiceProjectCardsProps)
             className="group"
           >
             <Link href={`${baseHref}/${project.id}`} className="flex h-full flex-col">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[#08080c]">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[18px] bg-surface">
                 {screenshot ? (
                   <Image
                     src={screenshot.src}
@@ -47,17 +47,17 @@ export function ServiceProjectCards({ locale, items }: ServiceProjectCardsProps)
               </div>
 
               <div className="flex flex-1 flex-col pt-5">
-                <p className="mb-2 text-sm text-gray-500">
+                <p className="mb-2 text-sm text-mute/80">
                   {content.category}
                 </p>
-                <h3 className="text-2xl font-semibold text-white transition-colors group-hover:text-cyan-300">
+                <h3 className="text-2xl font-normal text-white transition-colors group-hover:text-ink">
                   {content.title}
                 </h3>
-                <p className="mt-3 flex-1 leading-relaxed text-gray-400">
+                <p className="mt-3 flex-1 leading-relaxed text-mute">
                   {item.note || content.description}
                 </p>
 
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-cyan-400">
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink">
                   {locale === 'ua' ? `Переглянути кейс ${content.title}` : `View the ${content.title} case study`}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </span>

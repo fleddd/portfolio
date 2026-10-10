@@ -102,33 +102,33 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-canvas text-white antialiased overflow-x-hidden">
       <Navigation locale={locale} mode="business" />
 
       <main id="main-content" tabIndex={-1}>
-        <section className="relative overflow-hidden pt-36 pb-24 bg-gradient-to-b from-[#0a0a0f] to-[#12121a]">
+        <section className="relative overflow-hidden pt-36 pb-24 bg-canvas">
           <div
             className="absolute inset-0 opacity-20"
             style={{
               backgroundImage:
-                'linear-gradient(to right, rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(6, 182, 212, 0.1) 1px, transparent 1px)',
+                'linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px)',
               backgroundSize: '72px 72px',
             }}
           />
           <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
             <Link
               href={projectsHref}
-              className="inline-flex min-h-11 items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors mb-10"
+              className="inline-flex min-h-11 items-center gap-2 text-sm text-mute hover:text-ink transition-colors mb-10"
             >
               <ArrowLeft className="w-4 h-4" />
               {t.back}
             </Link>
 
             <div className="max-w-4xl">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white text-balance mb-7">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-light uppercase tracking-[-0.03em] text-white text-balance mb-7">
                 {content.title}
               </h1>
-              <p className="max-w-3xl text-lg md:text-xl text-gray-300 leading-relaxed">
+              <p className="max-w-3xl text-lg md:text-xl text-mute leading-relaxed">
                 {content.description}
               </p>
 
@@ -139,7 +139,7 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
                       href={project.livePreview}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-medium hover:shadow-lg hover:shadow-cyan-500/20 transition-[box-shadow,transform]"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full silver font-medium text-canvas transition-[filter,opacity] hover:brightness-110"
                     >
                       <ExternalLink className="w-4 h-4" />
                       {t.live}
@@ -150,7 +150,7 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
                       href={project.sourceCode}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 font-medium hover:border-cyan-400/50 transition-colors"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/25 font-medium transition-colors hover:border-white/70"
                     >
                       <Github className="w-4 h-4" />
                       {t.source}
@@ -166,21 +166,21 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
           <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-16">
             <div className="space-y-16">
               <article>
-                <h2 className="text-2xl md:text-3xl font-bold mb-5">{t.overview}</h2>
-                <p className="text-lg text-gray-300 leading-relaxed">{content.overview}</p>
+                <h2 className="text-2xl md:text-3xl font-light uppercase tracking-[-0.03em] mb-5">{t.overview}</h2>
+                <p className="text-lg text-mute leading-relaxed">{content.overview}</p>
               </article>
 
               <article>
-                <h2 className="text-2xl md:text-3xl font-bold mb-5">{t.challenge}</h2>
-                <p className="text-lg text-gray-300 leading-relaxed">{content.challenge}</p>
+                <h2 className="text-2xl md:text-3xl font-light uppercase tracking-[-0.03em] mb-5">{t.challenge}</h2>
+                <p className="text-lg text-mute leading-relaxed">{content.challenge}</p>
               </article>
 
               <article>
-                <h2 className="text-2xl md:text-3xl font-bold mb-5">{t.contribution}</h2>
+                <h2 className="text-2xl md:text-3xl font-light uppercase tracking-[-0.03em] mb-5">{t.contribution}</h2>
                 <ul className="space-y-4">
                   {content.contributions.map((item) => (
-                    <li key={item} className="flex gap-4 text-lg text-gray-300 leading-relaxed">
-                      <span className="mt-2.5 w-1.5 h-1.5 shrink-0 rounded-full bg-cyan-400" />
+                    <li key={item} className="flex gap-4 text-lg text-mute leading-relaxed">
+                      <span className="mt-2.5 w-1.5 h-1.5 shrink-0 rounded-full bg-accent" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -188,18 +188,18 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
               </article>
 
               <article>
-                <h2 className="text-2xl md:text-3xl font-bold mb-5">{t.outcome}</h2>
-                <p className="text-lg text-gray-300 leading-relaxed">{content.outcome}</p>
+                <h2 className="text-2xl md:text-3xl font-light uppercase tracking-[-0.03em] mb-5">{t.outcome}</h2>
+                <p className="text-lg text-mute leading-relaxed">{content.outcome}</p>
               </article>
             </div>
 
             <aside className="lg:sticky lg:top-28 h-fit p-7 rounded-2xl bg-white/5 border border-white/10">
-              <h2 className="text-xl font-semibold mb-5">{t.stack}</h2>
+              <h2 className="text-xl font-light uppercase tracking-[-0.03em] mb-5">{t.stack}</h2>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-gray-300"
+                    className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-mute"
                   >
                     {tech}
                   </span>
@@ -209,11 +209,11 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
           </div>
         </section>
 
-        <section className="relative py-28 bg-[#12121a]">
+        <section className="relative py-28 bg-surface">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="max-w-3xl mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">{t.gallery}</h2>
-              <p className="text-base text-gray-300 leading-relaxed">{t.galleryDescription}</p>
+              <h2 className="text-2xl md:text-3xl font-light uppercase tracking-[-0.03em] mb-4">{t.gallery}</h2>
+              <p className="text-base text-mute leading-relaxed">{t.galleryDescription}</p>
             </div>
 
             <ProjectGallery
@@ -224,13 +224,13 @@ export function ProjectDetailPage({ locale, slug }: ProjectDetailPageProps) {
           </div>
         </section>
 
-        <section className="py-28 bg-[#0a0a0f]">
+        <section className="py-28 bg-canvas">
           <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">{t.ctaTitle}</h2>
-            <p className="text-base text-gray-300 leading-relaxed mb-8">{t.ctaText}</p>
+            <h2 className="text-2xl md:text-3xl font-light uppercase tracking-[-0.03em] mb-4">{t.ctaTitle}</h2>
+            <p className="text-base text-mute leading-relaxed mb-8">{t.ctaText}</p>
             <Link
               href={isUa ? '/ua/inquiry' : '/inquiry'}
-              className="inline-flex px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-medium hover:shadow-xl hover:shadow-cyan-500/20 transition-[box-shadow,transform]"
+              className="inline-flex px-8 py-4 rounded-full silver font-medium text-canvas transition-[filter,opacity] hover:brightness-110"
             >
               {t.cta}
             </Link>

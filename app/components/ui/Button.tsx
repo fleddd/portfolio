@@ -1,7 +1,3 @@
-'use client';
-
-import { motion } from 'motion/react';
-
 type Props = {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary';
@@ -12,13 +8,12 @@ type Props = {
 };
 
 const base =
-  'cursor-pointer font-medium rounded-xl transition-[color,background-color,border-color,box-shadow,transform] inline-flex items-center justify-center gap-2';
+  'inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-medium tracking-[-0.01em] transition-[filter,background-color,border-color,color] duration-300 ease-out-expo';
 
-const variants = {
-  primary:
-    'px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-2xl hover:shadow-cyan-500/25',
-  secondary:
-    'px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/10 text-white hover:bg-white/10 hover:border-cyan-400/50',
+// Primary is the brushed-silver pill; secondary is the hairline outline pill.
+export const buttonVariants = {
+  primary: 'silver text-canvas hover:brightness-110 active:brightness-95',
+  secondary: 'border border-white/25 text-ink hover:border-white/70 active:bg-white/5',
 };
 
 export function Button({
@@ -29,30 +24,19 @@ export function Button({
   type = 'button',
   className = '',
 }: Props) {
-  const cn = `${base} ${variants[variant]} ${className}`;
+  const cn = `${base} ${buttonVariants[variant]} ${className}`;
 
   if (href) {
     return (
-      <motion.a
-        href={href}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className={cn}
-      >
+      <a href={href} className={cn}>
         {children}
-      </motion.a>
+      </a>
     );
   }
 
   return (
-    <motion.button
-      type={type}
-      onClick={onClick}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className={cn}
-    >
+    <button type={type} onClick={onClick} className={cn}>
       {children}
-    </motion.button>
+    </button>
   );
 }

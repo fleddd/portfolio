@@ -1,13 +1,30 @@
 @import "tailwindcss";
 
+/* Wen-Launch world: charcoal surfaces, silver material, one blue signal. */
 :root {
-  --background: #0a0a0f;
-  --foreground: #fefefe;
+  --background: #0d0d0d;
+  --foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --font-sans: var(--font-onest, var(--font-geologica)), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-mono: var(--font-martian), ui-monospace, SFMono-Regular, monospace;
+}
+
+@theme {
+  --color-canvas: #0d0d0d;
+  --color-surface: #141414;
+  --color-raised: #1b1b1b;
+  --color-line: #272727;
+  --color-mute: #a9a9a9;
+  --color-ink: #ffffff;
+  /* Signal blue: badges, checks, active markers, focus. Never a solid surface. */
+  --color-accent: #4f8cff;
+  --color-accent-soft: #8db3ff;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
@@ -26,28 +43,81 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0f;
+  background: #0d0d0d;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #06b6d4, #3b82f6);
-  border-radius: 5px;
+  background: linear-gradient(180deg, #5a5a5a, #2f2f2f);
+  border: 2px solid #0d0d0d;
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #0891b2, #2563eb);
+  background: linear-gradient(180deg, #a9a9a9, #5a5a5a);
 }
 
 ::selection {
-  background-color: rgba(6, 182, 212, 0.3);
-  color: #ffffff;
+  background-color: #4f8cff;
+  color: #0d0d0d;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans);
+  caret-color: #4f8cff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Brushed-metal material from the reference palette (#Gradient swatch). */
+@utility silver {
+  background-image: linear-gradient(115deg, #8d8d8d 0%, #dcdcdc 38%, #f4f4f4 48%, #a9a9a9 62%, #cfcfcf 100%);
+}
+
+@utility text-silver {
+  background-image: linear-gradient(100deg, #9a9a9a 0%, #ededed 40%, #ffffff 52%, #a9a9a9 75%, #d6d6d6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Fine film grain over charcoal spotlights. */
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+@keyframes badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+    filter: blur(10px);
+  }
+}
+
+.hero-rise {
+  animation: hero-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.badge-spin {
+  animation: badge-spin 22s linear infinite;
+}
+
+.marquee-track {
+  animation: marquee 38s linear infinite;
 }
 
 html.language-transition-leave {
@@ -69,7 +139,7 @@ html.language-transition-leave::before,
 html.language-transition-enter::before {
   content: "";
   inset: 0;
-  background: #0a0a0f;
+  background: #0d0d0d;
   transform: none;
 }
 
@@ -82,13 +152,13 @@ html.language-transition-enter::after {
   content: attr(data-language-transition-message);
   top: 50%;
   width: min(90vw, 42rem);
-  color: #a5f3fc;
+  color: #ffffff;
   font-size: clamp(1rem, 2.5vw, 1.35rem);
   font-weight: 600;
   line-height: 1.5;
   text-align: center;
   text-wrap: balance;
-  text-shadow: 0 0 2rem rgb(34 211 238 / 0.35);
+  text-shadow: none;
   box-sizing: border-box;
   transform: translate(-50%, -50%);
 }
@@ -249,11 +319,11 @@ a,
 [role="button"] {
   cursor: pointer;
   touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(6, 182, 212, 0.18);
+  -webkit-tap-highlight-color: rgba(79, 140, 255, 0.18);
 }
 
 :where(a, button, input, textarea, summary):focus-visible {
-  outline: 2px solid #22d3ee;
+  outline: 2px solid #4f8cff;
   outline-offset: 3px;
 }
 
@@ -264,9 +334,9 @@ a,
   z-index: 1000;
   max-width: calc(100vw - 1.5rem);
   padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  background: #fefefe;
-  color: #0a0a0f;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0d0d0d;
   font-weight: 700;
   text-align: center;
   transform: translate(-50%, -200%);

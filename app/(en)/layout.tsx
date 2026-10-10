@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "../globals.css";
+import { fontVariables } from "../fonts";
+import { DesignContract } from "@/components/DesignContract";
 import { Toaster } from "@/components/Toaster";
 import { JsonLd } from "@/components/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
@@ -85,7 +87,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0f",
+  themeColor: "#0d0d0d",
   width: "device-width",
   initialScale: 1,
 };
@@ -96,8 +98,9 @@ export default function EnglishRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={fontVariables}>
       <body className="antialiased overflow-x-hidden">
+        <DesignContract />
         <LanguageTransitionScript />
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <MotionProvider>

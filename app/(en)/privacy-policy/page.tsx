@@ -37,35 +37,35 @@ export default function PrivacyPolicyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen bg-canvas text-white">
       <Navigation locale="en" mode="business" />
       <main id="main-content" tabIndex={-1}>
       <div className="max-w-4xl mx-auto px-6 pb-20 pt-32 space-y-6">
-        <h1 className="text-4xl font-bold">Privacy Policy</h1>
-        <p className="text-gray-300">Last updated: August 17, 2026</p>
-        <p className="text-gray-300">
+        <h1 className="text-4xl font-light uppercase tracking-[-0.03em]">Privacy Policy</h1>
+        <p className="text-mute">Last updated: August 17, 2026</p>
+        <p className="text-mute">
           This website collects only the data you provide through the project inquiry flow: project type, selected features, project context, current stage, preferred timeline, budget range, name, email, and an optional company or website.
         </p>
-        <p className="text-gray-300">
+        <p className="text-mute">
           The data is used solely to respond to your inquiry, discuss potential collaboration, and provide requested services.
         </p>
-        <p className="text-gray-300">
+        <p className="text-mute">
           Project inquiries are processed through email delivery infrastructure and may be stored in the mailbox used to manage project inquiries.
           Data is not sold or shared for third-party advertising.
         </p>
-        <p className="text-gray-300">
+        <p className="text-mute">
           Draft answers and a successful-submission marker are stored locally in your browser so progress survives accidental reloads and the same inquiry is not submitted twice. You can clear this information through your browser storage settings.
         </p>
-        <p className="text-gray-300">
+        <p className="text-mute">
           The site uses Vercel Analytics and Vercel Speed Insights to understand page usage, performance, and technical reliability.
           These tools collect aggregated diagnostic information such as page views, device/browser context, and Web Vitals measurements.
         </p>
-        <p className="text-gray-300">
+        <p className="text-mute">
           Inquiry data is retained only as long as needed to respond, manage collaboration, or meet reasonable business record requirements.
           You can request access, correction, or deletion of your submitted data at any time.
         </p>
-        <p className="text-gray-300">
-          Contact: <a href={`mailto:${CONTACT_EMAIL}`} className="text-cyan-400 hover:text-cyan-300 transition-colors">{CONTACT_EMAIL}</a>.
+        <p className="text-mute">
+          Contact: <a href={`mailto:${CONTACT_EMAIL}`} className="text-ink underline decoration-accent underline-offset-4 transition-colors hover:decoration-ink">{CONTACT_EMAIL}</a>.
         </p>
       </div>
       <script

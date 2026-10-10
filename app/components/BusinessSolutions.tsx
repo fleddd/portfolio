@@ -1,19 +1,32 @@
-import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
+import { Briefcase, Building2, CalendarCheck, Megaphone, MousePointerClick, Newspaper, ShoppingBag, Sparkles, type LucideIcon } from 'lucide-react';
 import type { Locale } from '@/constants/i18n';
-import { INQUIRY_OPTIONS } from '@/constants/inquiry';
-import { Section, SectionHeader } from '@/components/ui';
+import { INQUIRY_OPTIONS, type ProjectType } from '@/constants/inquiry';
+import { ArrowNE, IconBadge, Section, SectionHeader } from '@/components/ui';
+
+const FORMAT_ICONS: Record<ProjectType, LucideIcon> = {
+  'online-store': ShoppingBag,
+  'business-card': Briefcase,
+  corporate: Building2,
+  landing: MousePointerClick,
+  promo: Megaphone,
+  portal: Newspaper,
+  custom: Sparkles,
+  'online-service': CalendarCheck,
+};
 
 type BusinessSolutionsProps = { locale: Locale };
 
 const solutionCopy = {
   en: {
-    title: 'What I Can Build for You',
+    title: 'What I can build',
+    accent: 'for you',
     description: 'Choose a familiar website format. If none feels quite right, start with a custom website and I’ll help define the best solution.',
     linkLabel: 'Start a project',
   },
   ua: {
-    title: 'Що можу створити для вас',
+    title: 'Що можу створити',
+    accent: 'для вас',
     description: 'Оберіть знайомий формат сайту. Якщо жоден не підходить — почніть із кастомного сайту, а я допоможу визначити оптимальне рішення.',
     linkLabel: 'Обговорити проєкт',
   },
@@ -25,34 +38,24 @@ export function BusinessSolutions({ locale }: BusinessSolutionsProps) {
   const inquiryBase = locale === 'ua' ? '/ua/inquiry' : '/inquiry';
 
   return (
-    <Section id="solutions" bg="gradient-down" className="!py-16 md:!py-20 lg:!py-24">
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        <SectionHeader index="01" title={copy.title} description={copy.description} className="!mb-10 md:!mb-12 lg:!mb-14" />
+    <Section id="solutions">
+      <div className="mx-auto max-w-[90rem] safe-area-x">
+        <SectionHeader title={copy.title} accent={copy.accent} description={copy.description} />
 
-        <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((item, index) => (
+        <div className="grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((item) => (
             <Link
               key={item.value}
               href={`${inquiryBase}?projectType=${item.value}`}
               aria-label={`${item.label}: ${copy.linkLabel}`}
-              className="group relative min-h-56 overflow-hidden rounded-2xl border border-white/10 bg-[#111116] p-5 outline-none transition-[background-color,border-color,box-shadow] duration-300 hover:border-cyan-300/30 hover:bg-[#13131a] hover:shadow-[0_20px_55px_-30px_rgba(34,211,238,0.45)] focus-visible:border-cyan-300/50 focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f] md:min-h-64 md:p-6"
+              className="group relative flex min-h-56 flex-col border-b border-r border-line p-6 outline-none focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent md:min-h-64"
             >
-              <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_62%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true" />
-              <span className="pointer-events-none absolute inset-x-5 top-0 h-px origin-left scale-x-0 bg-linear-to-r from-cyan-300 to-blue-500 transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100 md:inset-x-6" aria-hidden="true" />
-              <article className="relative flex h-full flex-col">
-                <h3 className="max-w-[15rem] text-xl font-bold leading-tight text-white transition-colors group-hover:text-cyan-50 group-focus-visible:text-cyan-50 md:text-2xl">{item.label}</h3>
-                <p className="mt-4 max-w-[17rem] text-sm leading-relaxed text-gray-300">
-                  {item.description}
-                </p>
-                <div className="mt-auto flex items-end justify-between pt-5">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/15 bg-cyan-400/8 text-cyan-300 opacity-100 transition-[background-color,border-color,opacity] duration-300 group-hover:border-cyan-300/30 group-hover:bg-cyan-400/12 lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100">
-                    <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <span className="text-sm font-semibold tabular-nums text-cyan-400">
-                    {String(index + 1).padStart(2, '0')} <span className="text-gray-600 transition-colors group-hover:text-gray-400 group-focus-visible:text-gray-400">/ 08</span>
-                  </span>
-                </div>
-              </article>
+              <div className="flex items-start justify-between">
+                <IconBadge icon={FORMAT_ICONS[item.value]} />
+                <ArrowNE className="h-5 w-5 text-ink lg:translate-y-1 lg:opacity-0 lg:transition-[opacity,translate] lg:duration-500 lg:ease-out-expo lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-visible:translate-y-0 lg:group-focus-visible:opacity-100 motion-reduce:lg:translate-y-0" />
+              </div>
+              <h3 className="mt-auto pt-10 text-xl font-normal leading-tight tracking-[-0.02em] text-ink">{item.label}</h3>
+              <p className="mt-3 max-w-[17rem] text-[13px] leading-relaxed text-mute">{item.description}</p>
             </Link>
           ))}
         </div>

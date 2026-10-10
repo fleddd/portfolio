@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { CircleCheck } from 'lucide-react';
 import { useState } from 'react';
 import { Locale } from '@/constants/i18n';
 import { getServiceContent, ServiceSlug } from '@/constants/services';
@@ -78,7 +79,7 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-canvas text-white antialiased overflow-x-hidden">
       <Navigation locale={locale} mode="business" />
 
       <main id="main-content" tabIndex={-1} className="pt-16 xl:pt-20">
@@ -87,22 +88,19 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
           <div className="mx-auto max-w-7xl px-6 lg:px-12">
             <a
               href={servicesBase}
-              className="inline-flex min-h-10 items-center text-sm text-gray-400 transition-colors hover:text-white"
+              className="inline-flex min-h-10 items-center text-sm text-mute transition-colors hover:text-white"
             >
               ← {locale === 'ua' ? 'Усі послуги' : 'All services'}
             </a>
 
             <div className="mt-8 max-w-5xl">
-              <p className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-cyan-400">
-                {locale === 'ua' ? 'Розробка для бізнесу' : 'Web development for business'}
-              </p>
-              <h1 className="max-w-4xl text-4xl font-bold tracking-tight text-balance md:text-5xl lg:text-6xl">
+              <h1 className="max-w-4xl text-4xl font-light uppercase tracking-[-0.03em] text-balance md:text-5xl lg:text-6xl">
                 {service.title}
               </h1>
               <p className="mt-7 max-w-3xl text-lg font-medium leading-relaxed text-white md:text-xl">
                 {service.heroHook}
               </p>
-              <p className="mt-3 max-w-3xl leading-relaxed text-gray-400 md:text-lg">{service.summary}</p>
+              <p className="mt-3 max-w-3xl leading-relaxed text-mute md:text-lg">{service.summary}</p>
               <div className="mt-7">
                 <Button href={inquiryHref}>{service.ctaLabel}</Button>
               </div>
@@ -114,20 +112,17 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
         <Section id="solutions" bg="solid" className="border-b border-white/10 py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-12">
             <div className="mb-10 max-w-3xl md:mb-14">
-              <p className="mb-4 text-sm font-medium text-cyan-400">
-                {locale === 'ua' ? 'Конфігуратор послуги' : 'Service configurator'}
-              </p>
-              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <h2 className="text-3xl font-light uppercase tracking-[-0.03em] text-white md:text-4xl">
                 {locale === 'ua' ? 'Оберіть потрібний формат' : 'Choose the Right Format'}
               </h2>
-              <p className="mt-4 max-w-2xl leading-relaxed text-gray-400">
+              <p className="mt-4 max-w-2xl leading-relaxed text-mute">
                 {locale === 'ua'
                   ? 'Перемикайте варіанти, щоб побачити, які функції входять у кожне рішення. Обраний набір можна одразу перенести у форму заявки.'
                   : 'Switch between options to see the features included in each solution. You can send the selected setup straight to the inquiry form.'}
               </p>
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#101016] shadow-2xl shadow-black/20 lg:grid lg:grid-cols-[minmax(18rem,0.8fr)_minmax(0,1.2fr)]">
+            <div className="overflow-hidden rounded-3xl border border-white/10 bg-surface shadow-2xl shadow-black/20 lg:grid lg:grid-cols-[minmax(18rem,0.8fr)_minmax(0,1.2fr)]">
               <div
                 className="border-b border-white/10 lg:border-b-0 lg:border-r"
                 aria-label={locale === 'ua' ? 'Варіанти послуги' : 'Service options'}
@@ -139,21 +134,19 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
                     type="button"
                     aria-pressed={selectedOfferIndex === idx}
                     onClick={() => setSelectedOfferIndex(idx)}
-                    className={`relative flex w-full items-start gap-5 border-b border-white/10 px-6 py-5 text-left transition-colors last:border-b-0 focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cyan-300 md:px-7 md:py-6 ${
+                    className={`relative flex w-full items-start gap-5 border-b border-white/10 px-6 py-5 text-left transition-colors last:border-b-0 focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent md:px-7 md:py-6 ${
                       selectedOfferIndex === idx
-                        ? 'bg-cyan-400/8 text-white'
-                        : 'text-gray-400 hover:bg-white/4 hover:text-white'
+                        ? 'bg-white/[0.04] text-white'
+                        : 'text-mute hover:bg-white/4 hover:text-white'
                     }`}
                   >
                     <span
-                      className={`mt-1 font-mono text-xs transition-colors ${selectedOfferIndex === idx ? 'text-cyan-300' : 'text-gray-600'}`}
+                      className={`mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full transition-colors ${selectedOfferIndex === idx ? 'bg-accent' : 'bg-line'}`}
                       aria-hidden="true"
-                    >
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
+                    />
                     <span>
-                      <span className="block text-lg font-semibold tracking-tight md:text-xl">{offer.title}</span>
-                      <span className={`mt-2 block text-sm leading-relaxed ${selectedOfferIndex === idx ? 'text-gray-300' : 'text-gray-500'}`}>
+                      <span className="block text-lg font-medium tracking-tight md:text-xl">{offer.title}</span>
+                      <span className={`mt-2 block text-sm leading-relaxed ${selectedOfferIndex === idx ? 'text-mute' : 'text-mute/80'}`}>
                         {offer.description}
                       </span>
                     </span>
@@ -167,27 +160,22 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
                 className="relative flex min-h-full flex-col overflow-hidden p-6 md:p-8 lg:p-10"
               >
                 <div
-                  className="pointer-events-none absolute -right-32 -top-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl"
+                  className="pointer-events-none absolute -right-32 -top-40 h-96 w-96 rounded-full bg-white/[0.03] blur-3xl"
                   aria-hidden="true"
                 />
                 <div className="relative">
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">
-                    {locale === 'ua' ? 'Входить у цей варіант' : 'Included in this option'}
-                  </p>
-                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white md:text-3xl">
+                  <h3 className="text-2xl font-normal tracking-tight text-white md:text-3xl">
                     {selectedOffer.title}
                   </h3>
 
                   <div className="mt-8 grid border-t border-white/12 sm:grid-cols-2">
-                    {includedFeatures.map((feature, idx) => (
+                    {includedFeatures.map((feature) => (
                       <div
                         key={feature.value}
                         className="grid grid-cols-[1.75rem_1fr] gap-3 border-b border-white/12 py-4 sm:odd:pr-5 sm:even:border-l sm:even:pl-5"
                       >
-                        <span className="font-mono text-xs text-gray-600" aria-hidden="true">
-                          {String(idx + 1).padStart(2, '0')}
-                        </span>
-                        <span className="text-sm leading-relaxed text-gray-200 md:text-base">{feature.label}</span>
+                        <CircleCheck className="mt-0.5 h-4 w-4 text-accent" strokeWidth={1.5} aria-hidden="true" />
+                        <span className="text-sm leading-relaxed text-ink/90 md:text-base">{feature.label}</span>
                       </div>
                     ))}
                   </div>
@@ -196,12 +184,12 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
                 <div className="relative mt-auto pt-9">
                   <Link
                     href={configuredInquiryHref}
-                    className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-[#071014] transition-colors hover:bg-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101016]"
+                    className="silver inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-7 py-3 text-sm font-medium text-canvas transition-[filter] duration-300 hover:brightness-110 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                   >
                     {locale === 'ua' ? 'Перенести у форму' : 'Continue with this setup'}
                     <span aria-hidden="true">→</span>
                   </Link>
-                  <p className="mt-3 text-sm text-gray-500">
+                  <p className="mt-3 text-sm text-mute/80">
                     {locale === 'ua'
                       ? 'У формі можна додати або прибрати будь-яку функцію.'
                       : 'You can add or remove any feature in the form.'}
@@ -216,10 +204,10 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
         <Section bg="solid" className="border-b border-white/10 py-16 md:py-24">
           <div id="work" className="mx-auto max-w-7xl px-6 lg:px-12">
             <div className="mb-10 max-w-2xl md:mb-14">
-              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <h2 className="text-3xl font-light uppercase tracking-[-0.03em] text-white md:text-4xl">
                 {locale === 'ua' ? 'Релевантні роботи' : 'Relevant Work'}
               </h2>
-              <p className="mt-4 leading-relaxed text-gray-400">
+              <p className="mt-4 leading-relaxed text-mute">
                 {locale === 'ua'
                   ? 'Реальні проєкти, де можна оцінити підхід, інтерфейси та технічну реалізацію'
                   : 'Real projects that demonstrate the delivery approach, interfaces, and technical implementation'}
@@ -233,10 +221,10 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
         <Section id="details" bg="solid" className="py-16 md:py-24">
           <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20 lg:px-12">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <h2 className="text-3xl font-light uppercase tracking-[-0.03em] text-white md:text-4xl">
                 {locale === 'ua' ? 'Часті запитання' : 'Frequently Asked'}
               </h2>
-              <p className="mt-4 max-w-md leading-relaxed text-gray-400">
+              <p className="mt-4 max-w-md leading-relaxed text-mute">
                 {locale === 'ua' ? 'Що варто знати перед початком' : 'What to know before getting started'}
               </p>
             </div>
@@ -244,15 +232,15 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
               {service.faqs.map((faq) => (
                 <details key={faq.question} className="group border-b border-white/15">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 select-none">
-                    <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
+                    <h3 className="text-lg font-normal text-white">{faq.question}</h3>
                     <span
-                      className="text-xl font-light text-gray-400 transition-transform group-open:rotate-45"
+                      className="text-xl font-light text-mute transition-transform group-open:rotate-45"
                       aria-hidden="true"
                     >
                       +
                     </span>
                   </summary>
-                  <p className="max-w-2xl pb-6 leading-relaxed text-gray-300">{faq.answer}</p>
+                  <p className="max-w-2xl pb-6 leading-relaxed text-mute">{faq.answer}</p>
                 </details>
               ))}
             </div>

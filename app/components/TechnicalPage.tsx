@@ -29,7 +29,7 @@ export function TechnicalPage({ locale }: TechnicalPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-canvas text-white antialiased overflow-x-hidden">
       <Navigation locale={locale} mode="technical" />
 
       <main id="main-content" tabIndex={-1} className="pt-16 xl:pt-20">

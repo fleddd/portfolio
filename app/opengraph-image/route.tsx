@@ -17,7 +17,7 @@ export function GET(request: Request) {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #0a0a0f 0%, #12121a 100%)",
+          background: "radial-gradient(ellipse at 50% 0%, #3b3b3b 0%, #1f1f1f 40%, #0d0d0d 80%)",
           fontFamily: "system-ui, sans-serif",
         }}
       >
@@ -38,13 +38,16 @@ export function GET(request: Request) {
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
               backgroundSize: "contain",
+              filter: "grayscale(1) brightness(1.7)",
             }}
           />
           <div
             style={{
               fontSize: 72,
-              fontWeight: 800,
-              background: "linear-gradient(90deg, #fff 0%, #94a3b8 100%)",
+              fontWeight: 400,
+              letterSpacing: -2,
+              textTransform: "uppercase",
+              background: "linear-gradient(100deg, #9a9a9a 0%, #ededed 40%, #ffffff 52%, #a9a9a9 75%, #d6d6d6 100%)",
               backgroundClip: "text",
               color: "transparent",
               marginBottom: 16,
@@ -56,9 +59,7 @@ export function GET(request: Request) {
             style={{
               fontSize: 36,
               fontWeight: 600,
-              background: "linear-gradient(90deg, #06b6d4 0%, #3b82f6 100%)",
-              backgroundClip: "text",
-              color: "transparent",
+              color: "#ffffff",
             }}
           >
             Full-Stack Developer
@@ -66,7 +67,7 @@ export function GET(request: Request) {
           <div
             style={{
               fontSize: 24,
-              color: "#64748b",
+              color: "#a9a9a9",
               marginTop: 24,
             }}
           >

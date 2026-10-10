@@ -8,16 +8,16 @@ type HomePageProps = {
 
 export function HomePage({ locale }: HomePageProps) {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-canvas text-ink antialiased overflow-x-hidden">
       <Navigation locale={locale} mode="business" />
 
       <main id="main-content" tabIndex={-1}>
         <Hero locale={locale} />
         <About locale={locale} />
         <BusinessSolutions locale={locale} />
-        <Experience locale={locale} />
         <Projects locale={locale} mode="business" />
-        <Contact locale={locale} sectionIndex="04" />
+        <Experience locale={locale} />
+        <Contact locale={locale} />
       </main>
 
       <Footer locale={locale} mode="business" />

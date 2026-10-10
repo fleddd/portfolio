@@ -1,26 +1,57 @@
 type Props = {
   title: React.ReactNode;
-  description?: string;
+  accent?: React.ReactNode;
+  description?: React.ReactNode;
+  align?: 'left' | 'center';
+  // `display` is the bookend voice (page openers and the closing CTA): larger,
+  // with the thin second voice. Every other section heading stays one voice
+  // so the hierarchy reads hero → section → card without competing.
+  display?: boolean;
   className?: string;
   level?: 1 | 2;
-  index?: string;
 };
 
-export function SectionHeader({ title, description, className = '', level = 2, index }: Props) {
+export function SectionHeader({
+  title,
+  accent,
+  description,
+  align = 'left',
+  display = false,
+  className = '',
+  level = 2,
+}: Props) {
   const Heading = level === 1 ? 'h1' : 'h2';
+  const centered = align === 'center';
 
   return (
-    <div className={`mb-12 space-y-4 text-center md:mb-16 lg:mb-20 ${className}`}>
-      {index && (
-        <div className="flex items-center justify-center gap-3 font-mono text-xs font-semibold tracking-[0.16em] text-cyan-400" aria-hidden="true">
-          <span>{index}</span>
-          <span className="h-px w-8 bg-cyan-400/40" />
-        </div>
-      )}
-      <Heading className="text-3xl font-bold text-white text-balance md:text-5xl lg:text-6xl">{title}</Heading>
+    <div className={`mb-12 md:mb-14 ${centered ? 'text-center' : ''} ${className}`}>
+      <Heading
+        className={`font-light uppercase text-ink text-balance ${display
+          ? 'text-[clamp(2.5rem,6vw,4.75rem)] leading-[0.95] tracking-[-0.035em]'
+          : 'max-w-3xl text-[clamp(2rem,3.6vw,3.25rem)] leading-none tracking-[-0.03em]'
+          } ${centered ? 'mx-auto' : ''}`}
+      >
+        {title}
+        {accent && (
+          <>
+            {' '}
+            {display ? <DisplayAccent>{accent}</DisplayAccent> : accent}
+          </>
+        )}
+      </Heading>
       {description && (
-        <p className="mx-auto max-w-2xl text-base leading-relaxed text-gray-300 text-pretty md:text-lg">{description}</p>
+        <p className={`mt-5 max-w-xl text-[17px] leading-relaxed text-mute text-pretty ${centered ? 'mx-auto' : ''}`}>
+          {description}
+        </p>
       )}
     </div>
+  );
+}
+
+export function DisplayAccent({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span className={`font-display text-[1.12em] font-light tracking-[0.01em] ${className}`}>
+      {children}
+    </span>
   );
 }

@@ -11,7 +11,9 @@ import {
   Server,
   GitBranch,
   Send,
+  Mail,
 } from 'lucide-react';
+import { CONTACT_EMAIL } from './site';
 
 export { PROJECTS, PROJECT_SLUGS, getProject, getProjectContent } from './projects';
 export type { Project, ProjectSlug } from './projects';
@@ -46,7 +48,6 @@ export const SKILL_CATEGORIES = [
   {
     title: 'Frontend',
     icon: Code2,
-    color: 'from-cyan-500 to-blue-500',
     recruiterFocus: 'UI architecture, SSR/SSG, and conversion-focused landing pages',
     technologies: [
       { name: 'React', icon: '/assets/react.svg' },
@@ -58,7 +59,6 @@ export const SKILL_CATEGORIES = [
   {
     title: 'Backend',
     icon: Server,
-    color: 'from-blue-500 to-purple-500',
     recruiterFocus: 'APIs, integrations, validation, and scalable business logic',
     technologies: [
       { name: 'Node.js', icon: '/assets/nodejs.svg' },
@@ -71,7 +71,6 @@ export const SKILL_CATEGORIES = [
   {
     title: 'Database',
     icon: Database,
-    color: 'from-purple-500 to-pink-500',
     recruiterFocus: 'Data modeling, query performance, and reliable persistence',
     technologies: [
       { name: 'PostgreSQL', icon: '/assets/postgresql.svg' },
@@ -82,7 +81,6 @@ export const SKILL_CATEGORIES = [
   {
     title: 'DevOps',
     icon: Cloud,
-    color: 'from-pink-500 to-red-500',
     recruiterFocus: 'Deployment pipelines, containerization, and production stability',
     technologies: [
       { name: 'Docker', icon: '/assets/docker.svg' },
@@ -94,7 +92,6 @@ export const SKILL_CATEGORIES = [
   {
     title: 'Tools',
     icon: GitBranch,
-    color: 'from-green-500 to-emerald-500',
     recruiterFocus: 'Version control, API testing, and collaborative workflows',
     technologies: [
       { name: 'Git', icon: '/assets/git.svg' },
@@ -126,8 +123,16 @@ export const CONTACT_SOCIAL_LINKS: { icon: LucideIcon; href: string; label: stri
   { icon: Send, href: 'https://telegram.me/olehfedkiv', label: 'Telegram' },
 ];
 
+// Direct contact channels, shown in the Contact section and the footer.
+export const CONTACT_CHANNELS: { icon: LucideIcon; href: string; label: string; value: string; external: boolean }[] = [
+  { icon: Mail, href: `mailto:${CONTACT_EMAIL}`, label: 'Email', value: CONTACT_EMAIL, external: false },
+  { icon: Send, href: 'https://telegram.me/olehfedkiv', label: 'Telegram', value: '@olehfedkiv', external: true },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/olehfedkiv/', label: 'LinkedIn', value: 'in/olehfedkiv', external: true },
+  { icon: Github, href: 'https://github.com/fleddd/', label: 'GitHub', value: 'fleddd', external: true },
+];
+
 export const INPUT_CLASS =
-  'w-full px-4 py-3 rounded-xl bg-[#111116] border border-white/10 text-white placeholder-gray-400 focus-visible:border-cyan-400/70 focus-visible:ring-2 focus-visible:ring-cyan-400/30 transition-[border-color,box-shadow,background-color]';
+  'w-full px-4 py-3 rounded-xl bg-surface border border-line text-ink placeholder-mute focus-visible:border-accent/70 focus-visible:ring-2 focus-visible:ring-accent/30 transition-[border-color,box-shadow,background-color]';
 
 // Footer
 export const FOOTER_LINKS = [

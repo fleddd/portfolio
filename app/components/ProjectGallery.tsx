@@ -134,7 +134,7 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
               key={`${screenshot.alt}-${index}`}
               className={index === 0 ? 'lg:col-span-2' : ''}
             >
-              <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-[#08080c] shadow-xl shadow-black/10">
+              <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-xl shadow-black/10">
                 {screenshot.src ? (
                   <button
                     type="button"
@@ -159,7 +159,7 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                     </span>
                   </button>
                 ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 border-2 border-dashed border-white/10 text-gray-400">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 border-2 border-dashed border-white/10 text-mute">
                     <ImageIcon className="w-10 h-10" strokeWidth={1.5} />
                     <span className="text-sm font-medium uppercase tracking-widest">
                       {placeholderLabel} {index + 1}
@@ -167,7 +167,7 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                   </div>
                 )}
               </div>
-              <figcaption className="mt-4 text-sm text-gray-400">{screenshot.caption}</figcaption>
+              <figcaption className="mt-4 text-sm text-mute">{screenshot.caption}</figcaption>
             </motion.figure>
           );
         })}
@@ -206,12 +206,12 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
-                    className="truncate text-sm text-gray-300"
+                    className="truncate text-sm text-mute"
                   >
                     {activeScreenshot.alt}
                   </motion.p>
                 </AnimatePresence>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-mute">
                   {activeIndex + 1} / {availableScreenshots.length} · {t.hint}
                 </p>
               </div>
@@ -251,7 +251,7 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                   <button
                     type="button"
                     onClick={() => move(-1)}
-                    className="absolute z-20 left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 border border-white/15 hover:bg-cyan-500 transition-colors duration-300"
+                    className="absolute z-20 left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 border border-white/20 hover:border-white/70 transition-colors duration-300"
                     aria-label={t.previous}
                   >
                     <ChevronLeft className="w-7 h-7" aria-hidden="true" />
@@ -259,7 +259,7 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                   <button
                     type="button"
                     onClick={() => move(1)}
-                    className="absolute z-20 right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/15 border border-white/15 hover:bg-cyan-500 transition-colors duration-300"
+                    className="absolute z-20 right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 border border-white/20 hover:border-white/70 transition-colors duration-300"
                     aria-label={t.next}
                   >
                     <ChevronRight className="w-7 h-7" aria-hidden="true" />
@@ -273,7 +273,7 @@ export function ProjectGallery({ screenshots, locale, placeholderLabel }: Projec
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -5 }}
-                  className="absolute bottom-5 left-4 right-4 text-center text-sm text-gray-400"
+                  className="absolute bottom-5 left-4 right-4 text-center text-sm text-mute"
                 >
                   {activeScreenshot.caption}
                 </motion.p>

@@ -1,6 +1,8 @@
 import { Heart } from 'lucide-react';
 import { Locale, getCopy } from '@/constants/i18n';
 import { BrandLogo } from '@/components/BrandLogo';
+import { ArrowNE } from '@/components/ui';
+import { CONTACT_CHANNELS } from '@/constants';
 
 type FooterProps = {
   locale: Locale;
@@ -29,33 +31,51 @@ export function Footer({ locale, mode }: FooterProps) {
     ];
 
   return (
-    <footer className="relative bg-[#0a0a0f] border-t border-white/5">
-      <div className="mx-auto max-w-7xl px-6 py-10 lg:px-12 lg:py-12">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-16">
-          <div className="max-w-lg space-y-4">
+    <footer className="relative overflow-hidden border-t border-line bg-canvas">
+      <div className="mx-auto max-w-[90rem] safe-area-x pt-14 md:pt-20">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,0.9fr)]">
+          <div className="max-w-sm">
             <a
               href={isUa ? '/ua' : '/'}
-              className="inline-flex min-h-11 items-center gap-3 rounded-lg"
+              className="inline-flex min-h-11 items-center gap-3"
               aria-label={isUa ? 'Перейти на головну сторінку' : 'Go to homepage'}
             >
-              <BrandLogo className="h-14 w-auto drop-shadow-[0_0_12px_rgba(34,211,238,0.18)]" />
-              <h2 className="text-2xl font-bold text-white">Oleh Fedkiv</h2>
+              <BrandLogo className="h-8 w-auto grayscale brightness-[1.7] contrast-[0.9]" />
+              <span className="text-lg uppercase tracking-[0.04em] text-ink">Oleh Fedkiv</span>
             </a>
-            <p className="text-gray-300 leading-relaxed">
-              {t.subtitle}
-            </p>
+            <p className="mt-4 text-sm leading-relaxed text-mute">{t.subtitle}</p>
           </div>
 
-          <div className="space-y-4">
-            <h2 className="font-semibold text-white">{t.quickLinks}</h2>
-            <ul className="grid gap-x-8 md:grid-cols-2 lg:grid-cols-3">
+          <nav aria-label={t.quickLinks}>
+            <h2 className="text-xs uppercase tracking-[0.08em] text-mute">{t.quickLinks}</h2>
+            <ul className="mt-4 grid gap-x-8 sm:grid-cols-2">
               {links.map((link) => (
-                <li key={link.label}>
+                <li key={link.label} className="border-b border-line">
                   <a
                     href={link.href}
-                    className="inline-flex min-h-11 items-center rounded-sm text-gray-300 transition-colors hover:text-cyan-300"
+                    className="group flex min-h-12 items-center justify-between text-sm text-ink/85 transition-colors duration-300 hover:text-ink"
                   >
                     {link.label}
+                    <ArrowNE className="h-3 w-3 text-mute transition-colors duration-300 group-hover:text-ink" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div>
+            <h2 className="text-xs uppercase tracking-[0.08em] text-mute">{isUa ? 'Контакти' : 'Contacts'}</h2>
+            <ul className="mt-4">
+              {CONTACT_CHANNELS.map((channel) => (
+                <li key={channel.label} className="border-b border-line">
+                  <a
+                    href={channel.href}
+                    {...(channel.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                    className="group flex min-h-12 items-center gap-3 text-sm text-ink/85 transition-colors duration-300 hover:text-ink"
+                  >
+                    <channel.icon className="h-4 w-4 shrink-0 text-accent" strokeWidth={1.5} aria-hidden="true" />
+                    <span className="min-w-0 break-all">{channel.value}</span>
+                    <span className="sr-only">{channel.label}</span>
                   </a>
                 </li>
               ))}
@@ -63,30 +83,29 @@ export function Footer({ locale, mode }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 md:flex-row">
-          <p className="text-gray-300 text-sm flex items-center gap-2">
-            {locale === 'ua' ? (
-              <>
-                © {currentYear} Oleh Fedkiv. Створено з <Heart className="w-4 h-4 text-red-500" aria-hidden="true" /> {t.copyrightSuffix}
-              </>
-            ) : (
-              <>
-                © {currentYear} Oleh Fedkiv. Built with <Heart className="w-4 h-4 text-red-500" aria-hidden="true" /> {t.copyrightSuffix}
-              </>
-            )}
+        <div className="mt-14 flex flex-col items-center justify-between gap-2 border-t border-line py-5 text-xs text-mute md:flex-row">
+          <p className="flex items-center gap-1.5">
+            © {currentYear} Oleh Fedkiv. {isUa ? 'Створено з' : 'Built with'}
+            <Heart className="h-3.5 w-3.5 fill-accent text-accent" aria-hidden="true" />
+            {t.copyrightSuffix}
           </p>
           <div className="flex gap-6">
-            <a href={t.privacyHref} className="inline-flex min-h-11 items-center text-sm text-gray-300 transition-colors hover:text-cyan-300">
+            <a href={t.privacyHref} className="inline-flex min-h-11 items-center transition-colors duration-300 hover:text-ink">
               {t.privacy}
             </a>
-            <a href={t.termsHref} className="inline-flex min-h-11 items-center text-sm text-gray-300 transition-colors hover:text-cyan-300">
+            <a href={t.termsHref} className="inline-flex min-h-11 items-center transition-colors duration-300 hover:text-ink">
               {t.terms}
             </a>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-20" />
+      <p
+        className="pointer-events-none -mb-[0.2em] select-none whitespace-nowrap text-center font-display text-[clamp(4rem,17vw,16rem)] font-light uppercase leading-none tracking-[-0.03em] text-white/[0.06]"
+        aria-hidden="true"
+      >
+        Oleh Fedkiv
+      </p>
     </footer>
   );
 }

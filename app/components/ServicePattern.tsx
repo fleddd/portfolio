@@ -10,7 +10,7 @@ export function ServicePattern({ variant, className = '' }: ServicePatternProps)
         aria-hidden="true"
         className={`pointer-events-none absolute h-64 w-64 opacity-30 ${className}`}
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(34, 211, 238, 0.7) 1.25px, transparent 1.5px)',
+          backgroundImage: 'radial-gradient(circle, rgba(169, 169, 169, 0.5) 1.25px, transparent 1.5px)',
           backgroundSize: '18px 18px',
           maskImage: 'radial-gradient(circle, black 15%, transparent 70%)',
           WebkitMaskImage: 'radial-gradient(circle, black 15%, transparent 70%)',
@@ -25,7 +25,7 @@ export function ServicePattern({ variant, className = '' }: ServicePatternProps)
         aria-hidden="true"
         viewBox="0 0 360 220"
         fill="none"
-        className={`pointer-events-none absolute text-cyan-400/25 ${className}`}
+        className={`pointer-events-none absolute text-white/15 ${className}`}
       >
         <path d="M18 164H82L126 112H198L246 62H342" stroke="currentColor" strokeWidth="1" />
         <path d="M82 164L132 196H226L274 150H342" stroke="currentColor" strokeWidth="1" strokeDasharray="5 8" />
@@ -47,7 +47,7 @@ export function ServicePattern({ variant, className = '' }: ServicePatternProps)
       aria-hidden="true"
       viewBox="0 0 280 280"
       fill="none"
-      className={`pointer-events-none absolute text-cyan-400/20 ${className}`}
+      className={`pointer-events-none absolute text-white/15 ${className}`}
     >
       <circle cx="140" cy="140" r="116" stroke="currentColor" strokeWidth="1" strokeDasharray="3 8" />
       <circle cx="140" cy="140" r="78" stroke="currentColor" strokeWidth="1" />

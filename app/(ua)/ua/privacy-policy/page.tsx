@@ -37,35 +37,35 @@ export default function PrivacyPolicyUkPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen bg-canvas text-white">
       <Navigation locale="ua" mode="business" />
       <main id="main-content" tabIndex={-1}>
       <div className="max-w-4xl mx-auto px-6 pb-20 pt-32 space-y-6">
-        <h1 className="text-4xl font-bold">Політика конфіденційності</h1>
-        <p className="text-gray-300">Оновлено: 17 серпня 2026</p>
-        <p className="text-gray-300">
+        <h1 className="text-4xl font-light uppercase tracking-[-0.03em]">Політика конфіденційності</h1>
+        <p className="text-mute">Оновлено: 17 серпня 2026</p>
+        <p className="text-mute">
           Сайт збирає лише дані, які ви добровільно надсилаєте через форму запиту на проєкт: тип продукту, вибрані функції, опис, поточний етап, бажані терміни, бюджетний діапазон, ім&apos;я, email і необов&apos;язкову назву компанії або сайт.
         </p>
-        <p className="text-gray-300">
+        <p className="text-mute">
           Ці дані використовуються виключно для відповіді на запит, обговорення співпраці та надання послуг.
         </p>
-        <p className="text-gray-300">
+        <p className="text-mute">
           Дані запиту обробляються через інфраструктуру email-доставки та можуть зберігатися у поштовій скриньці для обробки проєктних запитів.
           Продаж або передача даних третім сторонам для реклами не здійснюється.
         </p>
-        <p className="text-gray-300">
+        <p className="text-mute">
           Чернетка відповідей і позначка про успішне надсилання зберігаються локально у вашому браузері, щоб прогрес не втрачався після випадкового перезавантаження, а одна заявка не надсилалася двічі. Ці дані можна очистити через налаштування сховища браузера.
         </p>
-        <p className="text-gray-300">
+        <p className="text-mute">
           Сайт використовує Vercel Analytics і Vercel Speed Insights для розуміння відвідуваності, продуктивності та технічної стабільності.
           Ці інструменти збирають агреговані діагностичні дані: перегляди сторінок, контекст пристрою/браузера та показники Web Vitals.
         </p>
-        <p className="text-gray-300">
+        <p className="text-mute">
           Дані із запитів зберігаються лише стільки, скільки потрібно для відповіді, ведення співпраці або розумного обліку бізнес-комунікації.
           Ви можете запросити доступ, виправлення або видалення надісланих даних.
         </p>
-        <p className="text-gray-300">
-          Контакт: <a href={`mailto:${CONTACT_EMAIL}`} className="text-cyan-400 hover:text-cyan-300 transition-colors">{CONTACT_EMAIL}</a>.
+        <p className="text-mute">
+          Контакт: <a href={`mailto:${CONTACT_EMAIL}`} className="text-ink underline decoration-accent underline-offset-4 transition-colors hover:decoration-ink">{CONTACT_EMAIL}</a>.
         </p>
       </div>
       <script

@@ -53,10 +53,10 @@ function OptionGroup({ legend, hint, name, options, value, error, stretch, secon
 
   return (
     <fieldset aria-describedby={error ? errorId : undefined} className={stretch ? 'md:flex md:min-h-0 md:flex-1 md:flex-col' : undefined}>
-      <legend className="text-xl font-bold tracking-tight text-white md:text-2xl">{legend}</legend>
-      {hint && <p className="mt-1.5 text-sm leading-relaxed text-gray-300">{hint}</p>}
+      <legend className="text-xl font-normal tracking-tight text-white md:text-2xl">{legend}</legend>
+      {hint && <p className="mt-1.5 text-sm leading-relaxed text-mute">{hint}</p>}
       <div className={`mt-4 grid gap-3 md:mt-3 md:gap-2.5 ${options.length >= 8 ? 'md:grid-cols-4 md:grid-rows-2' : secondaryOption ? 'md:grid-cols-3' : 'md:grid-cols-2'} ${stretch ? 'md:min-h-0 md:flex-1' : ''}`}>
-        {options.map((option, index) => (
+        {options.map((option) => (
           <label key={option.value} className="block cursor-pointer">
             <input
               type="radio"
@@ -66,22 +66,20 @@ function OptionGroup({ legend, hint, name, options, value, error, stretch, secon
               onChange={() => onChange(option.value)}
               className="peer sr-only"
             />
-            <span data-option-card className={`relative flex h-full min-h-14 flex-col justify-center rounded-xl border px-4 py-3 transition-[background-color,border-color,box-shadow,transform] peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-300 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-[#0a0a0f] md:min-h-12 md:justify-start ${dense ? 'md:px-4 md:pb-3 md:pt-9' : 'md:px-5 md:pb-5 md:pt-12'} ${value === option.value
-              ? 'border-cyan-300/70 bg-cyan-400/10 shadow-[0_0_0_1px_rgba(103,232,249,0.15)]'
+            <span data-option-card className={`relative flex h-full min-h-14 flex-col justify-center rounded-xl border px-4 py-3 transition-[background-color,border-color,box-shadow,transform] peer-focus-visible:ring-2 peer-focus-visible:ring-accent peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-canvas md:min-h-12 md:justify-start ${dense ? 'md:px-4 md:pb-3 md:pt-9' : 'md:px-5 md:pb-5 md:pt-12'} ${value === option.value
+              ? 'border-accent/70 bg-accent/10 shadow-[0_0_0_1px_rgba(79,140,255,0.18)]'
               : 'border-white/10 bg-white/4 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/7'
               }`}>
               <span className="pointer-events-none absolute left-5 right-5 top-5 hidden items-start justify-between md:flex" aria-hidden="true">
-                <span className="font-mono text-xs font-semibold tracking-[0.18em] text-gray-500">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <span className={`flex h-6 w-6 items-center justify-center rounded-full border transition-colors ${value === option.value ? 'border-cyan-300 bg-cyan-300 text-[#0a0a0f]' : 'border-white/15 text-transparent'}`}>
+                <span />
+                <span className={`flex h-6 w-6 items-center justify-center rounded-full border transition-colors ${value === option.value ? 'border-accent bg-accent text-canvas' : 'border-white/15 text-transparent'}`}>
                   <Check className="h-4 w-4" strokeWidth={3} />
                 </span>
               </span>
               <span data-option-content>
-                <span className={`block text-base font-semibold text-white md:font-bold md:leading-snug md:tracking-tight ${dense ? 'md:text-base' : 'md:text-lg'}`}>{option.label}</span>
+                <span className={`block text-base font-medium text-white md:font-normal md:leading-snug md:tracking-tight ${dense ? 'md:text-base' : 'md:text-lg'}`}>{option.label}</span>
                 {option.description && (
-                  <span className={`mt-1 block text-sm leading-snug text-gray-300 md:max-w-[38rem] ${dense ? 'md:mt-1 md:text-xs md:leading-snug' : 'md:mt-2 md:text-sm md:leading-relaxed'}`}>{option.description}</span>
+                  <span className={`mt-1 block text-sm leading-snug text-mute md:max-w-[38rem] ${dense ? 'md:mt-1 md:text-xs md:leading-snug' : 'md:mt-2 md:text-sm md:leading-relaxed'}`}>{option.description}</span>
                 )}
               </span>
             </span>
@@ -89,7 +87,7 @@ function OptionGroup({ legend, hint, name, options, value, error, stretch, secon
         ))}
       </div>
       {secondaryOption && (
-        <label className="mt-3 inline-flex min-h-11 cursor-pointer items-center gap-3 self-start rounded-lg pr-3 text-sm font-medium text-gray-200">
+        <label className="mt-3 inline-flex min-h-11 cursor-pointer items-center gap-3 self-start rounded-lg pr-3 text-sm font-medium text-ink/90">
           <input
             type="radio"
             name={name}
@@ -98,11 +96,11 @@ function OptionGroup({ legend, hint, name, options, value, error, stretch, secon
             onChange={() => onChange(secondaryOption.value)}
             className="peer sr-only"
           />
-          <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/25 bg-[#0a0a0f] text-[#0a0a0f] transition-colors peer-checked:border-cyan-300 peer-checked:bg-cyan-300 peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-300 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-[#111116]">
+          <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/25 bg-canvas text-canvas transition-colors peer-checked:border-accent peer-checked:bg-accent peer-focus-visible:ring-2 peer-focus-visible:ring-accent peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-surface">
             {value === secondaryOption.value && <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" />}
           </span>
           <span>{secondaryOption.label}</span>
-          {secondaryOption.description && <span className="hidden text-gray-400 sm:inline">— {secondaryOption.description}</span>}
+          {secondaryOption.description && <span className="hidden text-mute sm:inline">— {secondaryOption.description}</span>}
         </label>
       )}
       {error && <p id={errorId} className="mt-3 text-sm text-red-300">{error}</p>}
@@ -186,7 +184,7 @@ function CustomSelect({ label, placeholder, options, value, error, disabled, onC
 
   return (
     <div ref={rootRef} className={`relative ${isOpen ? 'z-50' : 'z-10'}`}>
-      <label id={`${id}-label`} className="text-xl font-bold tracking-tight text-white md:text-2xl md:[@media(max-height:800px)]:text-lg">
+      <label id={`${id}-label`} className="text-xl font-normal tracking-tight text-white md:text-2xl md:[@media(max-height:800px)]:text-lg">
         {label}
       </label>
       <button
@@ -202,12 +200,12 @@ function CustomSelect({ label, placeholder, options, value, error, disabled, onC
         disabled={disabled}
         onClick={() => (isOpen ? setIsOpen(false) : open())}
         onKeyDown={handleKeyDown}
-        className={`mt-3 flex min-h-12 w-full items-center justify-between gap-4 rounded-xl border bg-[#0a0a0f] px-4 py-3 text-left text-white transition-colors focus-visible:ring-2 focus-visible:ring-cyan-300/20 disabled:cursor-not-allowed disabled:opacity-60 md:[@media(max-height:800px)]:mt-2 md:[@media(max-height:800px)]:min-h-10 md:[@media(max-height:800px)]:py-2 ${isOpen ? 'border-cyan-300/70' : 'border-white/10 hover:border-white/25'}`}
+        className={`mt-3 flex min-h-12 w-full items-center justify-between gap-4 rounded-xl border bg-canvas px-4 py-3 text-left text-white transition-colors focus-visible:ring-2 focus-visible:ring-accent/20 disabled:cursor-not-allowed disabled:opacity-60 md:[@media(max-height:800px)]:mt-2 md:[@media(max-height:800px)]:min-h-10 md:[@media(max-height:800px)]:py-2 ${isOpen ? 'border-accent/70' : 'border-white/10 hover:border-white/25'}`}
       >
-        <span className={selectedOption ? 'text-white' : 'text-gray-500'}>
+        <span className={selectedOption ? 'text-white' : 'text-mute/80'}>
           {selectedOption?.label ?? placeholder}
         </span>
-        <ChevronDown className={`h-5 w-5 shrink-0 text-gray-300 transition-transform ${isOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+        <ChevronDown className={`h-5 w-5 shrink-0 text-mute transition-transform ${isOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
       </button>
 
       <AnimatePresence>
@@ -220,7 +218,7 @@ function CustomSelect({ label, placeholder, options, value, error, disabled, onC
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -4, scale: 0.99 }}
             transition={{ duration: 0.14 }}
-            className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-xl border border-white/15 bg-[#17171d] p-1.5 shadow-2xl shadow-black/40"
+            className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-xl border border-white/15 bg-raised p-1.5 shadow-2xl shadow-black/40"
           >
             {options.map((option, index) => (
               <li
@@ -235,10 +233,10 @@ function CustomSelect({ label, placeholder, options, value, error, disabled, onC
                 onKeyDown={event => {
                   if (event.key === 'Enter' || event.key === ' ') choose(index);
                 }}
-                className={`flex cursor-pointer items-center justify-between gap-4 rounded-lg px-3 py-2.5 text-sm transition-colors ${activeIndex === index ? 'bg-cyan-400/10 text-cyan-100' : 'text-gray-200'} ${value === option.value ? 'font-semibold' : ''}`}
+                className={`flex cursor-pointer items-center justify-between gap-4 rounded-lg px-3 py-2.5 text-sm transition-colors ${activeIndex === index ? 'bg-accent/10 text-ink' : 'text-ink/90'} ${value === option.value ? 'font-medium' : ''}`}
               >
                 <span>{option.label}</span>
-                {value === option.value && <Check className="h-4 w-4 text-cyan-300" aria-hidden="true" />}
+                {value === option.value && <Check className="h-4 w-4 text-accent" aria-hidden="true" />}
               </li>
             ))}
           </motion.ul>
@@ -290,23 +288,23 @@ function FeaturePicker({ label, hint, placeholder, addLabel, removeLabel, option
           onClick={addFeature}
           disabled={!candidate}
           aria-label={addLabel}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-cyan-300/25 bg-cyan-400/10 px-5 font-semibold text-cyan-100 transition-colors hover:bg-cyan-400/15 disabled:cursor-not-allowed disabled:border-white/10 disabled:bg-white/5 disabled:text-gray-500 md:[@media(max-height:800px)]:min-h-10"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/25 px-5 font-medium text-ink transition-colors hover:border-white/70 disabled:cursor-not-allowed disabled:border-white/10 disabled:text-mute/80 md:[@media(max-height:800px)]:min-h-10"
         >
           <Plus className="h-5 w-5" aria-hidden="true" />
           <span className="sm:hidden">{addLabel}</span>
         </button>
       </div>
-      <p className="mt-2 text-sm leading-relaxed text-gray-400 md:[@media(max-height:800px)]:hidden">{hint}</p>
+      <p className="mt-2 text-sm leading-relaxed text-mute md:[@media(max-height:800px)]:hidden">{hint}</p>
 
       {selectedOptions.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-2 pb-1 md:[@media(max-height:800px)]:mt-2" aria-label={label}>
           {selectedOptions.map(option => (
-            <span key={option.value} className="inline-flex min-h-9 shrink-0 items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-400/10 py-1 pl-3 pr-1.5 text-sm font-medium text-cyan-50 md:[@media(max-height:800px)]:min-h-8 md:[@media(max-height:800px)]:py-0.5">
+            <span key={option.value} className="inline-flex min-h-9 shrink-0 items-center gap-2 rounded-full border border-accent/20 bg-accent/10 py-1 pl-3 pr-1.5 text-sm font-medium text-ink md:[@media(max-height:800px)]:min-h-8 md:[@media(max-height:800px)]:py-0.5">
               {option.label}
               <button
                 type="button"
                 onClick={() => onChange(value.filter(feature => feature !== option.value))}
-                className="flex h-8 w-8 items-center justify-center rounded-full text-cyan-200 transition-colors hover:bg-white/10 hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full text-ink transition-colors hover:bg-white/10 hover:text-white"
                 aria-label={`${removeLabel}: ${option.label}`}
               >
                 <X className="h-4 w-4" aria-hidden="true" />
@@ -335,8 +333,8 @@ function BudgetSelector({ legend, options, value, error, onChange }: BudgetSelec
 
   return (
     <fieldset aria-describedby={error ? errorId : undefined}>
-      <legend className="text-xl font-bold tracking-tight text-white md:text-2xl">{legend}</legend>
-      <div className="mt-3 grid grid-cols-3 overflow-hidden rounded-xl border border-white/10 bg-[#0a0a0f] p-1">
+      <legend className="text-xl font-normal tracking-tight text-white md:text-2xl">{legend}</legend>
+      <div className="mt-3 grid grid-cols-3 overflow-hidden rounded-xl border border-white/10 bg-canvas p-1">
         {ranges.map(option => (
           <label key={option.value} className="cursor-pointer">
             <input
@@ -347,7 +345,7 @@ function BudgetSelector({ legend, options, value, error, onChange }: BudgetSelec
               onChange={() => onChange(option.value)}
               className="peer sr-only"
             />
-            <span className="flex min-h-11 items-center justify-center rounded-lg px-2 text-center text-sm font-semibold text-gray-300 transition-colors peer-checked:bg-cyan-400/12 peer-checked:text-cyan-100 peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-300 sm:text-base">
+            <span className="flex min-h-11 items-center justify-center rounded-lg px-2 text-center text-sm font-medium text-mute transition-colors peer-checked:bg-accent/12 peer-checked:text-ink peer-focus-visible:ring-2 peer-focus-visible:ring-accent sm:text-base">
               {option.label}
             </span>
           </label>
@@ -355,14 +353,14 @@ function BudgetSelector({ legend, options, value, error, onChange }: BudgetSelec
       </div>
 
       {estimate && (
-        <label className="mt-3 inline-flex min-h-11 cursor-pointer items-center gap-3 rounded-lg pr-3 text-sm font-medium text-gray-200">
+        <label className="mt-3 inline-flex min-h-11 cursor-pointer items-center gap-3 rounded-lg pr-3 text-sm font-medium text-ink/90">
           <input
             type="checkbox"
             checked={value === estimate.value}
             onChange={event => onChange(event.target.checked ? estimate.value : '')}
             className="peer sr-only"
           />
-          <span className="flex h-5 w-5 items-center justify-center rounded-md border border-white/25 bg-[#0a0a0f] text-[#0a0a0f] transition-colors peer-checked:border-cyan-300 peer-checked:bg-cyan-300 peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-300 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-[#111116]">
+          <span className="flex h-5 w-5 items-center justify-center rounded-md border border-white/25 bg-canvas text-canvas transition-colors peer-checked:border-accent peer-checked:bg-accent peer-focus-visible:ring-2 peer-focus-visible:ring-accent peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-surface">
             {value === estimate.value && <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" />}
           </span>
           {estimate.label}
@@ -627,8 +625,8 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
   if (submission) {
     return (
       <>
-      <div className="relative overflow-hidden rounded-3xl border border-cyan-300/20 bg-[#111116] px-6 py-12 text-center shadow-2xl shadow-cyan-950/20 md:px-12 md:py-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.10),transparent_55%)]" aria-hidden="true" />
+      <div className="relative overflow-hidden rounded-[28px] border border-line bg-surface px-6 py-12 text-center md:px-12 md:py-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04),transparent_55%)]" aria-hidden="true" />
         <motion.div
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -639,11 +637,11 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1.35, opacity: [0, 0.35, 0] }}
             transition={{ duration: 1.6, repeat: 1 }}
-            className="absolute inset-0 rounded-full border border-cyan-300/50"
+            className="absolute inset-0 rounded-full border border-white/20"
             aria-hidden="true"
           />
-          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-cyan-400 to-blue-600 text-white shadow-xl shadow-cyan-500/25">
-            <Check className="h-9 w-9" strokeWidth={3} aria-hidden="true" />
+          <span className="flex h-16 w-16 items-center justify-center rounded-full border border-line bg-raised text-accent">
+            <Check className="h-7 w-7" strokeWidth={1.75} aria-hidden="true" />
           </span>
         </motion.div>
         <motion.div
@@ -652,17 +650,16 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
           transition={{ delay: 0.2 }}
           className="relative mx-auto mt-5 max-w-2xl"
         >
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-300">{copy.success.eyebrow}</p>
-          <h1 className="mt-3 text-3xl font-bold text-white text-balance md:text-4xl">{copy.success.title}</h1>
-          <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-gray-300">{copy.success.description}</p>
-          <p className="mt-4 font-mono text-xs uppercase tracking-wider text-gray-400">
+          <h1 className="text-3xl font-light uppercase tracking-[-0.03em] text-white text-balance md:text-4xl">{copy.success.title}</h1>
+          <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-mute">{copy.success.description}</p>
+          <p className="mt-4 font-mono text-xs uppercase tracking-wider text-mute">
             {copy.success.reference}: {submission.id.slice(0, 8).toUpperCase()}
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link href={homeHref} className="inline-flex min-h-12 items-center justify-center rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-500/20">
+            <Link href={homeHref} className="inline-flex min-h-12 items-center justify-center rounded-full silver px-6 py-3 font-medium text-canvas transition-[filter,opacity] hover:brightness-110">
               {copy.success.home}
             </Link>
-            <button ref={startAnotherButtonRef} type="button" onClick={() => setIsResetDialogOpen(true)} className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-semibold text-gray-200 transition-colors hover:border-white/25 hover:bg-white/10 hover:text-white">
+            <button ref={startAnotherButtonRef} type="button" onClick={() => setIsResetDialogOpen(true)} className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/25 px-6 py-3 font-medium text-ink/90 transition-colors hover:border-white/70 hover:text-white">
               {copy.success.another}
             </button>
           </div>
@@ -691,18 +688,18 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
               exit={{ opacity: 0, y: 8, scale: 0.98 }}
               transition={{ duration: 0.18 }}
               onKeyDown={trapResetDialogFocus}
-              className="w-full max-w-lg rounded-2xl border border-white/15 bg-[#15151b] p-6 text-left shadow-2xl shadow-black/50 md:p-7"
+              className="w-full max-w-lg rounded-2xl border border-white/15 bg-raised p-6 text-left shadow-2xl shadow-black/50 md:p-7"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-400/10 text-cyan-300" aria-hidden="true">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent" aria-hidden="true">
                 <Plus className="h-5 w-5" />
               </div>
-              <h2 id="reset-dialog-title" className="mt-5 text-2xl font-bold tracking-tight text-white">{copy.success.confirmTitle}</h2>
-              <p id="reset-dialog-description" className="mt-3 leading-relaxed text-gray-300">{copy.success.confirmAnother}</p>
+              <h2 id="reset-dialog-title" className="mt-5 text-2xl font-light uppercase tracking-[-0.03em] text-white">{copy.success.confirmTitle}</h2>
+              <p id="reset-dialog-description" className="mt-3 leading-relaxed text-mute">{copy.success.confirmAnother}</p>
               <div className="mt-7 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-                <button ref={resetDialogCancelRef} type="button" onClick={closeResetDialog} className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 font-semibold text-gray-200 transition-colors hover:border-white/25 hover:bg-white/10 hover:text-white">
+                <button ref={resetDialogCancelRef} type="button" onClick={closeResetDialog} className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/25 px-5 py-2.5 font-medium text-ink/90 transition-colors hover:border-white/70 hover:text-white">
                   {copy.success.cancel}
                 </button>
-                <button type="button" onClick={startAnother} className="inline-flex min-h-11 items-center justify-center rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-5 py-2.5 font-semibold text-white">
+                <button type="button" onClick={startAnother} className="inline-flex min-h-11 items-center justify-center rounded-full silver px-5 py-2.5 font-medium text-canvas">
                   {copy.success.confirmAction}
                 </button>
               </div>
@@ -717,22 +714,22 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-1 flex-col md:min-h-0">
       <div className="mb-6 md:mb-4 md:[@media(max-height:800px)]:mb-2">
-        <div className="text-sm text-gray-300">
+        <div className="text-sm text-mute">
           <span>{copy.stepLabel} {step + 1} {copy.of} {TOTAL_STEPS}</span>
         </div>
         <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10 md:mt-2" aria-hidden="true">
-          <motion.div className="h-full rounded-full bg-linear-to-r from-cyan-400 to-blue-500" animate={{ width: `${((step + 1) / TOTAL_STEPS) * 100}%` }} />
+          <motion.div className="h-full rounded-full bg-accent" animate={{ width: `${((step + 1) / TOTAL_STEPS) * 100}%` }} />
         </div>
         <ol className="mt-3 grid grid-cols-4 gap-2 md:mt-2" aria-label={locale === 'ua' ? 'Прогрес форми' : 'Form progress'}>
           {copy.steps.map((label, index) => (
-            <li key={label} className={`text-center text-xs ${index === step ? 'font-semibold text-cyan-300' : index < step ? 'text-gray-300' : 'text-gray-500'}`} aria-current={index === step ? 'step' : undefined}>
+            <li key={label} className={`text-center text-xs ${index === step ? 'font-medium text-accent' : index < step ? 'text-mute' : 'text-mute/80'}`} aria-current={index === step ? 'step' : undefined}>
               {label}
             </li>
           ))}
         </ol>
       </div>
 
-      <div className={`rounded-3xl border border-white/10 bg-[#111116] p-5 md:p-6 md:[@media(max-height:800px)]:p-4 ${step <= 1 ? 'md:flex md:min-h-0 md:flex-1 md:flex-col' : ''}`}>
+      <div className={`rounded-3xl border border-white/10 bg-surface p-5 md:p-6 md:[@media(max-height:800px)]:p-4 ${step <= 1 ? 'md:flex md:min-h-0 md:flex-1 md:flex-col' : ''}`}>
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={step}
@@ -771,8 +768,8 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
                   onChange={value => updateDraft('features', value)}
                 />
                 <div className="md:flex md:min-h-0 md:flex-1 md:flex-col">
-                  <label htmlFor="details" className="text-xl font-bold tracking-tight text-white md:text-2xl md:[@media(max-height:800px)]:text-lg">{copy.questions.details}</label>
-                  <p id="details-hint" className="mt-1.5 text-sm leading-relaxed text-gray-300 md:[@media(max-height:800px)]:hidden">{copy.questions.detailsHint}</p>
+                  <label htmlFor="details" className="text-xl font-normal tracking-tight text-white md:text-2xl md:[@media(max-height:800px)]:text-lg">{copy.questions.details}</label>
+                  <p id="details-hint" className="mt-1.5 text-sm leading-relaxed text-mute md:[@media(max-height:800px)]:hidden">{copy.questions.detailsHint}</p>
                   <textarea
                     id="details"
                     name="details"
@@ -783,11 +780,11 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
                     placeholder={copy.questions.detailsPlaceholder}
                     aria-invalid={Boolean(errors.details)}
                     aria-describedby={`details-hint${errors.details ? ' details-error' : ''}`}
-                    className="mt-3 w-full resize-y rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-3 text-white placeholder:text-gray-500 focus-visible:border-cyan-300/70 focus-visible:ring-2 focus-visible:ring-cyan-300/20 md:min-h-24 md:flex-1 md:resize-none md:[@media(max-height:800px)]:mt-2 md:[@media(max-height:800px)]:min-h-20"
+                    className="mt-3 w-full resize-y rounded-xl border border-white/10 bg-canvas px-4 py-3 text-white placeholder:text-mute/70 focus-visible:border-accent/70 focus-visible:ring-2 focus-visible:ring-accent/20 md:min-h-24 md:flex-1 md:resize-none md:[@media(max-height:800px)]:mt-2 md:[@media(max-height:800px)]:min-h-20"
                   />
                   <div className="mt-2 flex items-start justify-between gap-4 md:[@media(max-height:800px)]:mt-1">
                     {errors.details ? <p id="details-error" className="text-sm text-red-300">{errors.details}</p> : <span />}
-                    <span className="text-xs tabular-nums text-gray-500">{draft.details.length}/2000</span>
+                    <span className="text-xs tabular-nums text-mute/80">{draft.details.length}/2000</span>
                   </div>
                 </div>
               </div>
@@ -825,22 +822,22 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
 
             {step === 3 && (
               <div>
-                <h2 className="text-xl font-bold tracking-tight text-white md:text-2xl">{copy.questions.contact}</h2>
-                <p className="mt-1.5 text-sm leading-relaxed text-gray-300">{copy.questions.contactHint}</p>
+                <h2 className="text-xl font-light uppercase tracking-[-0.03em] text-white md:text-2xl">{copy.questions.contact}</h2>
+                <p className="mt-1.5 text-sm leading-relaxed text-mute">{copy.questions.contactHint}</p>
                 <div className="mt-5 grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="name" className="text-sm font-medium text-gray-200">{copy.questions.name}</label>
-                    <input id="name" name="name" value={draft.name} onChange={event => updateDraft('name', event.target.value)} maxLength={120} autoComplete="name" placeholder={copy.placeholders.name} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? 'name-error' : undefined} className="mt-2 w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-3 text-white placeholder:text-gray-500 focus-visible:border-cyan-300/70 focus-visible:ring-2 focus-visible:ring-cyan-300/20" />
+                    <label htmlFor="name" className="text-sm font-medium text-ink/90">{copy.questions.name}</label>
+                    <input id="name" name="name" value={draft.name} onChange={event => updateDraft('name', event.target.value)} maxLength={120} autoComplete="name" placeholder={copy.placeholders.name} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? 'name-error' : undefined} className="mt-2 w-full rounded-xl border border-white/10 bg-canvas px-4 py-3 text-white placeholder:text-mute/70 focus-visible:border-accent/70 focus-visible:ring-2 focus-visible:ring-accent/20" />
                     {errors.name && <p id="name-error" className="mt-2 text-sm text-red-300">{errors.name}</p>}
                   </div>
                   <div>
-                    <label htmlFor="email" className="text-sm font-medium text-gray-200">{copy.questions.email}</label>
-                    <input id="email" name="email" type="email" inputMode="email" spellCheck={false} value={draft.email} onChange={event => updateDraft('email', event.target.value)} maxLength={320} autoComplete="email" placeholder={copy.placeholders.email} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? 'email-error' : undefined} className="mt-2 w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-3 text-white placeholder:text-gray-500 focus-visible:border-cyan-300/70 focus-visible:ring-2 focus-visible:ring-cyan-300/20" />
+                    <label htmlFor="email" className="text-sm font-medium text-ink/90">{copy.questions.email}</label>
+                    <input id="email" name="email" type="email" inputMode="email" spellCheck={false} value={draft.email} onChange={event => updateDraft('email', event.target.value)} maxLength={320} autoComplete="email" placeholder={copy.placeholders.email} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? 'email-error' : undefined} className="mt-2 w-full rounded-xl border border-white/10 bg-canvas px-4 py-3 text-white placeholder:text-mute/70 focus-visible:border-accent/70 focus-visible:ring-2 focus-visible:ring-accent/20" />
                     {errors.email && <p id="email-error" className="mt-2 text-sm text-red-300">{errors.email}</p>}
                   </div>
                   <div className="sm:col-span-2">
-                    <label htmlFor="company" className="text-sm font-medium text-gray-200">{copy.questions.company}</label>
-                    <input id="company" name="company" value={draft.company} onChange={event => updateDraft('company', event.target.value)} maxLength={200} autoComplete="organization" placeholder={copy.placeholders.company} className="mt-2 w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-3 text-white placeholder:text-gray-500 focus-visible:border-cyan-300/70 focus-visible:ring-2 focus-visible:ring-cyan-300/20" />
+                    <label htmlFor="company" className="text-sm font-medium text-ink/90">{copy.questions.company}</label>
+                    <input id="company" name="company" value={draft.company} onChange={event => updateDraft('company', event.target.value)} maxLength={200} autoComplete="organization" placeholder={copy.placeholders.company} className="mt-2 w-full rounded-xl border border-white/10 bg-canvas px-4 py-3 text-white placeholder:text-mute/70 focus-visible:border-accent/70 focus-visible:ring-2 focus-visible:ring-accent/20" />
                   </div>
                   <div className="hidden" aria-hidden="true">
                     <label htmlFor="website">Website</label>
@@ -859,28 +856,28 @@ export function LeadIntakeForm({ locale }: { locale: Locale }) {
 
       <div className="mt-5 flex items-center justify-between gap-4 md:mt-4 md:[@media(max-height:800px)]:mt-3">
         {step > 0 ? (
-          <button type="button" onClick={goBack} className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 font-semibold text-gray-200 transition-colors hover:border-white/25 hover:bg-white/10 hover:text-white">
+          <button type="button" onClick={goBack} className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/25 px-5 py-3 font-medium text-ink/90 transition-colors hover:border-white/70 hover:text-white">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             {copy.back}
           </button>
         ) : <span />}
 
         {step < TOTAL_STEPS - 1 ? (
-          <button type="button" onClick={goForward} className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white">
+          <button type="button" onClick={goForward} className="inline-flex min-h-12 items-center gap-2 rounded-full silver px-6 py-3 font-medium text-canvas">
             {copy.continue}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </button>
         ) : (
-          <button type="submit" disabled={isSubmitting} className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white transition-[box-shadow,opacity,transform] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-500/20 disabled:cursor-not-allowed disabled:opacity-60">
+          <button type="submit" disabled={isSubmitting} className="inline-flex min-h-12 items-center gap-2 rounded-full silver px-6 py-3 font-medium text-canvas transition-[filter,opacity] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60">
             {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Check className="h-4 w-4" aria-hidden="true" />}
             {isSubmitting ? copy.sending : copy.submit}
           </button>
         )}
       </div>
 
-      <p className="mt-4 text-center text-sm leading-relaxed text-gray-400 md:mt-auto md:pt-6 md:[@media(max-height:800px)]:pt-2 md:[@media(max-height:800px)]:text-xs">
+      <p className="mt-4 text-center text-sm leading-relaxed text-mute md:mt-auto md:pt-6 md:[@media(max-height:800px)]:pt-2 md:[@media(max-height:800px)]:text-xs">
         {locale === 'ua' ? 'Надсилаючи форму, ви погоджуєтеся з ' : 'By submitting, you agree to the '}
-        <Link href={privacyHref} className="rounded-sm text-cyan-300 underline decoration-cyan-300/40 underline-offset-4 hover:text-cyan-200">
+        <Link href={privacyHref} className="rounded-sm text-ink underline decoration-accent underline-offset-4 hover:decoration-ink">
           {locale === 'ua' ? 'Політикою конфіденційності' : 'Privacy Policy'}
         </Link>.
       </p>

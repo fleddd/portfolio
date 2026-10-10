@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { Locale, getCopy } from '@/constants/i18n';
 import { usePathname } from 'next/navigation';
 import { BrandLogo } from '@/components/BrandLogo';
@@ -20,6 +20,7 @@ const mobileMenuItemVariants = {
 export function Navigation({ locale, mode }: NavigationProps) {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -38,8 +39,8 @@ export function Navigation({ locale, mode }: NavigationProps) {
     ? [
       { label: t.about, href: homeSectionHref('about') },
       { label: t.solution, href: homeSectionHref('solutions') },
-      { label: locale === 'ua' ? 'Досвід' : 'Experience', href: homeSectionHref('experience') },
       { label: t.projects, href: homeSectionHref('projects') },
+      { label: locale === 'ua' ? 'Досвід' : 'Experience', href: homeSectionHref('experience') },
     ]
     : [
       { label: locale === 'ua' ? 'Навички' : 'Skills', href: technicalSectionHref('skills') },
@@ -76,7 +77,21 @@ export function Navigation({ locale, mode }: NavigationProps) {
             : homeHref;
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    // Hide while scrolling down, reveal on any upward scroll. A small threshold
+    // ignores trackpad jitter; the bar always shows near the top of the page.
+    let lastY = window.scrollY;
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setIsScrolled(y > 50);
+      if (y < 120) {
+        setIsHidden(false);
+      } else if (Math.abs(y - lastY) > 6) {
+        setIsHidden(y > lastY);
+      } else {
+        return;
+      }
+      lastY = y;
+    };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -84,7 +99,7 @@ export function Navigation({ locale, mode }: NavigationProps) {
 
   useEffect(() => {
     const localSectionIds = mode === 'business' && isHomePage
-      ? ['about', 'solutions', 'experience', 'projects']
+      ? ['about', 'solutions', 'projects', 'experience']
       : mode === 'technical' && isTechnicalPage
         ? ['skills', 'projects']
         : [];
@@ -179,69 +194,73 @@ export function Navigation({ locale, mode }: NavigationProps) {
   return (
     <nav
       aria-label={locale === 'ua' ? 'Головна навігація' : 'Primary navigation'}
-      className={`fixed top-0 left-0 right-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-300 ${isScrolled
-        ? 'bg-[#0a0a0f]/90 backdrop-blur-xl border-white/10'
-        : 'bg-[#0a0a0f]/70 backdrop-blur-md border-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-[translate,background-color,border-color,backdrop-filter] duration-500 ease-out-expo focus-within:translate-y-0 ${isHidden && !isMobileMenuOpen ? '-translate-y-full' : 'translate-y-0'} ${isScrolled || isMobileMenuOpen
+        ? 'bg-canvas/85 backdrop-blur-xl border-line'
+        : 'bg-transparent border-transparent'
         }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 safe-area-x">
-        <div className="flex h-16 items-center justify-between xl:h-20">
-          <motion.a
-            href={logoHref}
-            whileHover={{ scale: 1.03 }}
-            className="flex min-h-11 items-center rounded-lg"
-            aria-label={locale === 'ua' ? 'Перейти на головну сторінку' : 'Go to homepage'}
-          >
-            <BrandLogo className="h-7 w-auto drop-shadow-[0_0_8px_rgba(34,211,238,0.22)] xl:h-8" priority />
-          </motion.a>
-
-          <div className="hidden xl:flex items-center gap-6">
+      <div className="max-w-[90rem] mx-auto safe-area-x">
+        <div className="grid h-16 grid-cols-[1fr_auto] items-center xl:h-20 xl:grid-cols-[1fr_auto_1fr]">
+          <div className="hidden items-center gap-7 xl:flex">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={closeMenu}
                 aria-current={item.href === `#${activeSection}` ? 'location' : undefined}
-                className={`group relative rounded-sm text-sm font-medium transition-colors ${item.href === `#${activeSection}`
-                  ? 'text-cyan-300'
-                  : 'text-gray-300 hover:text-white'
+                className={`relative inline-flex min-h-11 items-center gap-2 text-[13px] transition-colors duration-300 ${item.href === `#${activeSection}`
+                  ? 'text-ink'
+                  : 'text-mute hover:text-ink'
                   }`}
               >
+                <span
+                  className={`h-1 w-1 rounded-full bg-accent transition-opacity duration-300 ${item.href === `#${activeSection}` ? 'opacity-100' : 'opacity-0'}`}
+                  aria-hidden="true"
+                />
                 {item.label}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-linear-to-r from-cyan-400 to-blue-500 transition-[width] duration-300 ${item.href === `#${activeSection}` ? 'w-full' : 'w-0 group-hover:w-full'}`} aria-hidden="true" />
               </a>
             ))}
+          </div>
+
+          <a
+            href={logoHref}
+            className="flex min-h-11 items-center gap-3 justify-self-start xl:justify-self-center"
+            aria-label={locale === 'ua' ? 'Перейти на головну сторінку' : 'Go to homepage'}
+          >
+            <BrandLogo className="h-6 w-auto grayscale brightness-[1.7] contrast-[0.9]" priority />
+            <span className="text-[15px] font-light uppercase tracking-[0.04em] text-ink">Oleh Fedkiv</span>
+          </a>
+
+          <div className="hidden items-center justify-end gap-6 xl:flex">
             <a
               href={modeSwitch.href}
               data-profile-switch
-              className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-gray-200 transition-colors hover:border-cyan-400/40 hover:bg-white/10 hover:text-white"
+              className="inline-flex min-h-11 items-center gap-1.5 text-[13px] text-mute transition-colors duration-300 hover:text-ink"
             >
               {modeSwitch.label}
-              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </a>
-            <motion.a
-              href={contactHref}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-6 py-2.5 bg-linear-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg hover:shadow-cyan-500/25 transition-[box-shadow,transform]"
-            >
-              {t.hireMe}
-            </motion.a>
             <a
               href={languageSwitchHref}
               data-language-switch
-              className="px-3 py-2.5 rounded-lg border border-white/10 bg-white/5 text-sm font-semibold text-white hover:bg-white/10 hover:border-cyan-400/50 transition-colors"
+              className="inline-flex min-h-11 items-center text-[13px] text-mute transition-colors duration-300 hover:text-ink"
               aria-label={locale === 'ua' ? 'Switch to English language' : 'Switch to Ukrainian language'}
               hrefLang={locale === 'ua' ? 'en' : 'uk'}
             >
               {t.switchLanguage}
+            </a>
+            <a
+              href={contactHref}
+              className="inline-flex min-h-10 items-center rounded-full border border-white/25 px-5 text-[13px] text-ink transition-colors duration-300 hover:border-white/70"
+            >
+              {t.hireMe}
             </a>
           </div>
 
           <button
             ref={menuButtonRef}
             onClick={() => setIsMobileMenuOpen((open) => !open)}
-            className="-mr-3 rounded-lg p-3 text-white transition-colors hover:bg-white/10 xl:hidden"
+            className="-mr-3 flex min-h-11 items-center gap-3 rounded-full px-3 text-[13px] uppercase tracking-[0.06em] text-ink xl:hidden"
             aria-label={isMobileMenuOpen
               ? locale === 'ua' ? 'Закрити меню' : 'Close menu'
               : locale === 'ua' ? 'Відкрити меню' : 'Open menu'}
@@ -249,21 +268,17 @@ export function Navigation({ locale, mode }: NavigationProps) {
             aria-controls="mobile-navigation"
             type="button"
           >
-            <span className="relative block h-6 w-6" aria-hidden="true">
+            <span aria-hidden="true">{isMobileMenuOpen ? (locale === 'ua' ? 'Закрити' : 'Close') : (locale === 'ua' ? 'Меню' : 'Menu')}</span>
+            <span className="relative block h-3 w-5" aria-hidden="true">
               <motion.span
-                className="absolute left-0 top-1 h-0.5 w-6 rounded-full bg-current"
-                animate={{ y: isMobileMenuOpen ? 7 : 0, rotate: isMobileMenuOpen ? 45 : 0 }}
-                transition={{ duration: shouldReduceMotion ? 0 : 0.24, ease: [0.4, 0, 0.2, 1] }}
+                className="absolute left-0 top-0 h-px w-5 bg-current"
+                animate={{ y: isMobileMenuOpen ? 6 : 0, rotate: isMobileMenuOpen ? 45 : 0 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
               />
               <motion.span
-                className="absolute left-0 top-[11px] h-0.5 w-6 rounded-full bg-current"
-                animate={{ opacity: isMobileMenuOpen ? 0 : 1, scaleX: isMobileMenuOpen ? 0.4 : 1 }}
-                transition={{ duration: shouldReduceMotion ? 0 : 0.18, ease: 'easeOut' }}
-              />
-              <motion.span
-                className="absolute left-0 top-[18px] h-0.5 w-6 rounded-full bg-current"
-                animate={{ y: isMobileMenuOpen ? -7 : 0, rotate: isMobileMenuOpen ? -45 : 0 }}
-                transition={{ duration: shouldReduceMotion ? 0 : 0.24, ease: [0.4, 0, 0.2, 1] }}
+                className="absolute left-0 top-3 h-px w-5 bg-current"
+                animate={{ y: isMobileMenuOpen ? -6 : 0, rotate: isMobileMenuOpen ? -45 : 0 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
               />
             </span>
           </button>
@@ -278,8 +293,8 @@ export function Navigation({ locale, mode }: NavigationProps) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: shouldReduceMotion ? 0 : 0.28, ease: [0.4, 0, 0.2, 1] }}
-            className="overflow-hidden border-t border-white/10 bg-[#0a0a0f]/98 backdrop-blur-xl xl:hidden"
+            transition={{ duration: shouldReduceMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden border-t border-line bg-canvas xl:hidden"
           >
             <motion.div
               initial="closed"
@@ -289,7 +304,7 @@ export function Navigation({ locale, mode }: NavigationProps) {
                 open: {
                   transition: shouldReduceMotion
                     ? { duration: 0 }
-                    : { delayChildren: 0.05, staggerChildren: 0.04 },
+                    : { delayChildren: 0.06, staggerChildren: 0.04 },
                 },
                 closed: {
                   transition: shouldReduceMotion
@@ -297,17 +312,8 @@ export function Navigation({ locale, mode }: NavigationProps) {
                     : { staggerChildren: 0.025, staggerDirection: -1 },
                 },
               }}
-              className="max-h-[calc(100svh-4rem)] space-y-2 overflow-y-auto overscroll-contain px-6 py-6 safe-area-x safe-area-bottom"
+              className="max-h-[calc(100svh-4rem)] overflow-y-auto overscroll-contain pb-8 pt-4 safe-area-x safe-area-bottom"
             >
-              <motion.a
-                variants={mobileMenuItemVariants}
-                href={modeSwitch.href}
-                data-profile-switch
-                className="mb-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-center text-sm font-semibold text-gray-100 transition-colors hover:border-cyan-400/40 hover:bg-white/10"
-              >
-                {modeSwitch.label}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </motion.a>
               {navItems.map((item) => (
                 <motion.a
                   variants={mobileMenuItemVariants}
@@ -315,31 +321,41 @@ export function Navigation({ locale, mode }: NavigationProps) {
                   href={item.href}
                   onClick={closeMenu}
                   aria-current={item.href === `#${activeSection}` ? 'location' : undefined}
-                  className={`block min-h-11 w-full rounded-lg px-3 py-3 transition-colors ${item.href === `#${activeSection}`
-                    ? 'bg-cyan-400/10 text-cyan-200'
-                    : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                  className={`flex min-h-14 w-full items-center justify-between border-b border-line text-2xl uppercase tracking-[-0.02em] transition-colors ${item.href === `#${activeSection}`
+                    ? 'text-ink'
+                    : 'text-mute hover:text-ink'
                     }`}
                 >
                   {item.label}
+                  <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
                 </motion.a>
               ))}
               <motion.a
                 variants={mobileMenuItemVariants}
-                href={contactHref}
-                onClick={closeMenu}
-                className="block w-full rounded-lg bg-linear-to-r from-cyan-500 to-blue-600 px-6 py-3 text-center font-medium text-white"
+                href={modeSwitch.href}
+                data-profile-switch
+                className="flex min-h-14 w-full items-center justify-between border-b border-line text-2xl uppercase tracking-[-0.02em] text-mute transition-colors hover:text-ink"
               >
-                {t.hireMe}
+                {modeSwitch.label}
+                <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
               </motion.a>
-              <motion.a
-                variants={mobileMenuItemVariants}
-                href={languageSwitchHref}
-                data-language-switch
-                className="block w-full rounded-lg border border-white/10 bg-white/5 px-6 py-3 text-center font-medium text-white transition-colors hover:bg-white/10"
-                hrefLang={locale === 'ua' ? 'en' : 'uk'}
-              >
-                {locale === 'ua' ? 'English' : 'Українська'}
-              </motion.a>
+              <motion.div variants={mobileMenuItemVariants} className="mt-8 grid grid-cols-2 gap-3">
+                <a
+                  href={languageSwitchHref}
+                  data-language-switch
+                  className="flex min-h-12 items-center justify-center rounded-full border border-white/25 text-sm text-ink"
+                  hrefLang={locale === 'ua' ? 'en' : 'uk'}
+                >
+                  {locale === 'ua' ? 'English' : 'Українська'}
+                </a>
+                <a
+                  href={contactHref}
+                  onClick={closeMenu}
+                  className="silver flex min-h-12 items-center justify-center rounded-full text-sm font-medium text-canvas"
+                >
+                  {t.hireMe}
+                </a>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}
