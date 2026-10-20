@@ -11,7 +11,7 @@ export function Hero({ locale }: HeroProps) {
   const inquiryHref = locale === 'ua' ? '/ua/inquiry' : '/inquiry';
 
   return (
-    <section id="hero" className="relative isolate flex min-h-[100svh] w-full min-w-0 flex-col overflow-hidden bg-canvas md:min-h-0">
+    <section id="hero" className="relative isolate flex min-h-[min(100svh,44rem)] w-full min-w-0 flex-col overflow-hidden bg-canvas md:min-h-0">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#3b3b3b_0%,#1f1f1f_38%,#0d0d0d_78%)]" />
         <div className="grain absolute inset-0 opacity-[0.07] mix-blend-overlay" />
@@ -27,7 +27,7 @@ export function Hero({ locale }: HeroProps) {
 
           <h1 className="sr-only">{t.headlineMain} — {t.headlineAccent}</h1>
           <p
-            className="hero-rise text-[clamp(2.25rem,6vw,5.5rem)] font-light uppercase leading-[0.98] tracking-[-0.04em] text-ink text-balance md:text-center"
+            className="hero-rise text-[clamp(2.5rem,9vw,4.25rem)] font-light md:text-[clamp(3rem,7vw,5.5rem)] uppercase leading-[0.98] tracking-[-0.04em] text-ink text-balance md:text-center"
             aria-hidden="true"
           >
             {t.headlineMain}
@@ -35,13 +35,13 @@ export function Hero({ locale }: HeroProps) {
 
           <div className="mt-4 flex flex-col gap-10 md:items-center xl:mt-6 xl:grid xl:grid-cols-[auto_minmax(0,19rem)] xl:items-center xl:justify-center xl:gap-12">
             <p
-              className="hero-rise font-display text-[clamp(2.1rem,4.6vw,4.25rem)] font-light uppercase leading-[1] tracking-[0.01em] text-ink/85 text-balance [animation-delay:140ms] md:text-center xl:whitespace-nowrap xl:text-left xl:text-[clamp(2.5rem,3.4vw,3.75rem)]"
+              className="hero-rise font-display text-[clamp(2.1rem,7vw,3.5rem)] md:text-[clamp(2.25rem,5.5vw,4.25rem)] font-light uppercase leading-[1] tracking-[0.01em] text-ink/85 text-balance [animation-delay:140ms] md:text-center xl:whitespace-nowrap xl:text-left xl:text-[clamp(2.5rem,3.4vw,3.75rem)]"
               aria-hidden="true"
             >
               {t.headlineAccent}
             </p>
             <div className="flex flex-col items-start gap-6 md:items-center md:text-center xl:items-start xl:text-left">
-              <p className="max-w-[20rem] text-base leading-relaxed text-mute text-pretty">{t.description}</p>
+              <p className="max-w-[24rem] text-base leading-relaxed text-mute text-pretty">{t.description}</p>
               <Button href={inquiryHref}>{t.secondaryCta}</Button>
             </div>
           </div>

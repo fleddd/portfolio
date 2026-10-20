@@ -99,13 +99,6 @@ export function Footer({ locale, mode }: FooterProps) {
           </div>
         </div>
       </div>
-
-      <p
-        className="pointer-events-none -mb-[0.2em] select-none whitespace-nowrap text-center font-display text-[clamp(4rem,17vw,16rem)] font-light uppercase leading-none tracking-[-0.03em] text-white/[0.06]"
-        aria-hidden="true"
-      >
-        Oleh Fedkiv
-      </p>
     </footer>
   );
 }
