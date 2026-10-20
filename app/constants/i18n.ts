@@ -18,11 +18,11 @@ export const copy = {
     },
     hero: {
       available: "Available for work",
-      role: "Oleh Fedkiv · Full-Stack Web Developer",
-      headlineMain: "Websites & web systems",
-      headlineAccent: "built for your goals",
+      role: "Web developer for small business & startups",
+      headlineMain: "Websites that bring clients",
+      headlineAccent: "systems that save hours",
       description:
-        "I create websites and web tools that help you get more clients and spend less time on routine — all done turnkey.",
+        "Turnkey: from your goal to a launched product. One developer, no agency overhead.",
       scroll: "Scroll to explore",
       primaryCta: "See Relevant Cases",
       secondaryCta: "Discuss Your Task",
@@ -155,11 +155,11 @@ export const copy = {
     },
     hero: {
       available: "Відкритий до співпраці",
-      role: "Олег Федьків · розробник веб-рішень для бізнесу",
-      headlineMain: "Сайти та вебсистеми",
-      headlineAccent: "під ваші задачі",
+      role: "Веброзробник для малого бізнесу та стартапів",
+      headlineMain: "Сайти, що приводять клієнтів",
+      headlineAccent: "системи, що економлять час",
       description:
-        "Створюю сайти та вебінструменти під ключ, що допомагають отримувати більше клієнтів і менше часу витрачати на рутину.",
+        "Під ключ: від вашої задачі до запущеного продукту. Один розробник, без агентських накладних.",
       scroll: "Гортай, щоб дізнатися більше",
       primaryCta: "Переглянути релевантні кейси",
       secondaryCta: "Обговорити проєкт",
